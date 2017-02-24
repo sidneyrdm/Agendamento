@@ -30,7 +30,7 @@
 		<property name="show_sql">true</property>
 
 		<!-- Cria as tabelas do banco de dados -->
-		<property name="hbm2ddl.auto">validate</property>
+		<property name="hbm2ddl.auto">update</property>
 
 		<!-- Mapeamento de Entidades -->
 		<mapping class="br.com.Agendamento.domain.Estado" />
@@ -43,6 +43,8 @@
 		<mapping class="br.com.Agendamento.domain.Cliente" />
 		<mapping class="br.com.Agendamento.domain.Venda" />
 		<mapping class="br.com.Agendamento.domain.ItemVenda" />
+		<mapping class="br.com.Agendamento.domain.Empresa" />
+		<mapping class="br.com.Agendamento.domain.Representante" />
 
 	</session-factory>
 

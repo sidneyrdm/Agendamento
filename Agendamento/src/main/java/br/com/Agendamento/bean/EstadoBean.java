@@ -51,37 +51,30 @@ public class EstadoBean implements Serializable {
 			Messages.addGlobalError("Erro ao tentar listar o Estado ");
 			erro.printStackTrace();
 		}
-
 	}
 
 	public void excluir(ActionEvent evento) {
-		try{
-		estado = (Estado) evento.getComponent().getAttributes().get("estadoSelecionado");
-		//Messages.addGlobalInfo("nome.: " + estado.getNome());
-		
-		EstadoDAO estadodao = new EstadoDAO();
-		estadodao.excluir(estado);
-		estados= estadodao.listar();
-		Messages.addGlobalInfo("Estado excluído com sucesso!");
-		estadodao.listar();
-		}catch(RuntimeException erro){
+		try {
+			estado = (Estado) evento.getComponent().getAttributes().get("estadoSelecionado");
+
+			EstadoDAO estadodao = new EstadoDAO();
+			estadodao.excluir(estado);
+			estados = estadodao.listar();
+			Messages.addGlobalInfo("Estado excluído com sucesso!");
+			estadodao.listar();
+		} catch (RuntimeException erro) {
 			Messages.addGlobalError("erro ao tentar excluir estado");
-			erro.printStackTrace();			
+			erro.printStackTrace();
 		}
 	}
-	
+
 	public void editar(ActionEvent evento) {
-		try{
-		estado = (Estado) evento.getComponent().getAttributes().get("estadoSelecionado");
-		//Messages.addGlobalInfo("nome.: " + estado.getNome());
-		
-	//	EstadoDAO estadodao = new EstadoDAO();
-	//	estadodao.excluir(estado);
-	//	Messages.addGlobalInfo("Estado excluído com sucesso!");
-		//estadodao.listar();
-		}catch(RuntimeException erro){
+		try {
+			estado = (Estado) evento.getComponent().getAttributes().get("estadoSelecionado");
+
+		} catch (RuntimeException erro) {
 			Messages.addGlobalError("erro ao tentar excluir estado");
-			erro.printStackTrace();			
+			erro.printStackTrace();
 		}
 	}
 
@@ -92,7 +85,7 @@ public class EstadoBean implements Serializable {
 			estado.setSigla(estado.getSigla().toUpperCase());
 			estadodao.merge(estado);
 			novo();
-			estados= estadodao.listar();
+			estados = estadodao.listar();
 			Messages.addGlobalInfo("Estado gravado com sucesso!");
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Erro ao tentar gravar o Estado ");

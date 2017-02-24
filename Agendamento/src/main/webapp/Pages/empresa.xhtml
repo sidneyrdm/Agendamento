@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Empresas</title>
+</h:head>
+<h:body>
+	<p:growl id="mensagem" />
+
+	<h:form id="formtabela">
+		<p:panel header="EMPRESAS - LISTAGEM">
+			<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela"
+				paginator="false" rows="30" value="#{empresaBean.empresas}"
+				var="empresa">
+				<f:facet name="footer">
+					<p:commandButton value="Novo" actionListener="#{empresaBean.novo}"
+						oncomplete="PF('dialogo').show();"
+						update=":formcadastro:gridcadastro">
+						<f:actionListener
+							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+					</p:commandButton>
+				</f:facet>
+				<p:column headerText="Nome" sortBy="{empresaBean.empresa.nome}"
+					filterBy="{empresa.nome}">
+					<h:outputText value="#{empresa.nome}" />
+				</p:column>
+				<p:column headerText="Cnpj">
+					<h:outputText value="#{empresa.cnpj}" />
+				</p:column>
+				<p:column headerText="Opções">
+					<p:commandButton icon="ui-icon-trash"
+						actionListener="#{empresaBean.excluir}"
+						update=":mensagem :formtabela:tabela">
+						<p:confirm header="Confirmação" message="Deseja exluir a Empresa?"
+							icon="ui-icon-alert" />
+						<f:attribute name="empresaSelecionada" value="#{empresa}" />
+					</p:commandButton>
+
+					<p:commandButton icon="ui-icon-pencil"
+						actionListener="#{empresaBean.editar}"
+						oncomplete="PF('dialogo').show();"
+						update=":formcadastro:gridcadastro">
+						<f:attribute name="empresaSelecionada" value="#{empresa}" />
+						 <f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+					</p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+		</p:panel>
+	</h:form>
+	<p:dialog header="Empresas - Cadastro" widgetVar="dialogo"
+		draggable="false" resizable="false" modal="true">
+		<h:form id="formcadastro">
+			<h:panelGrid id="gridcadastro" columns="2">
+				<h:outputLabel value="Nome.:" />
+				<h:inputText size="15" maxlength="50"
+					value="#{empresaBean.empresa.nome}" required="true"
+					requiredMessage="o campo NOME é obrigatório" />
+
+				<h:outputLabel value="Cnpj.:" />
+				<h:inputText size="15" maxlength="14"
+					value="#{empresaBean.empresa.cnpj}" required="true"
+					requiredMessage="campo CNPJ é obrigatório" />
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+				<p:commandButton value="Salvar"
+					actionListener="#{empresaBean.salvar}"
+					update=":mensagem :formcadastro:gridcadastro :formtabela:tabela" />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+</h:body>
+</html>

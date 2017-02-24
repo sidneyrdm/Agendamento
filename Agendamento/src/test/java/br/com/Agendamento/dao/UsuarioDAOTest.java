@@ -18,7 +18,6 @@ public class UsuarioDAOTest {
 		pessoa = pessoadao.pesquisarNome("Sidney");
 		
 		usuario.setAtivo(true);
-		usuario.setPessoa(pessoa);
 		usuario.setSenha("12345");
 		usuario.setTipo('A');
 		usuariodao.salvar(usuario);

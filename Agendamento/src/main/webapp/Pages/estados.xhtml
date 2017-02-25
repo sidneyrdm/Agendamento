@@ -12,7 +12,7 @@
 	<p:growl id="mensagem" />
 
 	<h:form id="formtabela">
-		<p:panel header="ESTADOS - LISTAGEM">
+		<p:panel header="ESTADOS - LISTAGEM" footer="Bem vindo #{autenticacaoBean.usuariologado.nome}">
 			<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela"
 				paginator="false" rows="30" value="#{estadoBean.estados}"
 				var="estado">

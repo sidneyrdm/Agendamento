@@ -36,9 +36,9 @@
 				<p:column headerText="Telefone">
 					<h:outputText value="#{usuario.telefone}" />
 				</p:column>
-				<p:column headerText="Login" sortBy="#{usuario.login}"
-					filterBy="#{usuario.login}">
-					<h:outputText value="#{usuario.login}" />
+				<p:column headerText="Cpf" sortBy="#{usuario.cpf}"
+					filterBy="#{usuario.cpf}">
+					<h:outputText value="#{usuario.cpf}" />
 				</p:column>
 				<p:column headerText="Senha">
 					<h:outputText value="#{usuario.senha}" />
@@ -88,10 +88,10 @@
 					value="#{usuarioBean.usuario.telefone}" required="true"
 					requiredMessage="o campo TELEFONE é obrigatório" />
 
-				<h:outputLabel value="Login.:" />
-				<h:inputText size="15" maxlength="50"
-					value="#{usuarioBean.usuario.login}" required="true"
-					requiredMessage="o campo LOGIN é obrigatório" />
+				<h:outputLabel value="Cpf" />
+				<p:inputMask mask="999.999.999-99" size="15" maxlength="50"
+					value="#{usuarioBean.usuario.cpf}" required="true"
+					requiredMessage="o campo CPF é obrigatório" />
 
 				<h:outputLabel value="Senha.:" />
 				<p:password size="15" maxlength="50"
@@ -100,14 +100,15 @@
 
 				<h:outputLabel for="tipo" value="Tipo.:" />
 				<p:selectOneRadio value="#{usuarioBean.usuario.tipo}"
-				required="true" requiredMessage="o campo TIPO é obrigatório">
+					required="true" requiredMessage="o campo TIPO é obrigatório">
 					<f:selectItem itemValue="A" itemLabel="Administrador" />
 					<f:selectItem itemValue="G" itemLabel="Representante" />
 				</p:selectOneRadio>
 
 				<h:outputLabel for="ativo" value="Ativo" />
-				<p:selectBooleanCheckbox id="ativo" value="#{usuarioBean.usuario.ativo}"
-				required="true" requiredMessage="o campo ATIVO é obrigatório"/>
+				<p:selectBooleanCheckbox id="ativo"
+					value="#{usuarioBean.usuario.ativo}" required="true"
+					requiredMessage="o campo ATIVO é obrigatório" />
 			</h:panelGrid>
 
 			<h:panelGrid columns="2">

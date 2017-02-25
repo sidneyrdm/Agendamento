@@ -98,14 +98,16 @@
 					value="#{usuarioBean.usuario.senha}" required="true"
 					requiredMessage="o campo SENHA é obrigatório" />
 
-				<h:outputLabel value="Tipo.:" />
-				<p:selectOneRadio>
+				<h:outputLabel for="tipo" value="Tipo.:" />
+				<p:selectOneRadio value="#{usuarioBean.usuario.tipo}"
+				required="true" requiredMessage="o campo TIPO é obrigatório">
 					<f:selectItem itemValue="A" itemLabel="Administrador" />
 					<f:selectItem itemValue="G" itemLabel="Representante" />
 				</p:selectOneRadio>
 
-				<h:outputLabel value="Ativo" />
-				<p:selectBooleanCheckbox />
+				<h:outputLabel for="ativo" value="Ativo" />
+				<p:selectBooleanCheckbox id="ativo" value="#{usuarioBean.usuario.ativo}"
+				required="true" requiredMessage="o campo ATIVO é obrigatório"/>
 			</h:panelGrid>
 
 			<h:panelGrid columns="2">

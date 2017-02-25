@@ -45,7 +45,8 @@
 						oncomplete="PF('dialogo').show();"
 						update=":formcadastro:gridcadastro">
 						<f:attribute name="empresaSelecionada" value="#{empresa}" />
-						 <f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+						<f:actionListener
+							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 					</p:commandButton>
 				</p:column>
 
@@ -63,14 +64,16 @@
 		<h:form id="formcadastro">
 			<h:panelGrid id="gridcadastro" columns="2">
 				<h:outputLabel value="Nome.:" />
-				<h:inputText size="15" maxlength="50"
+				<h:inputText size="20" maxlength="50"
 					value="#{empresaBean.empresa.nome}" required="true"
 					requiredMessage="o campo NOME é obrigatório" />
 
 				<h:outputLabel value="Cnpj.:" />
-				<h:inputText size="15" maxlength="14"
-					value="#{empresaBean.empresa.cnpj}" required="true"
-					requiredMessage="campo CNPJ é obrigatório" />
+				<p:inputMask mask="99.999.999/9999-99" id="cnpj" size="20"
+					required="true"
+					requiredMessage="campo CNPJ é obrigatório"
+					value="#{empresaBean.empresa.cnpj}" />
+
 			</h:panelGrid>
 
 			<h:panelGrid columns="2">

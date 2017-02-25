@@ -10,7 +10,7 @@ EmpresaDAO empresadao = new EmpresaDAO();
 	
 	@Test
 	public void salvar() {
-		empresa.setNome("RendeMais");
+		empresa.setNome("veneza supermercado ltda");
 		empresa.setCnpj("05678702000142");
 		
 		empresadao.salvar(empresa);

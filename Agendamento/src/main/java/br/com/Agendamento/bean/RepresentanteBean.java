@@ -8,9 +8,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.omnifaces.util.Messages;
 
-import br.com.Agendamento.dao.EmpresaDAO; 
+import br.com.Agendamento.dao.EmpresaDAO;
 import br.com.Agendamento.dao.RepresentanteDAO;
 import br.com.Agendamento.domain.Empresa;
 import br.com.Agendamento.domain.Representante;
@@ -66,12 +67,14 @@ public class RepresentanteBean implements Serializable {
 			representante.setSobrenome(representante.getSobrenome().toUpperCase());
 			representante.setEmail(representante.getEmail().toUpperCase());
 			representante.setTelefone(representante.getTelefone().toUpperCase());
-			representante.setLogin(representante.getLogin().toUpperCase());
-			representante.setSenha(representante.getSenha().toUpperCase());
+			representante.setCpf(representante.getCpf().toUpperCase());
+			representante.setSenhaNaoCriptografada(representante.getSenha());
+			SimpleHash hash = new SimpleHash("md5", representante.getSenhaNaoCriptografada());
+			representante.setSenha(hash.toHex());
 			representante.setAtivo(representante.getAtivo());
 			representante.setTipo(representante.getTipo());
 			representante.setEmpresa(representante.getEmpresa());
-			
+
 			representantedao.merge(representante);
 			novo();
 			representantes = representantedao.listar();
@@ -114,7 +117,7 @@ public class RepresentanteBean implements Serializable {
 	public void editar(ActionEvent evento) {
 		try {
 			representante = (Representante) evento.getComponent().getAttributes().get("representanteSelecionado");
-			
+
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("erro ao tentar excluir representante");
 			erro.printStackTrace();

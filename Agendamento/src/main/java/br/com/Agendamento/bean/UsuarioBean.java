@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.omnifaces.util.Messages;
 
 import br.com.Agendamento.dao.UsuarioDAO;
@@ -20,20 +21,23 @@ public class UsuarioBean implements Serializable {
 
 	Usuario usuario = new Usuario();
 	List<Usuario> usuarios;
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
+
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
 	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}
+
 	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
-	
-	
+
 	public void novo() {
 		usuario = new Usuario();
 	}
@@ -82,11 +86,12 @@ public class UsuarioBean implements Serializable {
 			usuario.setSobrenome(usuario.getSobrenome().toUpperCase());
 			usuario.setEmail(usuario.getEmail().toUpperCase());
 			usuario.setTelefone(usuario.getTelefone().toUpperCase());
-			usuario.setLogin(usuario.getLogin().toUpperCase());
-			usuario.setSenha(usuario.getSenha().toUpperCase());
+			usuario.setCpf(usuario.getCpf().toUpperCase());
+			usuario.setSenhaNaoCriptografada(usuario.getSenha());
+			SimpleHash hash = new SimpleHash("md5", usuario.getSenhaNaoCriptografada());
+			usuario.setSenha(hash.toHex());
 			usuario.setAtivo(usuario.getAtivo());
 			usuario.setTipo(usuario.getTipo());
-			
 			usuariodao.merge(usuario);
 			novo();
 			usuarios = usuariodao.listar();

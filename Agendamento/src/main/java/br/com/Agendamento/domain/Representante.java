@@ -4,17 +4,21 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @SuppressWarnings("serial")
 @Entity
 public class Representante extends GenericDomain {
 
-	@Column(length = 50, nullable = false)
-	private String login;
-	
-	@Column(length = 50, nullable = false)
+	@Column(length = 14, nullable = false)
+	private String cpf;
+
+	@Column(length = 32, nullable = false)
 	private String senha;
-	
+
+	@Transient
+	private String senhaNaoCriptografada;
+
 	@Column(length = 50, nullable = false)
 	private String nome;
 
@@ -30,7 +34,7 @@ public class Representante extends GenericDomain {
 
 	@Column(length = 50)
 	private String email;
-	
+
 	@Column(nullable = false)
 	private Character tipo;
 
@@ -77,12 +81,12 @@ public class Representante extends GenericDomain {
 		this.empresa = empresa;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getCpf() {
+		return cpf;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public String getSenha() {
@@ -108,5 +112,13 @@ public class Representante extends GenericDomain {
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
-	
+
+	public String getSenhaNaoCriptografada() {
+		return senhaNaoCriptografada;
+	}
+
+	public void setSenhaNaoCriptografada(String senhaNaoCriptografada) {
+		this.senhaNaoCriptografada = senhaNaoCriptografada;
+	}
+
 }

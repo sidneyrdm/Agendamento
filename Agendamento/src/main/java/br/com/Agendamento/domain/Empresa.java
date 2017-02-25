@@ -9,7 +9,7 @@ public class Empresa extends GenericDomain {
 	@Column(length = 50, nullable = false)
 	private String nome;
 
-	@Column(length = 14, nullable = false)
+	@Column(length = 18, nullable = false)
 	private String cnpj;
 
 	public String getNome() {

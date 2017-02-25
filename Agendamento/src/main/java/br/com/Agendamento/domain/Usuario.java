@@ -2,15 +2,22 @@ package br.com.Agendamento.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Transient;
 
 @SuppressWarnings("serial")
 @Entity
 public class Usuario extends GenericDomain {
 	@Column(length = 32, nullable = false)
 	private String senha;
-	
-	@Column(length = 50, nullable = false)
-	private String login;
+
+	@Transient
+	private String senhaNaoCriptografada;
+
+	@PrimaryKeyJoinColumn
+	@Column(length = 14, nullable = false)
+	private String cpf;
 
 	@Column(length = 50, nullable = false)
 	private String nome;
@@ -18,16 +25,16 @@ public class Usuario extends GenericDomain {
 	@Column(length = 50)
 	private String sobrenome;
 
-	@Column(length = 11, nullable = false)
+	@Column(length = 11)
 	private String telefone;
 
 	@Column(length = 50)
 	private String email;
 
-	@Column(nullable = false)
+	@Column()
 	private Character tipo;
 
-	@Column(nullable = false)
+	@Column()
 	private Boolean ativo;
 
 	public String getSenha() {
@@ -54,12 +61,12 @@ public class Usuario extends GenericDomain {
 		this.ativo = ativo;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getCpf() {
+		return cpf;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public String getNome() {
@@ -94,5 +101,12 @@ public class Usuario extends GenericDomain {
 		this.email = email;
 	}
 
-	
+	public String getSenhaNaoCriptografada() {
+		return senhaNaoCriptografada;
+	}
+
+	public void setSenhaNaoCriptografada(String senhaNaoCriptografada) {
+		this.senhaNaoCriptografada = senhaNaoCriptografada;
+	}
+
 }

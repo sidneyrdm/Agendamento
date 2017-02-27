@@ -6,25 +6,30 @@
 
 	<!-- Nome da Aplicação -->
 	<display-name>Agendamento</display-name>
-	
+
 	<!-- Estágio do Projeto -->
 	<context-param>
-        <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Development</param-value>
-    </context-param>
-        
-    <!-- Configuração do JSF -->
-    <servlet>
-        <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.xhtml</url-pattern>
-    </servlet-mapping>
-    <!-- carregamento do Hibernate -->
-    <listener>
-    <listener-class>br.com.Agendamento.util.HibernateContexto</listener-class>
-    </listener>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+	</context-param>
+
+	<!-- Configuração do JSF -->
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+	<!-- carregamento do Hibernate -->
+	<listener>
+		<listener-class>br.com.Agendamento.util.HibernateContexto</listener-class>
+	</listener>
+
+	<!-- Página Principal -->
+	<welcome-file-list>
+		<welcome-file>Pages/principal.xhtml</welcome-file>
+	</welcome-file-list>
 </web-app>

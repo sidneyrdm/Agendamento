@@ -1,140 +1,150 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Representantes</title>
-</h:head>
-<h:body>
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
 
-	<p:growl id="mensagem" />
-	<h:form id="formtabela">
-		<p:panel header="Representantes - LISTAGEM">
-			<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela"
-				paginator="true" value="#{representanteBean.representantes}"
-				var="representante">
-				<f:facet name="footer">
-					<p:commandButton value="Novo"
-						actionListener="#{representanteBean.novo}"
-						oncomplete="PF('dialogo').show();"
-						update=":formcadastro:gridcadastro">
-						<f:actionListener
-							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
-					</p:commandButton>
-				</f:facet>
-				<p:column headerText="Nome" sortBy="#{representante.nome}"
-					filterBy="#{representante.nome}">
-					<h:outputText value="#{representante.nome}" />
-				</p:column>
+	<ui:define name="conteudo">
+		<h:form id="formtabela">
+			<p:panel header="Representantes - LISTAGEM">
+				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela"
+					paginator="true" value="#{representanteBean.representantes}"
+					var="representante">
+					<f:facet name="footer">
+						<p:commandButton value="Novo"
+							actionListener="#{representanteBean.novo}"
+							oncomplete="PF('dialogo').show();"
+							update=":formcadastro:gridcadastro">
+							<f:actionListener
+								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+						</p:commandButton>
+					</f:facet>
+					<p:column headerText="Nome" sortBy="#{representante.nome}"
+						filterBy="#{representante.nome}">
+						<h:outputText value="#{representante.nome}" />
+					</p:column>
 
-				<p:column headerText="Sobrenome">
-					<h:outputText value="#{representante.sobrenome}" />
-				</p:column>
-				<p:column headerText="Email">
-					<h:outputText value="#{representante.email}" />
-				</p:column>
-				<p:column headerText="Telefone" >
-					<h:outputText value="#{representante.telefone}" />
-				</p:column>
-				<p:column headerText="Login" sortBy="#{representante.login}"
-					filterBy="#{representante.login}">
-					<h:outputText value="#{representante.login}" />
-				</p:column>
-				<p:column headerText="Senha">
-					<h:outputText value="#{representante.senha}" />
-				</p:column>
+					<p:column headerText="Sobrenome">
+						<h:outputText value="#{representante.sobrenome}" />
+					</p:column>
+					<p:column headerText="Email">
+						<h:outputText value="#{representante.email}" />
+					</p:column>
+					<p:column headerText="Telefone">
+						<h:outputText value="#{representante.telefone}" />
+					</p:column>
+					<p:column headerText="Cpf" sortBy="#{representante.cpf}"
+						filterBy="#{representante.cpf}">
+						<h:outputText value="#{representante.cpf}" />
+					</p:column>
+					<p:column headerText="Senha">
+						<h:outputText value="#{representante.senha}" />
+					</p:column>
 
-				<p:column headerText="Empresa"
-					sortBy="#{representante.empresa.nome}"
-					filterBy="#{representante.empresa.nome}">
-					<h:outputText value="#{representante.empresa.nome}" />
-				</p:column>
-				<p:column headerText="Opções">
-					<p:commandButton icon="ui-icon-trash"
-						actionListener="#{representanteBean.excluir}"
-						update=":mensagem :formtabela:tabela">
-						<p:confirm header="Confirmação"
-							message="Deseja exluir o representante?" icon="ui-icon-alert" />
-						<f:attribute name="representanteSelecionado"
-							value="#{representante}" />
-					</p:commandButton>
+					<p:column headerText="Empresa"
+						sortBy="#{representante.empresa.nome}"
+						filterBy="#{representante.empresa.nome}">
+						<h:outputText value="#{representante.empresa.nome}" />
+					</p:column>
+					<p:column headerText="Opções">
+						<p:commandButton icon="ui-icon-trash"
+							actionListener="#{representanteBean.excluir}"
+							update=":mensagem :formtabela:tabela">
+							<p:confirm header="Confirmação"
+								message="Deseja exluir o representante?" icon="ui-icon-alert" />
+							<f:attribute name="representanteSelecionado"
+								value="#{representante}" />
+						</p:commandButton>
 
-					<p:commandButton icon="ui-icon-pencil"
-						actionListener="#{representanteBean.editar}"
-						oncomplete="PF('dialogo').show();"
-						update=":mensagem :formcadastro:gridcadastro">
-						<f:attribute name="representanteSelecionado"
-							value="#{representante}" />
-						<f:actionListener
-							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
-					</p:commandButton>
-				</p:column>
+						<p:commandButton icon="ui-icon-pencil"
+							actionListener="#{representanteBean.editar}"
+							oncomplete="PF('dialogo').show();"
+							update=":mensagem :formcadastro:gridcadastro">
+							<f:attribute name="representanteSelecionado"
+								value="#{representante}" />
+							<f:actionListener
+								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+						</p:commandButton>
+					</p:column>
 
-			</p:dataTable>
-			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-				<p:commandButton value="Sim" type="button"
-					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-				<p:commandButton value="Não" type="button"
-					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-			</p:confirmDialog>
-		</p:panel>
-	</h:form>
-	<p:dialog header="Representantes - Cadastro" widgetVar="dialogo"
-		draggable="false" resizable="false" modal="true">
-		<h:form id="formcadastro">
-			<h:panelGrid columns="2" id="gridcadastro">
-				<h:outputLabel value="Nome.:" />
-				<h:inputText size="15" maxlength="50"
-					value="#{representanteBean.representante.nome}" required="true"
-					requiredMessage="o campo NOME é obrigatório" />
-
-				<h:outputLabel value="Sobrenome.:" />
-				<h:inputText size="15" maxlength="50"
-					value="#{representanteBean.representante.sobrenome}"
-					required="false" />
-
-				<h:outputLabel value="Email.:" />
-				<h:inputText size="15" maxlength="50"
-					value="#{representanteBean.representante.email}" required="false" />
-
-				<h:outputLabel value="Telefone.:" />
-				<h:inputText size="15" maxlength="50"
-					value="#{representanteBean.representante.telefone}" required="true"
-					requiredMessage="o campo TELEFONE é obrigatório" />
-
-				<h:outputLabel value="Login.:" />
-				<h:inputText size="15" maxlength="50"
-					value="#{representanteBean.representante.login}" required="true"
-					requiredMessage="o campo LOGIN é obrigatório" />
-
-				<h:outputLabel value="Senha.:" />
-				<p:password size="15" maxlength="50"
-					value="#{representanteBean.representante.senha}" required="true"
-					requiredMessage="o campo SENHA é obrigatório" />
-
-
-
-				<h:outputLabel value="Empresa.:" />
-				<p:selectOneMenu filter="true"
-					value="#{representanteBean.representante.empresa}"
-					converter="omnifaces.SelectItemsConverter" required="true"
-					requiredMessage="o campo EMPRESA é obrigatório">
-					<f:selectItem itemLabel="Selecione uma Empresa" />
-					<f:selectItems value="#{representanteBean.empresas}" var="empresa"
-						itemLabel="#{empresa.nome}" itemValue="#{empresa}" />
-				</p:selectOneMenu>
-			</h:panelGrid>
-
-			<h:panelGrid columns="2">
-				<p:commandButton value="Salvar"
-					actionListener="#{representanteBean.salvar}"
-					update=":mensagem :formtabela:tabela :formcadastro:gridcadastro" />
-				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
-			</h:panelGrid>
+				</p:dataTable>
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+			</p:panel>
 		</h:form>
-	</p:dialog>
-</h:body>
-</html>
+		<p:dialog header="Representantes - Cadastro" widgetVar="dialogo"
+			draggable="false" resizable="false" modal="true">
+			<h:form id="formcadastro">
+				<h:panelGrid columns="2" id="gridcadastro">
+					<h:outputLabel value="Nome.:" />
+					<h:inputText size="15" maxlength="50"
+						value="#{representanteBean.representante.nome}" required="true"
+						requiredMessage="o campo NOME é obrigatório" />
+
+					<h:outputLabel value="Sobrenome.:" />
+					<h:inputText size="15" maxlength="50"
+						value="#{representanteBean.representante.sobrenome}"
+						required="false" />
+
+					<h:outputLabel value="Email.:" />
+					<h:inputText size="15" maxlength="50"
+						value="#{representanteBean.representante.email}" required="false" />
+
+					<h:outputLabel value="Telefone.:" />
+					<p:inputMask size="15" maxlength="50" mask="(99)-99999-9999"
+						value="#{representanteBean.representante.telefone}"
+						required="true" requiredMessage="o campo TELEFONE é obrigatório" />
+
+					<h:outputLabel value="Cpf.:" />
+					<p:inputMask mask="999.999.999-99" size="15" maxlength="50"
+						value="#{representanteBean.representante.cpf}" required="true"
+						requiredMessage="o campo CPF é obrigatório" />
+
+					<h:outputLabel value="Senha.:" />
+					<p:password size="15" maxlength="50"
+						value="#{representanteBean.representante.senha}" required="true"
+						requiredMessage="o campo SENHA é obrigatório" />
+
+					<h:outputLabel for="tipo" value="Tipo.:" />
+					<p:selectOneRadio value="#{representanteBean.representante.tipo}"
+						required="true" requiredMessage="o campo TIPO é obrigatório">
+						<f:selectItem itemValue="R" itemLabel="Representante" />
+					</p:selectOneRadio>
+
+					<h:outputLabel for="ativo" value="Ativo" />
+					<p:selectBooleanCheckbox id="ativo"
+						value="#{representanteBean.representante.ativo}" required="true"
+						requiredMessage="o campo ATIVO é obrigatório" />
+
+
+
+
+					<h:outputLabel value="Empresa.:" />
+					<p:selectOneMenu filter="true"
+						value="#{representanteBean.representante.empresa}"
+						converter="omnifaces.SelectItemsConverter" required="true"
+						requiredMessage="o campo EMPRESA é obrigatório">
+						<f:selectItem itemLabel="Selecione uma Empresa" />
+						<f:selectItems value="#{representanteBean.empresas}" var="empresa"
+							itemLabel="#{empresa.nome}" itemValue="#{empresa}" />
+					</p:selectOneMenu>
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar"
+						actionListener="#{representanteBean.salvar}"
+						update=":mensagem :formtabela:tabela :formcadastro:gridcadastro" />
+					<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

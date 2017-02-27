@@ -14,11 +14,11 @@ public class UsuarioDAOTest {
 	@Test
 	public void salvar() {
 
-		usuario.setNome("eduardo");
-		usuario.setSenhaNaoCriptografada("1234");
+		usuario.setNome("sidney");
+		usuario.setSenhaNaoCriptografada("123");
 		SimpleHash hash = new SimpleHash("md5", usuario.getSenhaNaoCriptografada());
 		usuario.setSenha(hash.toHex());
-		usuario.setCpf("072.915.384-80");
+		usuario.setCpf("070.915.384-80");
 		usuariodao.salvar(usuario);
 	}
 

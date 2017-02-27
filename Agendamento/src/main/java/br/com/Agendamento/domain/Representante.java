@@ -29,7 +29,7 @@ public class Representante extends GenericDomain {
 	@JoinColumn(nullable = false)
 	private Empresa empresa;
 
-	@Column(length = 11, nullable = false)
+	@Column(length = 15, nullable = false)
 	private String telefone;
 
 	@Column(length = 50)
@@ -38,7 +38,7 @@ public class Representante extends GenericDomain {
 	@Column(nullable = false)
 	private Character tipo;
 
-	@Column(nullable = false)
+	@Column
 	private Boolean ativo;
 
 	public String getNome() {

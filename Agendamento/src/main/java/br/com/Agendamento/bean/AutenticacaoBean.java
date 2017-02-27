@@ -1,6 +1,7 @@
 package br.com.Agendamento.bean;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -49,12 +50,20 @@ public class AutenticacaoBean {
 				return;
 			}
 
-			Faces.redirect("./Pages/estados.xhtml");
+			Faces.redirect("./Pages/principal.xhtml");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Messages.addGlobalError(e.getMessage());
 		}
+	}
+	
+	public boolean temPermissoes(List<String> permissoes){
+		for(String permissao: permissoes){
+			if(usuariologado.getTipo() == (permissao.charAt(0)))
+				return true;
+		}
+		return false;
 	}
 
 }

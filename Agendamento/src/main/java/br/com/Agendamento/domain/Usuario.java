@@ -2,7 +2,6 @@ package br.com.Agendamento.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Transient;
 
@@ -25,7 +24,7 @@ public class Usuario extends GenericDomain {
 	@Column(length = 50)
 	private String sobrenome;
 
-	@Column(length = 11)
+	@Column(length = 15)
 	private String telefone;
 
 	@Column(length = 50)

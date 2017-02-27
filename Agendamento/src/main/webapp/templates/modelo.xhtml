@@ -14,23 +14,25 @@
 	<p:growl id="mensagem" />
 
 	<div id="geral">
+		<h:form>
+			<h:outputText
+				value="Bem vindo #{autenticacaoBean.usuariologado.nome}" />
+			<p:commandLink value="Sair"/>
+		</h:form>
 		<div id="topo" class="divTopo">
 			<p:graphicImage library="images" name="banner.jpg"
 				styleClass="imagemCentralizada" />
+
 		</div>
 
 		<div id="cabecalho" class="divCabecalho">
 			<h:form id="formMenu">
 				<p:menubar>
-					<p:submenu label="Arquivo">
-						<p:menuitem value="Sair" />
-					</p:submenu>
-
 					<p:submenu label="Cadastros">
 						<p:menuitem value="Agendamento" url="/Pages/agendamento.xhtml" />
 						<p:menuitem value="Usuário" url="/Pages/usuario.xhtml" />
 						<p:menuitem value="Representante" url="/Pages/representante.xhtml" />
-						<p:menuitem value="Empresa" url="/Pages/empresa.xhtml"/>
+						<p:menuitem value="Empresa" url="/Pages/empresa.xhtml" />
 					</p:submenu>
 
 					<p:submenu label="Movimentações">

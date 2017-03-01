@@ -7,7 +7,7 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>SiGDro</title>
+	<title>Agendamento</title>
 	<h:outputStylesheet library="css" name="estilos.css" />
 </h:head>
 <h:body>
@@ -19,22 +19,24 @@
 				styleClass="imagemCentralizada" />
 
 		</div>
+		<div id="usuariologado" class="divUsuario">
+			<h:outputLabel value="Bem vindo.: #{autenticacaoBean.nome}" />
+		</div>
 
 		<div id="cabecalho" class="divCabecalho">
 			<h:form id="formMenu">
 				<p:menubar>
-					<p:menuitem value="Início" url="/Pages/principal.xhtml" />
+					<p:menuitem value="Início" url="/Pages/principal.xhtml"
+						rendered="true" />
 					<p:submenu label="Cadastros">
 						<p:menuitem value="Agendamento" url="/Pages/agendamento.xhtml" />
 						<p:menuitem value="Usuário" url="/Pages/usuario.xhtml" />
 						<p:menuitem value="Representante" url="/Pages/representante.xhtml" />
 						<p:menuitem value="Empresa" url="/Pages/empresa.xhtml" />
 					</p:submenu>
-					<p:submenu label="Ajuda">
-						<p:menuitem value="Sobre" />
-					</p:submenu>
-					<p:menuitem
-						value="Bem vindo.: #{autenticacaoBean.usuariologado.nome}" />
+
+					<p:menuitem value="Sair" url="/Pages/autenticacao.xhtml" />
+
 				</p:menubar>
 			</h:form>
 		</div>

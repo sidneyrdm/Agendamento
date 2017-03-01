@@ -19,6 +19,7 @@ import br.com.Agendamento.domain.Usuario;
 @ViewScoped
 public class UsuarioBean implements Serializable {
 
+
 	Usuario usuario = new Usuario();
 	List<Usuario> usuarios;
 

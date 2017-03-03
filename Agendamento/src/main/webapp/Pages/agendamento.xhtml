@@ -13,10 +13,11 @@
 			<p:panel header="Agendamentos - LISTAGEM">
 				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela"
 					paginator="true" value="#{agendamentoBean.agendamentos}"
-					var="agendamento" rows="3">
+					var="agendamento" rows="10">
 					<f:facet name="footer">
 						<p:commandButton value="Novo"
 							actionListener="#{agendamentoBean.novo}"
+							
 							oncomplete="PF('dialogo').show();"
 							update=":formcadastro:gridcadastro">
 							<f:actionListener
@@ -87,7 +88,7 @@
 							itemValue="#{representante}" />
 					</p:selectOneMenu>
 
-					<h:outputLabel value="Empresa.:" rendered="true"/>
+					<h:outputLabel value="Empresa.:" rendered="true" />
 					<p:selectOneMenu filter="true" rendered="true"
 						value="#{agendamentoBean.agendamento.empresa}"
 						converter="omnifaces.SelectItemsConverter" required="true"
@@ -105,8 +106,9 @@
 
 
 					<h:outputLabel value="Data do agendamento.:" />
-					<p:calendar pattern="dd/mm/yyyy" locale="pt_BR"
-						timeZone="America/Sao_Paulo"
+					<p:calendar id="data" for="data" mindate=""
+						maxdate="" pattern="dd/MM/yyyy" mask="true"
+						locale="pt_BR"
 						value="#{agendamentoBean.agendamento.data}" />
 
 					<h:outputLabel for="turno" value="Turno.:" />

@@ -1,6 +1,8 @@
 package br.com.Agendamento.bean;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -22,10 +24,29 @@ import br.com.Agendamento.domain.Representante;
 @ViewScoped
 public class AgendamentoBean implements Serializable {
 
+	private Calendar dataMinima;
+	private Calendar dataMaxima;
 	private Agendamento agendamento;
 	private List<Agendamento> agendamentos;
 	private List<Representante> representantes;
 	private List<Empresa> empresas;
+	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+	public Calendar getDataMinima() {
+		return dataMinima;
+	}
+
+	public void setDataMinima(Calendar dataMinima) {
+		this.dataMinima = dataMinima;
+	}
+
+	public Calendar getDataMaxima() {
+		return dataMaxima;
+	}
+
+	public void setDataMaxima(Calendar dataMaxima) {
+		this.dataMaxima = dataMaxima;
+	}
 
 	public Agendamento getAgendamento() {
 		return agendamento;

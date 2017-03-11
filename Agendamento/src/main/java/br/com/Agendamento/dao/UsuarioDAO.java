@@ -23,8 +23,7 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
 
 			return resultado;
 		} catch (RuntimeException erro) {
-			// JOptionPane.showMessageDialog(null, "NENHUM REGISTRO
-			// ENCONTRADO");
+
 			throw erro;
 		}
 	}

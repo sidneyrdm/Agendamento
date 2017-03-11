@@ -34,9 +34,10 @@
 
 		<!-- Mapeamento de Entidades -->
 		<mapping class="br.com.Agendamento.domain.Usuario" />
+		<mapping class="br.com.Agendamento.domain.Disponibilidade" />
+		<mapping class="br.com.Agendamento.domain.Agendamento" />
 		<mapping class="br.com.Agendamento.domain.Empresa" />
 		<mapping class="br.com.Agendamento.domain.Representante" />
-		<mapping class="br.com.Agendamento.domain.Agendamento" /> 
 
 	</session-factory>
 

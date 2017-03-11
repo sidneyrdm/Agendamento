@@ -26,18 +26,11 @@
 						<h:outputText value="#{usuario.nome}" />
 					</p:column>
 
-					<p:column headerText="Sobrenome">
-						<h:outputText value="#{usuario.sobrenome}" />
-					</p:column>
 					<p:column headerText="Email">
 						<h:outputText value="#{usuario.email}" />
 					</p:column>
 					<p:column headerText="Telefone">
 						<h:outputText value="#{usuario.telefone}" />
-					</p:column>
-					<p:column headerText="Cpf" sortBy="#{usuario.cpf}"
-						filterBy="#{usuario.cpf}">
-						<h:outputText value="#{usuario.cpf}" />
 					</p:column>
 					<p:column headerText="Opções">
 						<p:commandButton icon="ui-icon-trash"
@@ -76,10 +69,6 @@
 						value="#{usuarioBean.usuario.nome}" required="true"
 						requiredMessage="o campo NOME é obrigatório" />
 
-					<h:outputLabel value="Sobrenome.:" />
-					<h:inputText size="15" maxlength="50"
-						value="#{usuarioBean.usuario.sobrenome}" required="false" />
-
 					<h:outputLabel value="Email.:" />
 					<h:inputText size="15" maxlength="50"
 						value="#{usuarioBean.usuario.email}" required="false" />
@@ -106,10 +95,6 @@
 						<f:selectItem itemValue="R" itemLabel="Representante" />
 					</p:selectOneRadio>
 
-					<h:outputLabel for="ativo" value="Ativo" />
-					<p:selectBooleanCheckbox id="ativo"
-						value="#{usuarioBean.usuario.ativo}" required="true"
-						requiredMessage="o campo ATIVO é obrigatório" />
 				</h:panelGrid>
 
 				<h:panelGrid columns="2">

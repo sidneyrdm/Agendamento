@@ -83,15 +83,13 @@ public class UsuarioBean implements Serializable {
 	public void salvar() {
 		try {
 			UsuarioDAO usuariodao = new UsuarioDAO();
-			usuario.setNome(usuario.getNome().toUpperCase());
-			usuario.setSobrenome(usuario.getSobrenome().toUpperCase());
-			usuario.setEmail(usuario.getEmail().toUpperCase());
-			usuario.setTelefone(usuario.getTelefone().toUpperCase());
-			usuario.setCpf(usuario.getCpf().toUpperCase());
+			usuario.setNome(usuario.getNome());
+			usuario.setEmail(usuario.getEmail());
+			usuario.setTelefone(usuario.getTelefone());
+			usuario.setCpf(usuario.getCpf());
 			usuario.setSenhaNaoCriptografada(usuario.getSenha());
 			SimpleHash hash = new SimpleHash("md5", usuario.getSenhaNaoCriptografada());
 			usuario.setSenha(hash.toHex());
-			usuario.setAtivo(usuario.getAtivo());
 			usuario.setTipo(usuario.getTipo());
 			usuariodao.merge(usuario);
 			novo();

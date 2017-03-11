@@ -7,7 +7,6 @@ import javax.faces.event.PhaseListener;
 import org.omnifaces.util.Faces;
 
 import br.com.Agendamento.bean.AutenticacaoBean;
-import br.com.Agendamento.domain.Representante;
 import br.com.Agendamento.domain.Usuario;
 
 @SuppressWarnings("serial")
@@ -29,9 +28,8 @@ public class AutenticacaoListener implements PhaseListener {
 				return;
 			}
 
-			Representante representante = autenticacaoBean.getRepresentantelogado();
 			Usuario usuario = autenticacaoBean.getUsuariologado();
-			if (usuario == null && representante == null) {
+			if (usuario == null) {
 				Faces.navigate("/Pages/autenticacao.xhtml");
 				return;
 			}

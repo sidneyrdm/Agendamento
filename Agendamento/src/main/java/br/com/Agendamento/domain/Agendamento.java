@@ -1,58 +1,36 @@
 package br.com.Agendamento.domain;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @SuppressWarnings("serial")
 @Entity
-public class Agendamento extends GenericDomain {
-
-	@OneToOne
-	@JoinColumn(nullable = false)
-	private Representante representante;
+public class Agendamento extends GenericDomain{
 	
 	@OneToOne
-	@JoinColumn(nullable = false)
-	private Empresa empresa;
+	@JoinColumn(nullable= false)
+	private Usuario usuario;
 	
+	@OneToOne
+	@JoinColumn(nullable= false)
+	private Disponibilidade disponibilidade;
 
-	private Character turno;
-	private Date data;
-
-	public Representante getRepresentante() {
-		return representante;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setRepresentante(Representante representante) {
-		this.representante = representante;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
-	public Character getTurno() {
-		return turno;
+	public Disponibilidade getDisponibilidade() {
+		return disponibilidade;
 	}
 
-	public void setTurno(Character turno) {
-		this.turno = turno;
+	public void setDisponibilidade(Disponibilidade disponibilidade) {
+		this.disponibilidade = disponibilidade;
 	}
-
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
-	}
-
-	public Empresa getEmpresa() {
-		return empresa;
-	}
-
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
-	}
-	
+		
 
 }

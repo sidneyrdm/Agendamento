@@ -106,7 +106,7 @@
 
 
 					<h:outputLabel value="Data do agendamento.:" />
-					<p:calendar id="data" for="data" mindate=""
+					<p:calendar id="data" for="data" mindate="#{disponibilidadeBean.disponibilidade.data}"
 						maxdate="" pattern="dd/MM/yyyy" mask="true"
 						locale="pt_BR"
 						value="#{agendamentoBean.agendamento.data}" />

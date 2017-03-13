@@ -4,38 +4,22 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @SuppressWarnings("serial")
 @Entity
 public class Disponibilidade extends GenericDomain {
 
-	@Column
-	private int qtd_manha;
-	
-	@Column
-	private int qtd_tarde;
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private Turno turno;
 	
 	@Column
 	private int agendado;
-	
-	@Column(nullable= false)
+
+	@Column(nullable = false)
 	private Date data;
-
-	public int getQtd_manha() {
-		return qtd_manha;
-	}
-
-	public void setQtd_manha(int qtd_manha) {
-		this.qtd_manha = qtd_manha;
-	}
-
-	public int getQtd_tarde() {
-		return qtd_tarde;
-	}
-
-	public void setQtd_tarde(int qtd_tarde) {
-		this.qtd_tarde = qtd_tarde;
-	}
 
 	public int getAgendado() {
 		return agendado;
@@ -52,7 +36,14 @@ public class Disponibilidade extends GenericDomain {
 	public void setData(Date data) {
 		this.data = data;
 	}
-	
-	
+
+	public Turno getTurno() {
+		return turno;
+	}
+
+	public void setTurno(Turno turno) {
+		this.turno = turno;
+	}
+
 	
 }

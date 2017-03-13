@@ -74,7 +74,7 @@ public class AgendamentoBean implements Serializable {
 		try {
 			AgendamentoDAO agendamentodao = new AgendamentoDAO();
 			agendamento.setDisponibilidade(agendamento.getDisponibilidade());
-			agendamento.setUsuario(agendamento.getUsuario());
+			agendamento.setUsuario(new AutenticacaoBean().getUsuariologado());
 			agendamentodao.merge(agendamento);
 			novo();
 			agendamentos = agendamentodao.listar();

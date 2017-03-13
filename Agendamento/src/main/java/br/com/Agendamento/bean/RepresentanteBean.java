@@ -119,7 +119,7 @@ public class RepresentanteBean implements Serializable {
 			representante = (Representante) evento.getComponent().getAttributes().get("representanteSelecionado");
 
 		} catch (RuntimeException erro) {
-			Messages.addGlobalError("erro ao tentar excluir representante");
+			Messages.addGlobalError("erro ao tentar editar representante");
 			erro.printStackTrace();
 		}
 	}

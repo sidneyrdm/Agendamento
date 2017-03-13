@@ -10,21 +10,35 @@
 
 	<ui:define name="conteudo">
 		<h:form id="formdisponibilidade">
-
 			<h:panelGrid columns="2" id="gridcadastro">
-				<h:outputLabel value="Data.:" />
-				<p:calendar id="data" for="data" pattern="dd/MM/yyyy" mask="true"
-					locale="pt_BR" value="#{disponibilidadeBean.disponibilidade.data}" />
-				<h:outputLabel value="Quantidade Turno Manhã.:"/>
-				<p:inputMask value="#{disponibilidadeBean.disponibilidade.qtd_manha}" size="1" mask="99"/>
-
-				<h:outputLabel value="Quantidade Turno Tarde.:"/>
-				<p:inputMask value="#{disponibilidadeBean.disponibilidade.qtd_tarde}" size="1" mask="99"/>
-				
-				<p:commandButton value="Gravar" actionListener="#{disponibilidadeBean.salvar}"
-				update=":mensagem :formdisponibilidade:gridcadastro"
-				/>
+				<h:outputLabel value="Turno.:" />
+				<p:selectOneMenu filter="true"
+					value="#{disponibilidadeBean.disponibilidade.turno}"
+					converter="omnifaces.SelectItemsConverter" required="true"
+					requiredMessage="o campo Turno é obrigatório">
+					<f:selectItem itemLabel="Selecione um Turno" />
+					<f:selectItems value="#{disponibilidadeBean.turnos}" var="turno"
+						itemLabel="#{turno.nome}" itemValue="#{turno}" />
+					<p:ajax listener="#{disponibilidadeBean.popular}" update=":formdisponibilidade:disponibilidade"/>
+				</p:selectOneMenu>
 			</h:panelGrid>
+			
+			<h:outputLabel for="disponibilidade" value="Data.:" />
+			<p:selectOneMenu id="disponibilidade" filter="true"
+				value="#{disponibilidadeBean.disponibilidade.data}"
+				converter="omnifaces.SelectItemsConverter" required="true"
+				requiredMessage="o campo DATA é obrigatório">
+				<f:selectItem noSelectionOption="true"
+					itemLabel="Selecione uma Data" />
+				<f:selectItems value="#{disponibilidadeBean.disponibilidades}"
+					var="disponibilidade" itemLabel="#{disponibilidade.data}"
+					itemValue="#{disponibilidade}" />
+			</p:selectOneMenu>
+
+
+			<p:commandButton value="Gravar"
+				actionListener="#{disponibilidadeBean.salvar}"
+				update=":mensagem :formdisponibilidade:gridcadastro" />
 		</h:form>
 
 	</ui:define>

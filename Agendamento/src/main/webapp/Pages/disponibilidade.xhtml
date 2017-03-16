@@ -9,37 +9,87 @@
 	template="/templates/modelo.xhtml">
 
 	<ui:define name="conteudo">
-		<h:form id="formdisponibilidade">
-			<h:panelGrid columns="2" id="gridcadastro">
-				<h:outputLabel value="Turno.:" />
-				<p:selectOneMenu filter="true"
-					value="#{disponibilidadeBean.disponibilidade.turno}"
-					converter="omnifaces.SelectItemsConverter" required="true"
-					requiredMessage="o campo Turno é obrigatório">
-					<f:selectItem itemLabel="Selecione um Turno" />
-					<f:selectItems value="#{disponibilidadeBean.turnos}" var="turno"
-						itemLabel="#{turno.nome}" itemValue="#{turno}" />
-					<p:ajax listener="#{disponibilidadeBean.popular}" update=":formdisponibilidade:disponibilidade"/>
-				</p:selectOneMenu>
-			</h:panelGrid>
-			
-			<h:outputLabel for="disponibilidade" value="Data.:" />
-			<p:selectOneMenu id="disponibilidade" filter="true"
-				value="#{disponibilidadeBean.disponibilidade.data}"
-				converter="omnifaces.SelectItemsConverter" required="true"
-				requiredMessage="o campo DATA é obrigatório">
-				<f:selectItem noSelectionOption="true"
-					itemLabel="Selecione uma Data" />
-				<f:selectItems value="#{disponibilidadeBean.disponibilidades}"
-					var="disponibilidade" itemLabel="#{disponibilidade.data}"
-					itemValue="#{disponibilidade}" />
-			</p:selectOneMenu>
 
-
-			<p:commandButton value="Gravar"
-				actionListener="#{disponibilidadeBean.salvar}"
-				update=":mensagem :formdisponibilidade:gridcadastro" />
+		<!-- Tabela disponibilidades -->
+		<h:form id="formtabela">
+			<p:panel header="Disponibilidades - LISTAGEM">
+				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela"
+					paginator="false" rows="30"
+					value="#{disponibilidadeBean.disponibilidades}"
+					var="disponibilidade">
+					<f:facet name="footer">
+						<p:commandButton value="Novo"
+							actionListener="#{disponibilidadeBean.novo}"
+							oncomplete="PF('dialogo').show();"
+							update=":formdisponibilidade:gridcadastro">
+							<f:actionListener
+								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+						</p:commandButton>
+					</f:facet>
+					<p:column headerText="Data.:" sortBy="#{disponibilidade.date}"
+						filterBy="#{disponibilidade.date}">
+						<h:outputText value="#{disponibilidade.date}" />
+					</p:column>
+					<p:column headerText="Turno.:" sortBy="#{disponibilidade.mt}"
+						filterBy="#{disponibilidade.mt}">
+						<h:outputText value="#{disponibilidade.mt}" />
+					</p:column>
+					<p:column headerText="Quantidade">
+						<h:outputText value="#{disponibilidade.qtd}" />
+					</p:column>
+					<p:column headerText="Opções">
+						<p:commandButton icon="ui-icon-trash"
+							actionListener="#{disponibilidadeBean.excluir}"
+							update=":mensagem :formtabela:tabela">
+							<p:confirm header="Confirmação" message="Deseja exluir o Turno?"
+								icon="ui-icon-alert" />
+							<f:attribute name="disponibilidadeSelecionada"
+								value="#{disponibilidade}" />
+						</p:commandButton>
+						<p:commandButton icon="ui-icon-pencil"
+							actionListener="#{disponibilidadeBean.editar}"
+							oncomplete="PF('dialogo').show();"
+							update=":formdisponibilidade:gridcadastro">
+							<f:attribute name="disponibilidadeSelecionada"
+								value="#{disponibilidade}" />
+							<f:actionListener
+								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+			</p:panel>
 		</h:form>
+		<p:dialog header="Turnos - Cadastro" widgetVar="dialogo"
+			draggable="false" resizable="false" modal="true">
+			<h:form id="formdisponibilidade">
+				<h:panelGrid columns="2" id="gridcadastro">
+					<h:outputLabel for="turno" value="Turno.:" />
+					<p:selectOneRadio value="#{disponibilidadeBean.disponibilidade.mt}"
+						required="true" requiredMessage="o campo Turno é obrigatório">
+						<f:selectItem itemValue="Manha" itemLabel="Manha" />
+						<f:selectItem itemValue="Tarde" itemLabel="Tarde" />
+					</p:selectOneRadio>
+					<h:outputLabel value="quantidade" />
+					<p:inputMask mask="99" id="quantidade" size="1" required="true"
+						requiredMessage="campo QUANTIDADE é obrigatório"
+						value="#{disponibilidadeBean.disponibilidade.qtd}" />
+					<h:outputLabel for="disponibilidade" value="Data.:" />
+					<p:calendar id="mask"
+						value="#{disponibilidadeBean.disponibilidade.data}"
+						pattern="dd-MM-yyyy" mask="true" />
+
+				</h:panelGrid>
+				<p:commandButton value="Gravar"
+					actionListener="#{disponibilidadeBean.salvar}"
+					update=":formtabela:tabela :mensagem :formdisponibilidade:gridcadastro" />
+			</h:form>
+		</p:dialog>
 
 	</ui:define>
 </ui:composition>

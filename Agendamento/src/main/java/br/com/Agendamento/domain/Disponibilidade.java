@@ -11,15 +11,32 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Disponibilidade extends GenericDomain {
 
+	@Column(length= 5)
+	private String mt;
+	
+	@Column(length= 2)
+	private int qtd;	
+	
+	@Column(nullable = false)
+	private String Date;
+		
 	@ManyToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn()
 	private Turno turno;
 	
 	@Column
 	private int agendado;
 
-	@Column(nullable = false)
+	
 	private Date data;
+
+	public String getDate() {
+		return Date;
+	}
+
+	public void setDate(String date) {
+		Date = date;
+	}
 
 	public int getAgendado() {
 		return agendado;
@@ -43,6 +60,22 @@ public class Disponibilidade extends GenericDomain {
 
 	public void setTurno(Turno turno) {
 		this.turno = turno;
+	}
+
+	public String getMt() {
+		return mt;
+	}
+
+	public void setMt(String mt) {
+		this.mt = mt;
+	}
+
+	public int getQtd() {
+		return qtd;
+	}
+
+	public void setQtd(int qtd) {
+		this.qtd = qtd;
 	}
 
 	

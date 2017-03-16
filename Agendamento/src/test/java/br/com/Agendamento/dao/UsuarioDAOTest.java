@@ -1,16 +1,19 @@
 package br.com.Agendamento.dao;
 
+import java.util.List;
+
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import br.com.Agendamento.domain.Disponibilidade;
 import br.com.Agendamento.domain.Usuario;
 
 public class UsuarioDAOTest {
 	Usuario usuario = new Usuario();
 	UsuarioDAO usuariodao = new UsuarioDAO();
 
-	
+	@Ignore
 	@Test
 	public void salvar() {
 
@@ -31,6 +34,18 @@ public class UsuarioDAOTest {
 
 		usuario = usuariodao.autenticar(cpf, senha);
 		System.out.println(usuario.getNome() + " =nome");
+	}
+
+	@Test
+	public void testar() {
+		String datapesquisa = "Manha";
+		DisponibilidadeDAO disponibilidadedao = new DisponibilidadeDAO();
+		List<Disponibilidade> resultado = disponibilidadedao.buscarPorTurno(datapesquisa);
+
+		for (Disponibilidade disp : resultado) {
+			System.out.println("turno.: " + disp.getMt());
+			System.out.println("data.: " + disp.getDate());
+		}
 	}
 
 }

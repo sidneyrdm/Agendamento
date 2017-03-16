@@ -11,11 +11,26 @@ import br.com.Agendamento.util.HibernateUtil;
 
 public class DisponibilidadeDAO extends GenericDAO<Disponibilidade> {
 	@SuppressWarnings("unchecked")
-	public List<Disponibilidade> buscarPorTurno(Long turnoCodigo) {
+	public List<Disponibilidade> buscarPorData(String date) {
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
 		try {
 			Criteria consulta = sessao.createCriteria(Disponibilidade.class);
-			consulta.add(Restrictions.eq("turno.codigo", turnoCodigo));
+			consulta.add(Restrictions.eq("Date", date));
+			List<Disponibilidade> resultado = consulta.list();
+			return resultado;
+		} catch (RuntimeException erro) {
+			throw erro;
+		} finally {
+			sessao.close();
+		}
+	}	
+	
+	@SuppressWarnings("unchecked")
+	public List<Disponibilidade> buscarPorTurno(String mt) {
+		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
+		try {
+			Criteria consulta = sessao.createCriteria(Disponibilidade.class);
+			consulta.add(Restrictions.eq("mt", mt));
 			List<Disponibilidade> resultado = consulta.list();
 			return resultado;
 		} catch (RuntimeException erro) {

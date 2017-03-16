@@ -11,32 +11,33 @@
 	<ui:define name="conteudo">
 		<h:form id="formdisponibilidade">
 			<h:panelGrid columns="2" id="gridcadastro">
-				<h:outputLabel value="Turno.:" />
-				<p:selectOneMenu filter="true"
-					value="#{disponibilidadeBean.disponibilidade.turno}"
+				<h:outputLabel for="disponibilidade" value="Data.:" />
+				<p:selectOneMenu id="disponibilidade" filter="true"
+					value="#{disponibilidadeBean.selecao}"
+					converter="omnifaces.SelectItemsConverter" required="true"
+					requiredMessage="o campo DATA é obrigatório">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="Selecione uma Data" />
+					<f:selectItems value="#{disponibilidadeBean.disponibilidades}"
+						var="selecao" itemLabel="#{selecao.date}" itemValue="#{selecao}" />
+					<p:ajax listener="#{disponibilidadeBean.popular}"
+						update=":formdisponibilidade:turno" />
+				</p:selectOneMenu>
+
+				<h:outputLabel value="Turno.:" for="turno" />
+				<p:selectOneMenu filter="true" id="turno"
+					value="#{disponibilidadeBean.disponibilidade.mt}"
 					converter="omnifaces.SelectItemsConverter" required="true"
 					requiredMessage="o campo Turno é obrigatório">
 					<f:selectItem itemLabel="Selecione um Turno" />
-					<f:selectItems value="#{disponibilidadeBean.turnos}" var="turno"
-						itemLabel="#{turno.nome}" itemValue="#{turno}" />
-					<p:ajax listener="#{disponibilidadeBean.popular}" update=":formdisponibilidade:disponibilidade"/>
+					<f:selectItems
+						value="#{disponibilidadeBean.disponibilidadesCarregadas}"
+						var="turno" itemLabel="#{turno.mt}" itemValue="#{turno}" />
 				</p:selectOneMenu>
+
 			</h:panelGrid>
-			
-			<h:outputLabel for="disponibilidade" value="Data.:" />
-			<p:selectOneMenu id="disponibilidade" filter="true"
-				value="#{disponibilidadeBean.disponibilidade.data}"
-				converter="omnifaces.SelectItemsConverter" required="true"
-				requiredMessage="o campo DATA é obrigatório">
-				<f:selectItem noSelectionOption="true"
-					itemLabel="Selecione uma Data" />
-				<f:selectItems value="#{disponibilidadeBean.disponibilidades}"
-					var="disponibilidade" itemLabel="#{disponibilidade.data}"
-					itemValue="#{disponibilidade}" />
-			</p:selectOneMenu>
 
-
-			<p:commandButton value="Gravar"
+			<p:commandButton value="Agendar"
 				actionListener="#{agendamentoBean.salvar}"
 				update=":mensagem :formdisponibilidade:gridcadastro" />
 		</h:form>

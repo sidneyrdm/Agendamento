@@ -68,6 +68,7 @@ public class AutenticacaoBean {
 	public String getSenha() {
 		return senha;
 	}
+	
 
 	public void setSenha(String senha) {
 		this.senha = senha;
@@ -84,6 +85,10 @@ public class AutenticacaoBean {
 	@PostConstruct
 	public void iniciar() {
 		usuario = new Usuario();
+	}
+	
+	public void livre() throws IOException{
+		Faces.redirect("./Pages/principal.xhtml");
 	}
 
 	public void autenticar() {

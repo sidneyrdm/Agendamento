@@ -11,43 +11,36 @@
 	<ui:define name="conteudo">
 		<h:form id="formdisponibilidade">
 
-			<h:panelGrid columns="2" id="gridcadastro">
-				<h:outputLabel for="turno" value="Turno.:" />
-				<p:selectOneRadio value="#{disponibilidadeBean.disponibilidades}"
-					required="true" requiredMessage="o campo Turno é obrigatório">
-					<f:selectItem itemValue="m" itemLabel="Manha" />
-					<f:selectItem itemValue="t" itemLabel="Tarde" />
-				</p:selectOneRadio>
 
-				<h:outputLabel for="disponibilidade" value="Data.:" />
-				<p:selectOneMenu id="disponibilidade" filter="true"
+			<h:panelGrid id="Selecao" columns="2">
+				<p:outputLabel for="turno" value="Turno:" />
+				<p:selectOneRadio id="turno"
+					value="#{disponibilidadeBean.selecao.mt}">
+					<f:selectItem itemLabel="Manha" itemValue="Manha" />
+					<f:selectItem itemLabel="Tarde" itemValue="Tarde" />
+					<p:ajax listener="#{disponibilidadeBean.popular}"
+						update=":formdisponibilidade:date" />
+				</p:selectOneRadio>
+			</h:panelGrid>
+
+			<h:panelGrid columns="2" id="gridcadastro">
+				<h:outputLabel value="Data.:" for="date" />
+				<p:selectOneMenu filter="true" id="date"
+					value="#{disponibilidadeBean.disponibilidade}"
 					converter="omnifaces.SelectItemsConverter" required="true"
-					requiredMessage="o campo DATA é obrigatório">
-					<f:selectItem noSelectionOption="true"
-						itemLabel="Selecione uma Data" />
-					<f:selectItems value="#{disponibilidadeBean.disponibilidades}"
-						var="disponibilidade" itemLabel="#{disponibilidade.data}"
-						itemValue="#{disponibilidade}" />
+					requiredMessage="o campo Data é obrigatório">
+					<f:selectItem itemLabel="Selecione uma Data" />
+					<f:selectItems
+						value="#{disponibilidadeBean.disponibilidadesCarregadas}"
+						var="data" itemLabel="#{data.date}" itemValue="#{data}" />
 				</p:selectOneMenu>
 
-				<h:outputLabel value="data selecionada.: " />
-				<h:outputText
-					value="#{disponibilidadeBean.disponibilidade.qtd_manha}" />
-
 			</h:panelGrid>
+
+			<p:commandButton value="Agendar"
+				actionListener="#{agendamentoBean.salvar}"
+				update=":mensagem :formdisponibilidade:gridcadastro" />
 		</h:form>
 
-		<h:form>
-			<p:multiSelectListbox value="#{multiSelectView.selection}"
-				effect="slide" header="Categories" showHeaders="true">
-				<f:selectItems value="#{multiSelectView.categories}" />
-			</p:multiSelectListbox>
-
-			<p:commandButton value="Save" icon="ui-icon-check" update="out"
-				style="display:block;margin:10px 0" />
-
-			<h:outputText id="out" value="Value: #{multiSelectView.selection}"
-				style="display:block" />
-		</h:form>
 	</ui:define>
 </ui:composition>

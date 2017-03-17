@@ -11,6 +11,7 @@ import javax.faces.event.ActionEvent;
 import org.omnifaces.util.Messages;
 
 import br.com.Agendamento.dao.AgendamentoDAO;
+import br.com.Agendamento.dao.DisponibilidadeDAO;
 import br.com.Agendamento.domain.Agendamento;
 import br.com.Agendamento.domain.Disponibilidade;
 
@@ -87,6 +88,7 @@ public class AgendamentoBean implements Serializable {
 			agendamento.setDisponibilidade(agendamento.getDisponibilidade());
 			agendamento.setUsuario(agendamento.getUsuario());
 			agendamentodao.merge(agendamento);
+			atualizadisDonibilidade(agendamento.getDisponibilidade().getCodigo());
 			novo();
 			agendamentos = agendamentodao.listar();
 			Messages.addGlobalInfo("Agendamento gravado com sucesso!");
@@ -126,6 +128,14 @@ public class AgendamentoBean implements Serializable {
 			System.out.println("Vagas disponiveis.: " + agendamento.getDisponibilidade().getQtd());
 			System.out.println("Usuário conectado.: " + agendamento.getUsuario().getNome());
 		}
+	}
+
+	public void atualizadisDonibilidade(Long codigo) {
+		Disponibilidade disponibilidade = new Disponibilidade();
+		DisponibilidadeDAO disponibilidadedao = new DisponibilidadeDAO();
+		disponibilidade = disponibilidadedao.buscar(codigo);
+		disponibilidade.setAgendado(disponibilidade.getAgendado() + 1);
+		disponibilidadedao.editar(disponibilidade);
 
 	}
 

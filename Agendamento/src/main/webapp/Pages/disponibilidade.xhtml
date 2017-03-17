@@ -37,6 +37,9 @@
 					<p:column headerText="Quantidade">
 						<h:outputText value="#{disponibilidade.qtd}" />
 					</p:column>
+					<p:column headerText="Agendados">
+						<h:outputText value="#{disponibilidade.agendado}" />
+					</p:column>
 					<p:column headerText="Opções">
 						<p:commandButton icon="ui-icon-trash"
 							actionListener="#{disponibilidadeBean.excluir}"

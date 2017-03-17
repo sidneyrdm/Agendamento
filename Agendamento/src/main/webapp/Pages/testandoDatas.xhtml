@@ -10,8 +10,6 @@
 
 	<ui:define name="conteudo">
 		<h:form id="formdisponibilidade">
-
-
 			<h:panelGrid id="Selecao" columns="2">
 				<p:outputLabel for="turno" value="Turno:" />
 				<p:selectOneRadio id="turno"
@@ -26,7 +24,7 @@
 			<h:panelGrid columns="2" id="gridcadastro">
 				<h:outputLabel value="Data.:" for="date" />
 				<p:selectOneMenu filter="true" id="date"
-					value="#{disponibilidadeBean.disponibilidade}"
+					value="#{agendamentoBean.agendamento.disponibilidade}"
 					converter="omnifaces.SelectItemsConverter" required="true"
 					requiredMessage="o campo Data é obrigatório">
 					<f:selectItem itemLabel="Selecione uma Data" />
@@ -34,7 +32,14 @@
 						value="#{disponibilidadeBean.disponibilidadesCarregadas}"
 						var="data" itemLabel="#{data.date}" itemValue="#{data}" />
 				</p:selectOneMenu>
-
+				<h:outputLabel value="Usuario.:" />
+				<p:selectOneMenu filter="true"
+					value="#{agendamentoBean.agendamento.usuario}"
+					converter="omnifaces.SelectItemsConverter" required="true"
+					requiredMessage="o campo EMPRESA é obrigatório">
+					<f:selectItems value="#{autenticacaoBean.usuarios}" var="empresa"
+						itemLabel="#{empresa.nome}" itemValue="#{empresa}" />
+				</p:selectOneMenu>
 			</h:panelGrid>
 
 			<p:commandButton value="Agendar"

@@ -16,7 +16,7 @@ public class testes {
 		try {
 			System.out.println("data " + dataFormatada.format(data));
 		} catch (Exception e) {
-			e.printStackTrace(); // imprimi a stack trace
+			e.printStackTrace();
 		}
 
 	}

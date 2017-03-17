@@ -1,6 +1,7 @@
 package br.com.Agendamento.bean;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -24,9 +25,18 @@ public class AutenticacaoBean {
 
 	private Usuario usuario;
 	private Usuario usuariologado;
+	private List<Usuario> usuarios;
 
 	public String getNome() {
 		return nome;
+	}
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
 
 	public String getEmpresa() {
@@ -85,6 +95,7 @@ public class AutenticacaoBean {
 	@PostConstruct
 	public void iniciar() {
 		usuario = new Usuario();
+		usuarios = new ArrayList<Usuario>();
 	}
 	
 	public void livre() throws IOException{
@@ -100,6 +111,7 @@ public class AutenticacaoBean {
 				return;
 			}
 			nome = usuariologado.getNome();
+			usuarios.add(usuariologado);
 			Faces.redirect("./Pages/principal.xhtml");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

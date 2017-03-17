@@ -72,7 +72,7 @@ public class TurnoBean implements Serializable {
 		try {
 			turno = (Turno) evento.getComponent().getAttributes().get("turnoSelecionado");
 		} catch (RuntimeException erro) {
-			Messages.addGlobalError("erro ao tentar excluir Turno");
+			Messages.addGlobalError("erro ao tentar editar Turno");
 			erro.printStackTrace();
 		}
 	}

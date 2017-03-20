@@ -2,18 +2,24 @@ package br.com.Agendamento.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Transient;
 
 @SuppressWarnings("serial")
 @Entity
 public class Usuario extends GenericDomain {
-	
+
 	@Column(length = 32, nullable = false)
 	private String senha;
 
 	@Transient
 	private String senhaNaoCriptografada;
+
+	@ManyToOne
+	@JoinColumn()
+	private Empresa empresa;
 
 	@PrimaryKeyJoinColumn
 	@Column(length = 14, nullable = false, unique = true)
@@ -24,7 +30,7 @@ public class Usuario extends GenericDomain {
 
 	@Column(length = 15)
 	private String celular;
-	
+
 	@Column(length = 14)
 	private String telefone;
 
@@ -50,6 +56,22 @@ public class Usuario extends GenericDomain {
 		this.tipo = tipo;
 	}
 
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
 	public String getCpf() {
 		return cpf;
 	}
@@ -65,7 +87,6 @@ public class Usuario extends GenericDomain {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 
 	public String getTelefone() {
 		return telefone;

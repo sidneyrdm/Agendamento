@@ -26,11 +26,11 @@ public class DisponibilidadeDAO extends GenericDAO<Disponibilidade> {
 	}	
 	
 	@SuppressWarnings("unchecked")
-	public List<Disponibilidade> buscarPorTurno(String mt) {
+	public List<Disponibilidade> buscarPorTurno(String turno) {
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
 		try {
 			Criteria consulta = sessao.createCriteria(Disponibilidade.class);
-			consulta.add(Restrictions.eq("mt", mt));
+			consulta.add(Restrictions.eq("turno", turno));
 			List<Disponibilidade> resultado = consulta.list();
 			return resultado;
 		} catch (RuntimeException erro) {

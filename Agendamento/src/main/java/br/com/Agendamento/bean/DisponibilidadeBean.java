@@ -15,7 +15,6 @@ import org.omnifaces.util.Messages;
 
 import br.com.Agendamento.dao.DisponibilidadeDAO;
 import br.com.Agendamento.domain.Disponibilidade;
-import br.com.Agendamento.domain.Turno;
 
 @SuppressWarnings("serial")
 @ManagedBean
@@ -26,8 +25,15 @@ public class DisponibilidadeBean implements Serializable {
 	private Disponibilidade selecao;
 	private List<Disponibilidade> disponibilidadesCarregadas;
 	private List<Disponibilidade> disponibilidades;
-	private List<Turno> turnos;
-	private Turno turno;
+	private List<Disponibilidade> disponibilidadesAbertas;
+
+	public List<Disponibilidade> getDisponibilidadesAbertas() {
+		return disponibilidadesAbertas;
+	}
+
+	public void setDisponibilidadesAbertas(List<Disponibilidade> disponibilidadesAbertas) {
+		this.disponibilidadesAbertas = disponibilidadesAbertas;
+	}
 
 	public List<Disponibilidade> getDisponibilidadesCarregadas() {
 		return disponibilidadesCarregadas;
@@ -45,14 +51,6 @@ public class DisponibilidadeBean implements Serializable {
 		this.selecao = selecao;
 	}
 
-	public Turno getTurno() {
-		return turno;
-	}
-
-	public void setTurno(Turno turno) {
-		this.turno = turno;
-	}
-
 	public Disponibilidade getDisponibilidade() {
 		return disponibilidade;
 	}
@@ -67,14 +65,6 @@ public class DisponibilidadeBean implements Serializable {
 
 	public void setDisponibilidades(List<Disponibilidade> disponibilidades) {
 		this.disponibilidades = disponibilidades;
-	}
-
-	public List<Turno> getTurnos() {
-		return turnos;
-	}
-
-	public void setTurnos(List<Turno> turnos) {
-		this.turnos = turnos;
 	}
 
 	public void novo() {
@@ -102,7 +92,7 @@ public class DisponibilidadeBean implements Serializable {
 			DisponibilidadeDAO disponibilidadedao = new DisponibilidadeDAO();
 			disponibilidade.setAgendado(0);
 			disponibilidade.setDate(formataData(disponibilidade.getData()));
-			disponibilidade.setMt(disponibilidade.getMt());
+			disponibilidade.setTurno(disponibilidade.getTurno());
 			disponibilidade.setQtd(disponibilidade.getQtd());
 			disponibilidadedao.merge(disponibilidade);
 			novo();
@@ -130,8 +120,15 @@ public class DisponibilidadeBean implements Serializable {
 		try {
 			if (selecao != null) {
 				DisponibilidadeDAO ddao = new DisponibilidadeDAO();
-				disponibilidadesCarregadas = ddao.buscarPorTurno(selecao.getMt());
-				System.out.println("selecao.: " + disponibilidadesCarregadas.size());
+				disponibilidadesCarregadas = new ArrayList<Disponibilidade>();
+				disponibilidadesAbertas = ddao.buscarPorTurno(selecao.getTurno());
+				for (Disponibilidade disp : disponibilidadesAbertas) {
+					if (disp.getAgendado() < disp.getQtd())
+						if (!disponibilidadesCarregadas.contains(disp))
+							disponibilidadesCarregadas.add(disp);
+				}
+				if (disponibilidadesCarregadas.size() == 0)
+					Messages.addGlobalFatal("Não temos mais vagas para o turno da "+selecao.getTurno());
 
 			} else {
 				disponibilidadesCarregadas = new ArrayList<Disponibilidade>();
@@ -141,18 +138,6 @@ public class DisponibilidadeBean implements Serializable {
 			Messages.addGlobalError("erro ao tentar filtrar Disponibilidades");
 			erro.printStackTrace();
 		}
-		/*
-		 * try { if (selecao != null) { DisponibilidadeDAO ddao = new
-		 * DisponibilidadeDAO(); disponibilidadesCarregadas =
-		 * ddao.buscarPorData(selecao.getDate());
-		 * 
-		 * } else { disponibilidadesCarregadas = new
-		 * ArrayList<Disponibilidade>(); }
-		 * 
-		 * } catch (RuntimeException erro) {
-		 * Messages.addGlobalError("erro ao tentar filtrar Disponibilidades");
-		 * erro.printStackTrace(); }
-		 */
 
 	}
 

@@ -11,7 +11,9 @@ import javax.faces.event.ActionEvent;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.omnifaces.util.Messages;
 
+import br.com.Agendamento.dao.EmpresaDAO;
 import br.com.Agendamento.dao.UsuarioDAO;
+import br.com.Agendamento.domain.Empresa;
 import br.com.Agendamento.domain.Usuario;
 
 @SuppressWarnings("serial")
@@ -19,9 +21,17 @@ import br.com.Agendamento.domain.Usuario;
 @ViewScoped
 public class UsuarioBean implements Serializable {
 
-
 	Usuario usuario = new Usuario();
 	List<Usuario> usuarios;
+	private List<Empresa> empresas;
+
+	public List<Empresa> getEmpresas() {
+		return empresas;
+	}
+
+	public void setEmpresas(List<Empresa> empresas) {
+		this.empresas = empresas;
+	}
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -40,7 +50,14 @@ public class UsuarioBean implements Serializable {
 	}
 
 	public void novo() {
-		usuario = new Usuario();
+		try {
+			usuario = new Usuario();
+			empresas = new EmpresaDAO().listar();
+
+		} catch (RuntimeException erro) {
+			Messages.addGlobalError("Erro ao tentar listar os Empresas ");
+			erro.printStackTrace();
+		}
 	}
 
 	@PostConstruct
@@ -91,6 +108,7 @@ public class UsuarioBean implements Serializable {
 			SimpleHash hash = new SimpleHash("md5", usuario.getSenhaNaoCriptografada());
 			usuario.setSenha(hash.toHex());
 			usuario.setTipo(usuario.getTipo());
+			usuario.setEmpresa(usuario.getEmpresa());
 			usuariodao.merge(usuario);
 			novo();
 			usuarios = usuariodao.listar();

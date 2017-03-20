@@ -13,7 +13,7 @@ public class UsuarioDAOTest {
 	Usuario usuario = new Usuario();
 	UsuarioDAO usuariodao = new UsuarioDAO();
 
-	@Ignore
+	
 	@Test
 	public void salvar() {
 
@@ -36,6 +36,7 @@ public class UsuarioDAOTest {
 		System.out.println(usuario.getNome() + " =nome");
 	}
 
+	@Ignore
 	@Test
 	public void testar() {
 		String datapesquisa = "Manha";
@@ -43,7 +44,7 @@ public class UsuarioDAOTest {
 		List<Disponibilidade> resultado = disponibilidadedao.buscarPorTurno(datapesquisa);
 
 		for (Disponibilidade disp : resultado) {
-			System.out.println("turno.: " + disp.getMt());
+			System.out.println("turno.: " + disp.getTurno());
 			System.out.println("data.: " + disp.getDate());
 		}
 	}

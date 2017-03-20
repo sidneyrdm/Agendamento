@@ -13,7 +13,7 @@
 			<h:panelGrid id="Selecao" columns="2">
 				<p:outputLabel for="turno" value="Turno:" />
 				<p:selectOneRadio id="turno"
-					value="#{disponibilidadeBean.selecao.mt}">
+					value="#{disponibilidadeBean.selecao.turno}">
 					<f:selectItem itemLabel="Manha" itemValue="Manha" />
 					<f:selectItem itemLabel="Tarde" itemValue="Tarde" />
 					<p:ajax listener="#{disponibilidadeBean.popular}"

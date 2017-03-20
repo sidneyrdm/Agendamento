@@ -30,9 +30,9 @@
 						filterBy="#{disponibilidade.date}">
 						<h:outputText value="#{disponibilidade.date}" />
 					</p:column>
-					<p:column headerText="Turno.:" sortBy="#{disponibilidade.mt}"
-						filterBy="#{disponibilidade.mt}">
-						<h:outputText value="#{disponibilidade.mt}" />
+					<p:column headerText="Turno.:" sortBy="#{disponibilidade.turno}"
+						filterBy="#{disponibilidade.turno}">
+						<h:outputText value="#{disponibilidade.turno}" />
 					</p:column>
 					<p:column headerText="Quantidade">
 						<h:outputText value="#{disponibilidade.qtd}" />
@@ -68,12 +68,13 @@
 				</p:confirmDialog>
 			</p:panel>
 		</h:form>
-		<p:dialog header="Turnos - Cadastro" widgetVar="dialogo"
+		<p:dialog header="Disponibilidades - Cadastro" widgetVar="dialogo"
 			draggable="false" resizable="false" modal="true">
 			<h:form id="formdisponibilidade">
 				<h:panelGrid columns="2" id="gridcadastro">
 					<h:outputLabel for="turno" value="Turno.:" />
-					<p:selectOneRadio value="#{disponibilidadeBean.disponibilidade.mt}"
+					<p:selectOneRadio
+						value="#{disponibilidadeBean.disponibilidade.turno}"
 						required="true" requiredMessage="o campo Turno é obrigatório">
 						<f:selectItem itemValue="Manha" itemLabel="Manha" />
 						<f:selectItem itemValue="Tarde" itemLabel="Tarde" />
@@ -91,6 +92,7 @@
 				<p:commandButton value="Gravar"
 					actionListener="#{disponibilidadeBean.salvar}"
 					update=":formtabela:tabela :mensagem :formdisponibilidade:gridcadastro" />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
 			</h:form>
 		</p:dialog>
 

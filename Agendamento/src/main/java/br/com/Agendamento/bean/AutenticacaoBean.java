@@ -78,7 +78,6 @@ public class AutenticacaoBean {
 	public String getSenha() {
 		return senha;
 	}
-	
 
 	public void setSenha(String senha) {
 		this.senha = senha;
@@ -97,8 +96,8 @@ public class AutenticacaoBean {
 		usuario = new Usuario();
 		usuarios = new ArrayList<Usuario>();
 	}
-	
-	public void livre() throws IOException{
+
+	public void livre() throws IOException {
 		Faces.redirect("./Pages/principal.xhtml");
 	}
 
@@ -106,10 +105,13 @@ public class AutenticacaoBean {
 		try {
 			UsuarioDAO usuariodao = new UsuarioDAO();
 			usuariologado = usuariodao.autenticar(cpf, senha);
+			AgendamentoBean agendamento = new AgendamentoBean();
+
 			if (usuariologado == null) {
 				Messages.addGlobalError("Usuário e/ou senha incorretos");
 				return;
 			}
+			agendamento.setUsuario(usuariologado);
 			nome = usuariologado.getNome();
 			usuarios.add(usuariologado);
 			Faces.redirect("./Pages/principal.xhtml");
@@ -118,6 +120,11 @@ public class AutenticacaoBean {
 			e.printStackTrace();
 			Messages.addGlobalError(e.getMessage());
 		}
+	}
+
+	public void logOff() throws IOException {
+		usuariologado = null;
+		Faces.redirect("./Pages/autenticacao.xhtml");
 	}
 
 	public boolean temPermissoes(List<String> permissoes) {

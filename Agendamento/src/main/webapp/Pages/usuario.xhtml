@@ -32,6 +32,9 @@
 					<p:column headerText="Telefone">
 						<h:outputText value="#{usuario.telefone}" />
 					</p:column>
+					<p:column headerText="Celular">
+						<h:outputText value="#{usuario.celular}" />
+					</p:column>
 					<p:column headerText="Opções">
 						<p:commandButton icon="ui-icon-trash"
 							actionListener="#{usuarioBean.excluir}"
@@ -74,10 +77,13 @@
 						value="#{usuarioBean.usuario.email}" required="false" />
 
 					<h:outputLabel value="Telefone.:" />
-					<p:inputMask size="15" maxlength="50" mask="(99)-99999-9999"
-						value="#{usuarioBean.usuario.telefone}" required="true"
-						requiredMessage="o campo TELEFONE é obrigatório" />
+					<p:inputMask size="15" maxlength="50" mask="(99)-9999-9999"
+						value="#{usuarioBean.usuario.telefone}" />
 
+					<h:outputLabel value="Celular.:" />
+					<p:inputMask size="15" maxlength="50" mask="(99)-99999-9999"
+						value="#{usuarioBean.usuario.celular}" required="true"
+						requiredMessage="o campo CELULAR é obrigatório" />
 					<h:outputLabel value="Cpf" />
 					<p:inputMask mask="999.999.999-99" size="15" maxlength="50"
 						value="#{usuarioBean.usuario.cpf}" required="true"
@@ -93,8 +99,21 @@
 						required="true" requiredMessage="o campo TIPO é obrigatório">
 						<f:selectItem itemValue="A" itemLabel="Administrador" />
 						<f:selectItem itemValue="R" itemLabel="Representante" />
+						<p:ajax listener="#{usuarioBean.desabilitaEmpresa}"
+							update=":formcadastro:empresa" />
 					</p:selectOneRadio>
 
+					<h:outputLabel value="Empresa.:" />
+					<p:selectOneMenu filter="true" id="empresa"
+						disabled="#{usuarioBean.empresa}"
+						value="#{usuarioBean.usuario.empresa}"
+						converter="omnifaces.SelectItemsConverter" required="true"
+						requiredMessage="o campo EMPRESA é obrigatório">
+						<f:selectItem itemLabel="Selecione uma Empresa" />
+						<f:selectItems value="#{usuarioBean.empresas}" var="empresa"
+							itemLabel="#{empresa.nome}" itemValue="#{empresa}" />
+
+					</p:selectOneMenu>
 				</h:panelGrid>
 
 				<h:panelGrid columns="2">

@@ -15,14 +15,8 @@
 				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela"
 					paginator="false" rows="30" value="#{agendamentoBean.agendamentos}"
 					var="agendamento">
+
 					<f:facet name="footer">
-						<p:commandButton value="Novo"
-							actionListener="#{agendamentoBean.novo}"
-							oncomplete="PF('dialogo').show();"
-							update=":formcadastro:gridcadastro">
-							<f:actionListener
-								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
-						</p:commandButton>
 					</f:facet>
 					<p:column headerText="Data"
 						sortBy="#{agendamento.disponibilidade.date}"
@@ -33,7 +27,9 @@
 						<h:outputText value="#{agendamento.disponibilidade.turno}" />
 					</p:column>
 					<p:column headerText="Nome">
-						<h:outputText value="#{agendamento.usuario.nome}" />
+						<h:outputText value="#{agendamento.usuario.nome}"
+							sortBy="#{agendamento.usuario.nome}"
+							filterBy="#{agendamento.usuario.nome}" />
 					</p:column>
 					<p:column headerText="Opções">
 						<p:commandButton icon="ui-icon-trash"

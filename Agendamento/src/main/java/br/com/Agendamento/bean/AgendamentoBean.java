@@ -10,18 +10,20 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+
 import org.omnifaces.util.Messages;
+
 import br.com.Agendamento.dao.AgendamentoDAO;
 import br.com.Agendamento.dao.DisponibilidadeDAO;
 import br.com.Agendamento.domain.Agendamento;
 import br.com.Agendamento.domain.Disponibilidade;
-import br.com.Agendamento.domain.Usuario;
 
 @SuppressWarnings("serial")
 @ManagedBean
 @ViewScoped
 public class AgendamentoBean implements Serializable {
 
+	private AutenticacaoBean aut;
 	private boolean desabilitaBotaoSalvar;
 	private int disponiveis;
 	AutenticacaoBean ab;
@@ -29,23 +31,21 @@ public class AgendamentoBean implements Serializable {
 	List<Agendamento> agendamentos;
 	List<Agendamento> agendamentosUser;
 	List<Disponibilidade> disponibilidades;
-	Usuario usuario = new Usuario();
 
-	
+	public AutenticacaoBean getAut() {
+		return aut;
+	}
+
+	public void setAut(AutenticacaoBean aut) {
+		this.aut = aut;
+	}
+
 	public List<Agendamento> getAgendamentosUser() {
 		return agendamentosUser;
 	}
 
 	public void setAgendamentosUser(List<Agendamento> agendamentosUser) {
 		this.agendamentosUser = agendamentosUser;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 	public boolean getDesabilitaBotaoSalvar() {
@@ -102,7 +102,7 @@ public class AgendamentoBean implements Serializable {
 			novo();
 			mostrar();
 			AgendamentoDAO agendamentodao = new AgendamentoDAO();
-			agendamentosUser = agendamentodao.buscarPorUsuario(usuario.getCodigo());
+			agendamentosUser = agendamentodao.buscarPorUsuario(aut.getUsuario().getCodigo());
 			agendamentos = agendamentodao.listar();
 
 		} catch (RuntimeException erro) {
@@ -114,9 +114,10 @@ public class AgendamentoBean implements Serializable {
 
 	public void novo() {
 		try {
+			aut = new AutenticacaoBean();
 			this.desabilitaBotaoSalvar = true;
 			agendamento = new Agendamento();
-			agendamentosUser = new AgendamentoDAO().buscarPorUsuario(usuario.getCodigo());
+			agendamentosUser = new AgendamentoDAO().buscarPorUsuario(aut.getUsuario().getCodigo());
 			agendamentos = new AgendamentoDAO().listar();
 			this.disponiveis = 0;
 
@@ -135,7 +136,7 @@ public class AgendamentoBean implements Serializable {
 			atualizaDisponibilidade(agendamento.getDisponibilidade().getCodigo(), 's');
 			novo();
 			Messages.addGlobalInfo("Agendamento gravado com sucesso!");
-			agendamentosUser = agendamentodao.buscarPorUsuario(usuario.getCodigo());
+			agendamentosUser = agendamentodao.buscarPorUsuario(aut.getUsuario().getCodigo());
 			agendamentos = agendamentodao.listar();
 			refresh();
 		} catch (RuntimeException erro) {
@@ -160,7 +161,7 @@ public class AgendamentoBean implements Serializable {
 			AgendamentoDAO agendamentodao = new AgendamentoDAO();
 			agendamentodao.excluir(agendamento);
 			atualizaDisponibilidade(agendamento.getDisponibilidade().getCodigo(), 'e');
-			agendamentosUser = agendamentodao.buscarPorUsuario(usuario.getCodigo());
+			agendamentosUser = agendamentodao.buscarPorUsuario(aut.getUsuario().getCodigo());
 			agendamentos = agendamentodao.listar();
 			Messages.addGlobalInfo("Agendamento excluido com sucesso!");
 		} catch (RuntimeException erro) {
@@ -170,14 +171,14 @@ public class AgendamentoBean implements Serializable {
 	}
 
 	public void mostrar() {
-		if (usuario != null) {
-			agendamentosUser = new AgendamentoDAO().buscarPorUsuario(usuario.getCodigo());
+		System.out.println("usuario logado.: " + aut.getUsuario().getNome());
+		if (aut.getUsuario() != null) {
+			agendamentosUser = new AgendamentoDAO().buscarPorUsuario(aut.getUsuario().getCodigo());
 			for (Agendamento disp : agendamentosUser) {
 				System.out.println("usuario logado.: " + disp.getUsuario().getNome());
 
 			}
-		}
-		else
+		} else
 			System.out.println("usuario nulo");
 	}
 

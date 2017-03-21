@@ -21,12 +21,33 @@ import br.com.Agendamento.domain.Usuario;
 @ViewScoped
 public class UsuarioBean implements Serializable {
 
+	private boolean empresa;
 	Usuario usuario = new Usuario();
+	private Usuario selecao;
 	List<Usuario> usuarios;
 	private List<Empresa> empresas;
 
 	public List<Empresa> getEmpresas() {
 		return empresas;
+	}
+
+	
+	public boolean isEmpresa() {
+		return empresa;
+	}
+
+
+	public void setEmpresa(boolean empresa) {
+		this.empresa = empresa;
+	}
+
+
+	public Usuario getSelecao() {
+		return selecao;
+	}
+
+	public void setSelecao(Usuario selecao) {
+		this.selecao = selecao;
 	}
 
 	public void setEmpresas(List<Empresa> empresas) {
@@ -51,6 +72,7 @@ public class UsuarioBean implements Serializable {
 
 	public void novo() {
 		try {
+			selecao = new Usuario();
 			usuario = new Usuario();
 			empresas = new EmpresaDAO().listar();
 
@@ -63,6 +85,7 @@ public class UsuarioBean implements Serializable {
 	@PostConstruct
 	public void listar() {
 		try {
+			empresa = true;
 			UsuarioDAO usuariodao = new UsuarioDAO();
 			usuarios = usuariodao.listar();
 
@@ -103,6 +126,7 @@ public class UsuarioBean implements Serializable {
 			usuario.setNome(usuario.getNome());
 			usuario.setEmail(usuario.getEmail());
 			usuario.setTelefone(usuario.getTelefone());
+			usuario.setCelular(usuario.getCelular());
 			usuario.setCpf(usuario.getCpf());
 			usuario.setSenhaNaoCriptografada(usuario.getSenha());
 			SimpleHash hash = new SimpleHash("md5", usuario.getSenhaNaoCriptografada());
@@ -118,6 +142,13 @@ public class UsuarioBean implements Serializable {
 			erro.printStackTrace();
 		}
 
+	}
+
+	public void desabilitaEmpresa(){
+		if(usuario.getTipo()=='R')
+			empresa = false;
+	    else
+		   empresa = true;
 	}
 
 }

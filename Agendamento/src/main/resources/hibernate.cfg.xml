@@ -37,7 +37,6 @@
 		<mapping class="br.com.Agendamento.domain.Disponibilidade" />
 		<mapping class="br.com.Agendamento.domain.Agendamento" />
 		<mapping class="br.com.Agendamento.domain.Empresa" />
-		<mapping class="br.com.Agendamento.domain.Representante" />
 
 	</session-factory>
 

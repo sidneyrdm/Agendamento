@@ -22,6 +22,8 @@ public class UsuarioDAOTest {
 		SimpleHash hash = new SimpleHash("md5", usuario.getSenhaNaoCriptografada());
 		usuario.setSenha(hash.toHex());
 		usuario.setCpf("070.915.384-80");
+		usuario.setCelular("(81)98895-0121");
+		usuario.setTipo('A');
 		usuariodao.salvar(usuario);
 	}
 

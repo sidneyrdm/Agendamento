@@ -22,10 +22,28 @@ public class AutenticacaoBean {
 	private String cpf;
 	private String senha;
 	private String empresa;
+	private boolean permissaoAdm;
+	private boolean permissaoRepresentante;
 
-	private Usuario usuario;
+	public static Usuario usuario = new Usuario();
 	private Usuario usuariologado;
 	private List<Usuario> usuarios;
+
+	public boolean isPermissaoAdm() {
+		return permissaoAdm;
+	}
+
+	public void setPermissaoAdm(boolean permissaoAdm) {
+		this.permissaoAdm = permissaoAdm;
+	}
+
+	public boolean isPermissaoRepresentante() {
+		return permissaoRepresentante;
+	}
+
+	public void setPermissaoRepresentante(boolean permissaoRepresentante) {
+		this.permissaoRepresentante = permissaoRepresentante;
+	}
 
 	public String getNome() {
 		return nome;
@@ -51,20 +69,16 @@ public class AutenticacaoBean {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
 	public Usuario getUsusario() {
 		return usuario;
 	}
 
-	public void setUsusario(Usuario ususario) {
-		this.usuario = ususario;
-	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public static void setUsuario(Usuario usuario) {
+		AutenticacaoBean.usuario = usuario;
 	}
 
 	public String getCpf() {
@@ -93,7 +107,6 @@ public class AutenticacaoBean {
 
 	@PostConstruct
 	public void iniciar() {
-		usuario = new Usuario();
 		usuarios = new ArrayList<Usuario>();
 	}
 
@@ -105,13 +118,20 @@ public class AutenticacaoBean {
 		try {
 			UsuarioDAO usuariodao = new UsuarioDAO();
 			usuariologado = usuariodao.autenticar(cpf, senha);
-			AgendamentoBean agendamento = new AgendamentoBean();
 
 			if (usuariologado == null) {
 				Messages.addGlobalError("Usuário e/ou senha incorretos");
 				return;
 			}
-			agendamento.setUsuario(usuariologado);
+			usuario = usuariologado;
+			if (usuario.getTipo() == 'A') {
+				permissaoAdm = true;
+				permissaoRepresentante = false;
+			} else {
+				permissaoAdm = false;
+				permissaoRepresentante = true;
+			}
+
 			nome = usuariologado.getNome();
 			usuarios.add(usuariologado);
 			Faces.redirect("./Pages/principal.xhtml");
@@ -127,11 +147,4 @@ public class AutenticacaoBean {
 		Faces.redirect("./Pages/autenticacao.xhtml");
 	}
 
-	public boolean temPermissoes(List<String> permissoes) {
-		for (String permissao : permissoes) {
-			if (usuariologado.getTipo() == (permissao.charAt(0)))
-				return true;
-		}
-		return false;
-	}
 }

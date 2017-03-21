@@ -128,7 +128,7 @@ public class DisponibilidadeBean implements Serializable {
 							disponibilidadesCarregadas.add(disp);
 				}
 				if (disponibilidadesCarregadas.size() == 0)
-					Messages.addGlobalFatal("Não temos mais vagas para o turno da "+selecao.getTurno());
+					Messages.addGlobalWarn("Não temos mais vagas para o turno da "+selecao.getTurno());
 
 			} else {
 				disponibilidadesCarregadas = new ArrayList<Disponibilidade>();

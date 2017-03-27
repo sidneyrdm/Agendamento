@@ -91,7 +91,8 @@ public class DisponibilidadeBean implements Serializable {
 		try {
 			DisponibilidadeDAO disponibilidadedao = new DisponibilidadeDAO();
 			disponibilidade.setAgendado(0);
-			disponibilidade.setDate(formataData(disponibilidade.getData()));
+			disponibilidade.setDataView(formataData(disponibilidade.getData()));
+			disponibilidade.setData(disponibilidade.getData());
 			disponibilidade.setTurno(disponibilidade.getTurno());
 			disponibilidade.setQtd(disponibilidade.getQtd());
 			disponibilidadedao.merge(disponibilidade);

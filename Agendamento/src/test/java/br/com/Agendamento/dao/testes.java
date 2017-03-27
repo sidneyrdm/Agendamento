@@ -6,6 +6,8 @@ import java.util.Date;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import br.com.Agendamento.bean.AgendamentoBean;
+
 public class testes {
 
 	@Ignore
@@ -20,6 +22,7 @@ public class testes {
 		}
 
 	}
+	
 
 
 }

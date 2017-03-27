@@ -26,9 +26,9 @@
 								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 						</p:commandButton>
 					</f:facet>
-					<p:column headerText="Data.:" sortBy="#{disponibilidade.date}"
-						filterBy="#{disponibilidade.date}">
-						<h:outputText value="#{disponibilidade.date}" />
+					<p:column headerText="Data.:" sortBy="#{disponibilidade.dataView}"
+						filterBy="#{disponibilidade.dataView}">
+						<h:outputText value="#{disponibilidade.dataView}" />
 					</p:column>
 					<p:column headerText="Turno.:" sortBy="#{disponibilidade.turno}"
 						filterBy="#{disponibilidade.turno}">
@@ -48,15 +48,6 @@
 								icon="ui-icon-alert" />
 							<f:attribute name="disponibilidadeSelecionada"
 								value="#{disponibilidade}" />
-						</p:commandButton>
-						<p:commandButton icon="ui-icon-pencil"
-							actionListener="#{disponibilidadeBean.editar}"
-							oncomplete="PF('dialogo').show();"
-							update=":formdisponibilidade:gridcadastro">
-							<f:attribute name="disponibilidadeSelecionada"
-								value="#{disponibilidade}" />
-							<f:actionListener
-								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>

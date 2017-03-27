@@ -1,6 +1,8 @@
 package br.com.Agendamento.bean;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -100,7 +102,6 @@ public class AgendamentoBean implements Serializable {
 	public void listar() {
 		try {
 			novo();
-			mostrar();
 			AgendamentoDAO agendamentodao = new AgendamentoDAO();
 			agendamentosUser = agendamentodao.buscarPorUsuario(aut.getUsuario().getCodigo());
 			agendamentos = agendamentodao.listar();
@@ -120,7 +121,6 @@ public class AgendamentoBean implements Serializable {
 			agendamentosUser = new AgendamentoDAO().buscarPorUsuario(aut.getUsuario().getCodigo());
 			agendamentos = new AgendamentoDAO().listar();
 			this.disponiveis = 0;
-
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Erro ao tentar listar os Agendamentos ");
 			erro.printStackTrace();
@@ -170,18 +170,6 @@ public class AgendamentoBean implements Serializable {
 		}
 	}
 
-	public void mostrar() {
-		System.out.println("usuario logado.: " + aut.getUsuario().getNome());
-		if (aut.getUsuario() != null) {
-			agendamentosUser = new AgendamentoDAO().buscarPorUsuario(aut.getUsuario().getCodigo());
-			for (Agendamento disp : agendamentosUser) {
-				System.out.println("usuario logado.: " + disp.getUsuario().getNome());
-
-			}
-		} else
-			System.out.println("usuario nulo");
-	}
-
 	public void atualizaDisponibilidade(Long codigo, Character funcao) {
 		Disponibilidade disponibilidade = new Disponibilidade();
 		DisponibilidadeDAO disponibilidadedao = new DisponibilidadeDAO();
@@ -194,18 +182,38 @@ public class AgendamentoBean implements Serializable {
 
 	}
 
-	public void atualizaDisponiveis() {
+	//função que habilita e desabilita o botão gravar
+	public void habilitaBotaoGravar() {
 		try {
 
 			Disponibilidade disponibilidade = new Disponibilidade();
 			DisponibilidadeDAO disponibilidadedao = new DisponibilidadeDAO();
 			disponibilidade = disponibilidadedao.buscar(agendamento.getDisponibilidade().getCodigo());
 			this.disponiveis = disponibilidade.getQtd() - disponibilidade.getAgendado();
-			if (this.disponiveis == 0) {
-				Messages.addGlobalError("Não temos mais vagas para a data selecionada!");
-				this.desabilitaBotaoSalvar = true;
-			} else
-				this.desabilitaBotaoSalvar = false;
+
+			int semana = getSemana(agendamento.getDisponibilidade().getData());
+			int mes = getMes(agendamento.getDisponibilidade().getData());
+			int ano = getAno(agendamento.getDisponibilidade().getData());
+
+			for (Agendamento a : agendamentosUser) {
+				if (getAno(a.getDisponibilidade().getData()) == ano) {
+					if (getMes(a.getDisponibilidade().getData()) == mes) {
+						if (getSemana(a.getDisponibilidade().getData()) == semana) {
+							Messages.addGlobalError("Voce já está agendado para esta semana!");
+							this.desabilitaBotaoSalvar = true;
+						} else
+							this.desabilitaBotaoSalvar = false;
+					}
+
+				} else {
+
+					if (this.disponiveis == 0) {
+						Messages.addGlobalError("Não temos mais vagas para a data selecionada!");
+						this.desabilitaBotaoSalvar = true;
+					} else
+						this.desabilitaBotaoSalvar = false;
+				}
+			}
 
 		} catch (RuntimeException erro) {
 
@@ -223,4 +231,39 @@ public class AgendamentoBean implements Serializable {
 		context.renderResponse();
 	}
 
+	@SuppressWarnings("static-access")
+	public int getSemana(Date data) {
+		GregorianCalendar c = new GregorianCalendar();
+		c.setTime(data);
+		return c.get(c.WEEK_OF_MONTH);
+	}
+
+	@SuppressWarnings("static-access")
+	public int getMes(Date data) {
+		GregorianCalendar c = new GregorianCalendar();
+		c.setTime(data);
+		return c.get(c.MONTH);
+	}
+
+	@SuppressWarnings("static-access")
+	public int getAno(Date data) {
+		GregorianCalendar c = new GregorianCalendar();
+		c.setTime(data);
+		return c.get(c.YEAR);
+	}
+
+	/*
+	public void mostrar() {
+		int semana = getSemana(agendamento.getDisponibilidade().getData());
+		int mes = getMes(agendamento.getDisponibilidade().getData());
+		for (Agendamento agend : agendamentosUser) {
+			System.out.println("usuario logado.: " + agend.getUsuario().getNome());
+			System.out.println("quantidade de agendamentos.: " + agendamentosUser.size());
+			System.out.println("data do agendamento.: " + agend.getDisponibilidade().getDataView());
+			System.out.println(mes + " Mes do agendamento.: " + getMes(agend.getDisponibilidade().getData()));
+			System.out.println(semana + " semana do agendamento.: " + getSemana(agend.getDisponibilidade().getData()));
+
+		}
+
+	}*/
 }

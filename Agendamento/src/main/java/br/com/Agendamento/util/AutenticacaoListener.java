@@ -16,8 +16,6 @@ public class AutenticacaoListener implements PhaseListener {
 	public void afterPhase(PhaseEvent event) {
 
 		String paginaAtual = Faces.getViewId();
-	//	System.out.println("página atual.: " + paginaAtual);
-
 		boolean ePaginaDeAutenticacao = paginaAtual.contains("autenticacao.xhtml");
 
 		if (!ePaginaDeAutenticacao) {

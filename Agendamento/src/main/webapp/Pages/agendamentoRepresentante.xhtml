@@ -23,11 +23,12 @@
 							<f:actionListener
 								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 						</p:commandButton>
+						<p:commandButton value="teste" actionListener="#{agendamentoBean.mostrar}"/>
 					</f:facet>
 					<p:column headerText="Data"
-						sortBy="#{agendamento.disponibilidade.date}"
-						filterBy="#{agendamento.disponibilidade.date}">
-						<h:outputText value="#{agendamento.disponibilidade.date}" />
+						sortBy="#{agendamento.disponibilidade.dataView}"
+						filterBy="#{agendamento.disponibilidade.dataView}">
+						<h:outputText value="#{agendamento.disponibilidade.dataView}" />
 					</p:column>
 					<p:column headerText="Turno">
 						<h:outputText value="#{agendamento.disponibilidade.turno}" />
@@ -79,8 +80,8 @@
 						<f:selectItem itemLabel="Selecione uma Data" />
 						<f:selectItems
 							value="#{disponibilidadeBean.disponibilidadesCarregadas}"
-							var="data" itemLabel="#{data.date}" itemValue="#{data}" />
-						<p:ajax listener="#{agendamentoBean.atualizaDisponiveis}"
+							var="data" itemLabel="#{data.dataView}" itemValue="#{data}" />
+						<p:ajax listener="#{agendamentoBean.habilitaBotaoGravar}"
 							update=":mensagem :formcadastro:disponiveis :formcadastro:salvar" />
 					</p:selectOneMenu>
 					<h:outputLabel value="Disponíveis.:" />

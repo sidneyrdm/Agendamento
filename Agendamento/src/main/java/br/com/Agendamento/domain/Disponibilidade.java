@@ -16,19 +16,20 @@ public class Disponibilidade extends GenericDomain {
 	private int qtd;
 
 	@Column(nullable = false)
-	private String Date;
+	private String dataView;
 
 	@Column
 	private int agendado;
 
+	@Column
 	private Date data;
 
-	public String getDate() {
-		return Date;
+	public String getDataView() {
+		return dataView;
 	}
 
-	public void setDate(String date) {
-		Date = date;
+	public void setDataView(String date) {
+		dataView = date;
 	}
 
 	public int getAgendado() {

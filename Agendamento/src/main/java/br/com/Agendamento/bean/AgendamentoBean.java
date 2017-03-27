@@ -136,7 +136,7 @@ public class AgendamentoBean implements Serializable {
 			atualizaDisponibilidade(agendamento.getDisponibilidade().getCodigo(), 's');
 			novo();
 			Messages.addGlobalInfo("Agendamento gravado com sucesso!");
-listar();
+			listar();
 			refresh();
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Erro ao tentar gravar a Agendamento");
@@ -181,7 +181,7 @@ listar();
 
 	}
 
-	//função que habilita e desabilita o botão gravar
+	// função que habilita e desabilita o botão gravar
 	public void habilitaBotaoGravar() {
 		try {
 
@@ -194,27 +194,33 @@ listar();
 			int mes = getMes(agendamento.getDisponibilidade().getData());
 			int ano = getAno(agendamento.getDisponibilidade().getData());
 
-			for (Agendamento a : agendamentosUser) {
-				if (getAno(a.getDisponibilidade().getData()) == ano) {
-					if (getMes(a.getDisponibilidade().getData()) == mes) {
-						if (getSemana(a.getDisponibilidade().getData()) == semana) {
-							Messages.addGlobalError("Voce já está agendado para esta semana!");
-							this.desabilitaBotaoSalvar = true;
-							return;
+			if (agendamentosUser != null) {
+				for (Agendamento a : agendamentosUser) {
+					System.out.println("entrou no FOR");
+					if (getAno(a.getDisponibilidade().getData()) == ano) {
+						if (getMes(a.getDisponibilidade().getData()) == mes) {
+							if (getSemana(a.getDisponibilidade().getData()) == semana) {
+								Messages.addGlobalWarn("Voce já está agendado para esta semana!");
+								this.desabilitaBotaoSalvar = true;
+								return;
+							} else
+								this.desabilitaBotaoSalvar = false;
 						} else
 							this.desabilitaBotaoSalvar = false;
-					}
 
-				} else {
-
-					if (this.disponiveis == 0) {
-						Messages.addGlobalError("Não temos mais vagas para a data selecionada!");
-						this.desabilitaBotaoSalvar = true;
 					} else
 						this.desabilitaBotaoSalvar = false;
 				}
-			}
-
+			} 
+				System.out.println("entrou no else");
+				this.desabilitaBotaoSalvar = false;
+				if (this.disponiveis == 0) {
+					Messages.addGlobalError("Não temos mais vagas para a data selecionada!");
+					this.desabilitaBotaoSalvar = true;
+				} else
+					this.desabilitaBotaoSalvar = false;
+			
+			System.out.println("botao salvar.: " + desabilitaBotaoSalvar);
 		} catch (RuntimeException erro) {
 
 			erro.printStackTrace();

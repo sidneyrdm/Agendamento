@@ -1,14 +1,11 @@
 package br.com.Agendamento.dao;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import br.com.Agendamento.bean.AgendamentoBean;
 import br.com.Agendamento.domain.Disponibilidade;
 import br.com.Agendamento.domain.Usuario;
 
@@ -16,7 +13,7 @@ public class UsuarioDAOTest {
 	Usuario usuario = new Usuario();
 	UsuarioDAO usuariodao = new UsuarioDAO();
 
-	@Ignore
+	
 	@Test
 	public void salvar() {
 
@@ -30,11 +27,6 @@ public class UsuarioDAOTest {
 		usuariodao.salvar(usuario);
 	}
 
-	@SuppressWarnings("static-access")
-	@Test
-	public void teste() {
-		AgendamentoBean a = new AgendamentoBean();
-	}
 
 	@Ignore
 	@Test

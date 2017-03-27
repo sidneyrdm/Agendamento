@@ -136,8 +136,7 @@ public class AgendamentoBean implements Serializable {
 			atualizaDisponibilidade(agendamento.getDisponibilidade().getCodigo(), 's');
 			novo();
 			Messages.addGlobalInfo("Agendamento gravado com sucesso!");
-			agendamentosUser = agendamentodao.buscarPorUsuario(aut.getUsuario().getCodigo());
-			agendamentos = agendamentodao.listar();
+listar();
 			refresh();
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Erro ao tentar gravar a Agendamento");
@@ -201,6 +200,7 @@ public class AgendamentoBean implements Serializable {
 						if (getSemana(a.getDisponibilidade().getData()) == semana) {
 							Messages.addGlobalError("Voce já está agendado para esta semana!");
 							this.desabilitaBotaoSalvar = true;
+							return;
 						} else
 							this.desabilitaBotaoSalvar = false;
 					}
@@ -252,18 +252,25 @@ public class AgendamentoBean implements Serializable {
 		return c.get(c.YEAR);
 	}
 
-	/*
-	public void mostrar() {
-		int semana = getSemana(agendamento.getDisponibilidade().getData());
-		int mes = getMes(agendamento.getDisponibilidade().getData());
-		for (Agendamento agend : agendamentosUser) {
-			System.out.println("usuario logado.: " + agend.getUsuario().getNome());
-			System.out.println("quantidade de agendamentos.: " + agendamentosUser.size());
-			System.out.println("data do agendamento.: " + agend.getDisponibilidade().getDataView());
-			System.out.println(mes + " Mes do agendamento.: " + getMes(agend.getDisponibilidade().getData()));
-			System.out.println(semana + " semana do agendamento.: " + getSemana(agend.getDisponibilidade().getData()));
-
-		}
-
-	}*/
+	public void mostrar() {/*
+							 * int semana =
+							 * getSemana(agendamento.getDisponibilidade().
+							 * getData()); int mes =
+							 * getMes(agendamento.getDisponibilidade().getData()
+							 * ); for (Agendamento agend : agendamentosUser) {
+							 * System.out.println("usuario logado.: " +
+							 * agend.getUsuario().getNome()); System.out.
+							 * println("quantidade de agendamentos.: " +
+							 * agendamentosUser.size());
+							 * System.out.println("data do agendamento.: " +
+							 * agend.getDisponibilidade().getDataView());
+							 * System.out.println(mes + " Mes do agendamento.: "
+							 * + getMes(agend.getDisponibilidade().getData()));
+							 * System.out.println(semana +
+							 * " semana do agendamento.: " +
+							 * getSemana(agend.getDisponibilidade().getData()));
+							 * 
+							 * }
+							 */
+	}
 }

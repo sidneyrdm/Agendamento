@@ -17,6 +17,13 @@
 					var="agendamento">
 
 					<f:facet name="footer">
+						<p:commandButton value="Novo Agendamento"
+							actionListener="#{agendamentoBean.novo}"
+							oncomplete="PF('dialogo').show();"
+							update=":formcadastro:gridcadastro">
+							<f:actionListener
+								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+						</p:commandButton>
 					</f:facet>
 					<p:column headerText="Data"
 						sortBy="#{agendamento.disponibilidade.dataView}"
@@ -40,7 +47,7 @@
 							<f:attribute name="agendamentoSelecionado" value="#{agendamento}" />
 						</p:commandButton>
 
-						<p:commandButton icon="ui-icon-pencil"
+						<p:commandButton icon="ui-icon-pencil" disabled="true"
 							actionListener="#{agendamentoBean.editar}"
 							oncomplete="PF('dialogo').show();"
 							update=":formcadastro:gridcadastro">

@@ -35,6 +35,12 @@
 					<p:column headerText="Celular">
 						<h:outputText value="#{usuario.celular}" />
 					</p:column>
+					<p:column headerText="Tipo" sortBy="#{usuario.tipo}"
+						filterBy="#{usuario.tipo}">
+						<h:outputText value="#{usuario.tipo}" />
+					</p:column>
+
+
 					<p:column headerText="Opções">
 						<p:commandButton icon="ui-icon-trash"
 							actionListener="#{usuarioBean.excluir}"

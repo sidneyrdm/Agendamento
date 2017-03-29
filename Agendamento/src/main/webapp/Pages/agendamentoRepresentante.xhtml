@@ -13,8 +13,8 @@
 		<h:form id="formtabela">
 			<p:panel header="Meus Agendamentos - LISTAGEM">
 				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela"
-					paginator="false" rows="30" value="#{agendamentoBean.agendamentosUser}"
-					var="agendamento">
+					paginator="false" rows="30"
+					value="#{agendamentoBean.agendamentosUser}" var="agendamento">
 					<f:facet name="footer">
 						<p:commandButton value="Novo Agendamento"
 							actionListener="#{agendamentoBean.novo}"
@@ -23,7 +23,8 @@
 							<f:actionListener
 								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 						</p:commandButton>
-						<p:commandButton value="teste" actionListener="#{agendamentoBean.mostrar}" disabled="true"/>
+						<p:commandButton value="teste"
+							actionListener="#{agendamentoBean.mostrar}" disabled="true" />
 					</f:facet>
 					<p:column headerText="Data"
 						sortBy="#{agendamento.disponibilidade.dataView}"
@@ -37,8 +38,15 @@
 						<h:outputText value="#{agendamento.usuario.nome}" />
 					</p:column>
 					<p:column headerText="Opções">
+						<p:commandButton icon="ui-icon-trash"
+							actionListener="#{agendamentoBean.excluir}"
+							update=":mensagem :formtabela:tabela">
+							<p:confirm header="Confirmação"
+								message="Deseja exluir o Agendamento?" icon="ui-icon-alert" />
+							<f:attribute name="agendamentoSelecionado" value="#{agendamento}" />
+						</p:commandButton>
 
-						<p:commandButton icon="ui-icon-pencil"
+						<p:commandButton icon="ui-icon-pencil" disabled="true"
 							actionListener="#{agendamentoBean.editar}"
 							oncomplete="PF('dialogo').show();"
 							update=":formcadastro:gridcadastro">

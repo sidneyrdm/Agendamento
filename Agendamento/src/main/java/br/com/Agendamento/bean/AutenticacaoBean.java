@@ -7,6 +7,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
@@ -24,6 +26,7 @@ public class AutenticacaoBean {
 	private String empresa;
 	private boolean permissaoAdm;
 	private boolean permissaoRepresentante;
+	private boolean logar;
 
 	public static Usuario usuario = new Usuario();
 	private Usuario usuariologado;
@@ -31,6 +34,14 @@ public class AutenticacaoBean {
 
 	public boolean isPermissaoAdm() {
 		return permissaoAdm;
+	}
+
+	public boolean isLogar() {
+		return logar;
+	}
+
+	public void setLogar(boolean logar) {
+		this.logar = logar;
 	}
 
 	public void setPermissaoAdm(boolean permissaoAdm) {
@@ -110,10 +121,6 @@ public class AutenticacaoBean {
 		usuarios = new ArrayList<Usuario>();
 	}
 
-	public void livre() throws IOException {
-		Faces.redirect("./Pages/principal.xhtml");
-	}
-
 	public void autenticar() {
 		try {
 			UsuarioDAO usuariodao = new UsuarioDAO();
@@ -134,7 +141,9 @@ public class AutenticacaoBean {
 
 			nome = usuariologado.getNome();
 			usuarios.add(usuariologado);
+			desabilitabotaoLogar();
 			Faces.redirect("./Pages/principal.xhtml");
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -143,8 +152,21 @@ public class AutenticacaoBean {
 	}
 
 	public void logOff() throws IOException {
-		usuariologado = null;
-		Faces.redirect("./Pages/autenticacao.xhtml");
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+		session.invalidate();
+		
+		Faces.redirect("./Pages/principal.xhtml");
+	}
+
+	public void desabilitabotaoLogar() throws IOException {
+		if (usuariologado == null) {
+			logar = false;
+			Faces.redirect("./Pages/autenticacao.xhtml");
+		} else {
+			logar = true;
+			Faces.redirect("./Pages/principal.xhtml");
+		}
 	}
 
 }

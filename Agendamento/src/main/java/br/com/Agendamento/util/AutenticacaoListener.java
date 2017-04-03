@@ -17,17 +17,18 @@ public class AutenticacaoListener implements PhaseListener {
 
 		String paginaAtual = Faces.getViewId();
 		boolean ePaginaDeAutenticacao = paginaAtual.contains("autenticacao.xhtml");
+		boolean ePaginainicial = paginaAtual.contains("principal.xhtml");
 
-		if (!ePaginaDeAutenticacao) {
+		if (!ePaginaDeAutenticacao && !ePaginainicial) {
 			AutenticacaoBean autenticacaoBean = Faces.getSessionAttribute("autenticacaoBean");
 
-			if (autenticacaoBean == null) {
+			if (autenticacaoBean == null && !ePaginainicial) {
 				Faces.navigate("/Pages/autenticacao.xhtml");
 				return;
 			}
 
 			Usuario usuario = autenticacaoBean.getUsuariologado();
-			if (usuario == null) {
+			if (usuario == null && !ePaginainicial) {
 				Faces.navigate("/Pages/autenticacao.xhtml");
 				return;
 			}

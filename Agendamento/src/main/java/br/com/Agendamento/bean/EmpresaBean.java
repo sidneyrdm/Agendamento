@@ -2,11 +2,14 @@ package br.com.Agendamento.bean;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
+
 import org.omnifaces.util.Messages;
+
 import br.com.Agendamento.dao.EmpresaDAO;
 import br.com.Agendamento.domain.Empresa;
 
@@ -80,6 +83,14 @@ public class EmpresaBean implements Serializable {
 			EmpresaDAO empresadao = new EmpresaDAO();
 			empresa.setNome(empresa.getNome().toUpperCase());
 			empresa.setCnpj(empresa.getCnpj().toUpperCase());
+			empresa.setRazaoSocial(empresa.getRazaoSocial());
+			empresa.setBairro(empresa.getBairro());
+			empresa.setCep(empresa.getCep());
+			empresa.setCidade(empresa.getCidade());
+			empresa.setEstado(empresa.getEstado());
+			empresa.setInscricaoEstadual(empresa.getInscricaoEstadual());
+			empresa.setNumero(empresa.getNumero());
+			empresa.setRua(empresa.getRua());
 			empresadao.merge(empresa);
 			novo();
 			empresas = empresadao.listar();

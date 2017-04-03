@@ -30,6 +30,9 @@
 					<p:column headerText="Cnpj">
 						<h:outputText value="#{empresa.cnpj}" />
 					</p:column>
+					<p:column headerText="IE">
+						<h:outputText value="#{empresa.inscricaoEstadual}" />
+					</p:column>
 					<p:column headerText="Opções">
 						<p:commandButton icon="ui-icon-trash"
 							actionListener="#{empresaBean.excluir}"
@@ -62,16 +65,67 @@
 			draggable="false" resizable="false" modal="true">
 			<h:form id="formcadastro">
 				<h:panelGrid id="gridcadastro" columns="2">
-					<h:outputLabel value="Nome.:" />
+					<h:outputLabel value="Nome Fantasia.:" />
 					<h:inputText size="20" maxlength="50"
 						value="#{empresaBean.empresa.nome}" required="true"
 						requiredMessage="o campo NOME é obrigatório" />
+
+					<h:outputLabel value="Razao social.:" />
+					<h:inputText size="20" maxlength="50"
+						value="#{empresaBean.empresa.razaoSocial}" required="true"
+						requiredMessage="o campo RAZÃO SO é obrigatório" />
 
 					<h:outputLabel value="Cnpj.:" />
 					<p:inputMask mask="99.999.999/9999-99" id="cnpj" size="20"
 						required="true" requiredMessage="campo CNPJ é obrigatório"
 						value="#{empresaBean.empresa.cnpj}" />
 
+					<h:outputLabel value="Estado.:" />
+					<p:selectOneMenu filter="true" id="estado"
+						converter="omnifaces.SelectItemsConverter"
+						value="empresaBean.empresa.estado">
+						<f:selectItem itemLabel="Acre" itemValue="AC" />
+						<f:selectItem itemLabel="Alagoas" itemValue="AL" />
+						<f:selectItem itemLabel="Amapá" itemValue="AP" />
+						<f:selectItem itemLabel="Amazonas" itemValue="AM" />
+						<f:selectItem itemLabel="Bahia" itemValue="BA" />
+						<f:selectItem itemLabel="Ceará" itemValue="CE" />
+						<f:selectItem itemLabel="Distrito Federal" itemValue="DF" />
+						<f:selectItem itemLabel="Espírito Santo" itemValue="ES" />
+						<f:selectItem itemLabel="Goiás" itemValue="GO" />
+						<f:selectItem itemLabel="Maranhão" itemValue="MA" />
+						<f:selectItem itemLabel="Mato Grosso" itemValue="MT" />
+						<f:selectItem itemLabel="Mato Grosso Do Sul" itemValue="MS" />
+						<f:selectItem itemLabel="Minas Gerais" itemValue="MG" />
+						<f:selectItem itemLabel="Pará" itemValue="PA" />
+						<f:selectItem itemLabel="Paraíba" itemValue="PB" />
+						<f:selectItem itemLabel="Paraná" itemValue="PR" />
+						<f:selectItem itemLabel="Pernambuco" itemValue="PE" />
+						<f:selectItem itemLabel="Rio De Janeiro" itemValue="RJ" />
+						<f:selectItem itemLabel="Rio Grande Do Norte" itemValue="RN" />
+						<f:selectItem itemLabel="Rio Grande Do Norte" itemValue="RS" />
+						<f:selectItem itemLabel="Rondônia" itemValue="RO" />
+						<f:selectItem itemLabel="Roraima" itemValue="RR" />
+						<f:selectItem itemLabel="Santa Catarina" itemValue="SC" />
+						<f:selectItem itemLabel="São Paulo" itemValue="SP" />
+						<f:selectItem itemLabel="Sergipe" itemValue="SE" />
+						<f:selectItem itemLabel="Tocantins" itemValue="TO" />
+					</p:selectOneMenu>
+					<h:outputLabel value="Cidade.:" />
+					<h:inputText size="20" maxlength="50"
+						value="#{empresaBean.empresa.cidade}" />
+					<h:outputLabel value="Bairro.:" />
+					<h:inputText size="20" maxlength="50"
+						value="#{empresaBean.empresa.bairro}" />
+					<h:outputLabel value="Rua.:" />
+					<h:inputText size="20" maxlength="50"
+						value="#{empresaBean.empresa.rua}" />
+					<h:outputLabel value="Número.:" />
+					<h:inputText size="4" maxlength="4"
+						value="#{empresaBean.empresa.numero}" />
+					<h:outputLabel value="Cep.:" />
+					<h:inputText size="9" maxlength="9"
+						value="#{empresaBean.empresa.cep}" />
 				</h:panelGrid>
 
 				<h:panelGrid columns="2">

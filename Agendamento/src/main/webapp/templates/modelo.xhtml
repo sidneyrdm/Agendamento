@@ -19,30 +19,42 @@
 				styleClass="imagemCentralizada" />
 
 		</div>
-		<div id="usuariologado" class="divUsuario">
-			<h:outputLabel value="Bem vindo.: #{autenticacaoBean.nome}" />
-		</div>
-
-		<div id="cabecalho" class="divCabecalho">
+		<div id="teste">
+			<h:form id="FormUsuario">
+				<p:toolbar>
+					<f:facet name="left">
+						<p:menubar>
+							<p:menuitem value="Bem-Vindo.: #{autenticacaoBean.nome}" />
+						</p:menubar>
+					</f:facet>
+					<f:facet name="right">
+						<p:menubar>
+							<p:menuitem value="Sair"
+								actionListener="#{autenticacaoBean.logOff}" />
+						</p:menubar>
+					</f:facet>
+				</p:toolbar>
+			</h:form>
 			<h:form id="formMenu">
 				<p:menubar>
 					<p:menuitem value="Início" url="/Pages/principal.xhtml"
 						rendered="true" />
-					<p:submenu label="Cadastros"
-						rendered="#{autenticacaoBean.permissaoAdm}">
-						<p:menuitem value="Disponibilidade"
-							url="/Pages/disponibilidade.xhtml" />
-						<p:menuitem value="Agendamentos" url="/Pages/agendamentoAdm.xhtml" />
-						<p:menuitem value="Usuário" url="/Pages/usuario.xhtml" />
-						<p:menuitem value="Empresa" url="/Pages/empresa.xhtml" />
-					</p:submenu>
+
+					<p:menuitem value="Disponibilidade"
+						url="/Pages/disponibilidade.xhtml" />
+					<p:menuitem value="Agendamentos" url="/Pages/agendamentoAdm.xhtml" />
+					<p:menuitem value="Usuários" url="/Pages/usuario.xhtml" />
+					<p:menuitem value="Empresas" url="/Pages/empresa.xhtml" />
 					<p:menuitem value="Agendamentos"
 						rendered="#{autenticacaoBean.permissaoRepresentante}"
 						url="/Pages/agendamentoRepresentante.xhtml" />
-					<p:menuitem value="Sair"
-						actionListener="#{autenticacaoBean.logOff}" />
-
 				</p:menubar>
+
+				<f:facet name="right">
+					<p:menubar>
+						<p:menuitem value="Usuário.: #{autenticacaoBean.nome}" />
+					</p:menubar>
+				</f:facet>
 			</h:form>
 		</div>
 

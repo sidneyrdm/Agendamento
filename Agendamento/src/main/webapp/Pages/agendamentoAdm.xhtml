@@ -15,16 +15,6 @@
 				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela"
 					paginator="false" rows="30" value="#{agendamentoBean.agendamentos}"
 					var="agendamento">
-
-					<f:facet name="footer">
-						<p:commandButton value="Novo Agendamento"
-							actionListener="#{agendamentoBean.novo}"
-							oncomplete="PF('dialogo').show();"
-							update=":formcadastro:gridcadastro">
-							<f:actionListener
-								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
-						</p:commandButton>
-					</f:facet>
 					<p:column headerText="Data"
 						sortBy="#{agendamento.disponibilidade.dataView}"
 						filterBy="#{agendamento.disponibilidade.dataView}">
@@ -66,56 +56,5 @@
 				</p:confirmDialog>
 			</p:panel>
 		</h:form>
-
-
-		<p:dialog header="Agendamentos - Cadastro" widgetVar="dialogo"
-			showEffect="explode" draggable="false" resizable="false" modal="true">
-			<h:form id="formcadastro">
-				<h:panelGrid id="gridcadastro" columns="2">
-					<p:outputLabel for="turno" value="Turno:" />
-					<p:selectOneRadio id="turno"
-						value="#{disponibilidadeBean.selecao.turno}">
-						<f:selectItem itemLabel="Manha" itemValue="Manha" />
-						<f:selectItem itemLabel="Tarde" itemValue="Tarde" />
-						<p:ajax listener="#{disponibilidadeBean.popular}"
-							update=":formcadastro:date :mensagem" />
-					</p:selectOneRadio>
-
-					<h:outputLabel value="Data.:" for="date" />
-					<p:selectOneMenu filter="true" id="date"
-						value="#{agendamentoBean.agendamento.disponibilidade}"
-						converter="omnifaces.SelectItemsConverter" required="true"
-						requiredMessage="o campo Data é obrigatório">
-						<f:selectItem itemLabel="Selecione uma Data" />
-						<f:selectItems
-							value="#{disponibilidadeBean.disponibilidadesCarregadas}"
-							var="data" itemLabel="#{data.date}" itemValue="#{data}" />
-						<p:ajax listener="#{agendamentoBean.atualizaDisponiveis}"
-							update=":mensagem :formcadastro:disponiveis :formcadastro:salvar" />
-					</p:selectOneMenu>
-					<h:outputLabel value="Disponíveis.:" />
-					<h:outputText value="#{agendamentoBean.disponiveis}"
-						id="disponiveis" />
-					<h:outputLabel value="Usuario.:" />
-					<p:selectOneMenu filter="true"
-						value="#{agendamentoBean.agendamento.usuario}"
-						converter="omnifaces.SelectItemsConverter" required="true"
-						requiredMessage="o campo EMPRESA é obrigatório">
-						<f:selectItems value="#{autenticacaoBean.usuarios}" var="empresa"
-							itemLabel="#{empresa.nome}" itemValue="#{empresa}" />
-					</p:selectOneMenu>
-				</h:panelGrid>
-
-				<h:panelGrid columns="2">
-					<p:commandButton value="Agendar"
-						disabled="#{agendamentoBean.desabilitaBotaoSalvar}" id="salvar"
-						actionListener="#{agendamentoBean.salvar}"
-						update=":mensagem :formcadastro:gridcadastro :formtabela:tabela "
-						oncomplete="PF('dialogo').hide();" />
-					<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
-				</h:panelGrid>
-			</h:form>
-		</p:dialog>
-
 	</ui:define>
 </ui:composition>

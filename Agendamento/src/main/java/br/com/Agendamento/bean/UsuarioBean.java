@@ -31,16 +31,13 @@ public class UsuarioBean implements Serializable {
 		return empresas;
 	}
 
-	
 	public boolean isEmpresa() {
 		return empresa;
 	}
 
-
 	public void setEmpresa(boolean empresa) {
 		this.empresa = empresa;
 	}
-
 
 	public Usuario getSelecao() {
 		return selecao;
@@ -113,6 +110,10 @@ public class UsuarioBean implements Serializable {
 	public void editar(ActionEvent evento) {
 		try {
 			usuario = (Usuario) evento.getComponent().getAttributes().get("usuarioSelecionado");
+			if (usuario.getTipo() == 'R') {
+				empresa = false;
+				empresas = new EmpresaDAO().listar();
+			}
 
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("erro ao tentar excluir usuario");
@@ -144,11 +145,11 @@ public class UsuarioBean implements Serializable {
 
 	}
 
-	public void desabilitaEmpresa(){
-		if(usuario.getTipo()=='R')
+	public void desabilitaEmpresa() {
+		if (usuario.getTipo() == 'R')
 			empresa = false;
-	    else
-		   empresa = true;
+		else
+			empresa = true;
 	}
 
 }

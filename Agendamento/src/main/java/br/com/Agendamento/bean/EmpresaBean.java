@@ -71,6 +71,7 @@ public class EmpresaBean implements Serializable {
 	public void editar(ActionEvent evento) {
 		try {
 			empresa = (Empresa) evento.getComponent().getAttributes().get("empresaSelecionada");
+			empresas = new EmpresaDAO().listar();
 
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("erro ao tentar excluir empresa");

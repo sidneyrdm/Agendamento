@@ -20,13 +20,14 @@
 
 		</div>
 		<div id="teste">
-			<h:form id="FormUsuario">
-			</h:form>
 			<h:form id="formMenu">
-				<p:menubar>
-					<p:menuitem value="Logar"
-						actionListener="#{autenticacaoBean.desabilitabotaoLogar}" />
-				</p:menubar>
+				<p:toolbar id="barraPrincipalpublico" rendered="true">
+					<f:facet name="right">
+						<p:menubar>
+							<p:menuitem value="Logar" url="/Pages/autenticacao.xhtml" />
+						</p:menubar>
+					</f:facet>
+				</p:toolbar>
 			</h:form>
 		</div>
 		<div id="conteudo" class="divConteudo">

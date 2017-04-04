@@ -20,9 +20,26 @@
 
 		</div>
 		<div id="teste">
-			<h:form id="FormUsuario">
-				<p:toolbar id="toobar" rendered="#{autenticacaoBean.logar}">
+			<h:form id="formMenu">
+				<p:toolbar id="barraPrincipal" rendered="true">
 					<f:facet name="left">
+						<p:menubar>
+							<p:menuitem value="Início" url="/Pages/principal.xhtml"
+								rendered="true" />
+							<p:menuitem value="Disponibilidade"
+								url="/Pages/disponibilidade.xhtml"
+								rendered="#{autenticacaoBean.permissaoAdm}" />
+							<p:menuitem value="Agendamentos"
+								url="/Pages/agendamentoAdm.xhtml"
+								rendered="#{autenticacaoBean.permissaoAdm}" />
+							<p:menuitem value="Usuários" url="/Pages/usuario.xhtml"
+								rendered="#{autenticacaoBean.permissaoAdm}" />
+							<p:menuitem value="Empresas" url="/Pages/empresa.xhtml"
+								rendered="#{autenticacaoBean.permissaoAdm}" />
+							<p:menuitem value="Agendamentos"
+								rendered="#{autenticacaoBean.permissaoRepresentante}"
+								url="/Pages/agendamentoRepresentante.xhtml" />
+						</p:menubar>
 					</f:facet>
 					<f:facet name="right">
 						<p:menubar>
@@ -33,26 +50,6 @@
 						</p:menubar>
 					</f:facet>
 				</p:toolbar>
-			</h:form>
-			<h:form id="formMenu">
-				<p:menubar>
-					<p:menuitem value="Início" url="/Pages/principal.xhtml"
-						rendered="true" />
-					<p:menuitem value="Disponibilidade"
-						url="/Pages/disponibilidade.xhtml"
-						rendered="#{autenticacaoBean.permissaoAdm}" />
-					<p:menuitem value="Agendamentos" url="/Pages/agendamentoAdm.xhtml"
-						rendered="#{autenticacaoBean.permissaoAdm}" />
-					<p:menuitem value="Usuários" url="/Pages/usuario.xhtml"
-						rendered="#{autenticacaoBean.permissaoAdm}" />
-					<p:menuitem value="Empresas" url="/Pages/empresa.xhtml"
-						rendered="#{autenticacaoBean.permissaoAdm}" />
-					<p:menuitem value="Agendamentos"
-						rendered="#{autenticacaoBean.permissaoRepresentante}"
-						url="/Pages/agendamentoRepresentante.xhtml" />
-					<p:menuitem value="Logar"
-						actionListener="#{autenticacaoBean.desabilitabotaoLogar}" />
-				</p:menubar>
 			</h:form>
 
 		</div>

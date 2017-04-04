@@ -142,7 +142,7 @@ public class AutenticacaoBean {
 			nome = usuariologado.getNome();
 			usuarios.add(usuariologado);
 			desabilitabotaoLogar();
-			Faces.redirect("./Pages/principal.xhtml");
+			Faces.redirect("./Pages/principalPrivado.xhtml");
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -165,7 +165,7 @@ public class AutenticacaoBean {
 			Faces.redirect("./Pages/autenticacao.xhtml");
 		} else {
 			logar = true;
-			Faces.redirect("./Pages/principal.xhtml");
+			Faces.redirect("./Pages/principalPrivado.xhtml");
 		}
 	}
 

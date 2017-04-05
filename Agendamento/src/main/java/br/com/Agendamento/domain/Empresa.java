@@ -30,7 +30,7 @@ public class Empresa extends GenericDomain {
 	@Column(length = 9, nullable = true)
 	private String cep;
 
-	@Column(length = 8, nullable = true)
+	@Column(length = 10, nullable = true)
 	private String inscricaoEstadual;
 
 	@Column(length = 50, nullable = false)

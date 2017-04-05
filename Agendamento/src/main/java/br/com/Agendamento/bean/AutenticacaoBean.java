@@ -31,6 +31,7 @@ public class AutenticacaoBean {
 	public static Usuario usuario = new Usuario();
 	private Usuario usuariologado;
 	private List<Usuario> usuarios;
+	private List<Usuario> usuariosConectados;
 
 	public boolean isPermissaoAdm() {
 		return permissaoAdm;
@@ -119,17 +120,27 @@ public class AutenticacaoBean {
 	@PostConstruct
 	public void iniciar() {
 		usuarios = new ArrayList<Usuario>();
+		usuariosConectados = new ArrayList<Usuario>();
 	}
 
 	public void autenticar() {
 		try {
 			UsuarioDAO usuariodao = new UsuarioDAO();
 			usuariologado = usuariodao.autenticar(cpf, senha);
+			usuariosConectados = new UsuarioDAO().buscarConectado(true);
 
 			if (usuariologado == null) {
 				Messages.addGlobalError("Usuário e/ou senha incorretos");
 				return;
+			} else {
+				usuariologado.setConectado(true);
+				usuariodao.editar(usuariologado);
+				if (usuariosConectados.contains(usuariologado)) {
+					Messages.addGlobalError("Usuário " + usuariologado.getNome() + " já Conectado!");
+					return;
+				}
 			}
+
 			usuario = usuariologado;
 			if (usuario.getTipo() == 'A') {
 				permissaoAdm = true;
@@ -138,7 +149,6 @@ public class AutenticacaoBean {
 				permissaoAdm = false;
 				permissaoRepresentante = true;
 			}
-
 			nome = usuariologado.getNome();
 			usuarios.add(usuariologado);
 			desabilitabotaoLogar();
@@ -152,10 +162,14 @@ public class AutenticacaoBean {
 	}
 
 	public void logOff() throws IOException {
+		usuariologado.setConectado(false);
+		UsuarioDAO usuariodao = new UsuarioDAO();
+		usuariodao.editar(usuariologado);
+
 		FacesContext fc = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
 		session.invalidate();
-		
+
 		Faces.redirect("./Pages/principal.xhtml");
 	}
 
@@ -167,6 +181,24 @@ public class AutenticacaoBean {
 			logar = true;
 			Faces.redirect("./Pages/principalPrivado.xhtml");
 		}
+	}
+
+	public List<Usuario> getUsuariosConectados() {
+		return usuariosConectados;
+	}
+
+	public void setUsuariosConectados(List<Usuario> usuariosConectados) {
+		this.usuariosConectados = usuariosConectados;
+	}
+
+	public void mostrarUsuariosConectados() {
+		usuariosConectados = new UsuarioDAO().buscarConectado(true);
+		if (usuariosConectados.contains(usuariologado))
+			System.out.println("usuário já conectado!");
+		for (Usuario user : usuariosConectados) {
+			System.out.println("nome.: " + user.getNome());
+		}
+
 	}
 
 }

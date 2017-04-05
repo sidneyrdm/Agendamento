@@ -15,10 +15,12 @@
 			<h:panelGrid columns="2">
 				<p:outputLabel for="cpf" value="Cpf.:" />
 				<p:inputMask id="cpf" mask="999.999.999-99" size="15"
-					value="#{autenticacaoBean.cpf}" />
+					value="#{autenticacaoBean.cpf}" required="true"
+					requiredMessage="o campo CPF é obrigatório" />
 
 				<h:outputLabel for="senha" value="Senha.:" />
-				<p:password id="senha" size="15" value="#{autenticacaoBean.senha}" />
+				<p:password id="senha" size="15" value="#{autenticacaoBean.senha}"
+					required="true" requiredMessage="o campo SENHA é obrigatório"/>
 			</h:panelGrid>
 
 			<h:panelGrid columns="2">

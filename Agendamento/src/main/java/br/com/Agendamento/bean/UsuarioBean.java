@@ -128,6 +128,7 @@ public class UsuarioBean implements Serializable {
 			usuario.setEmail(usuario.getEmail());
 			usuario.setTelefone(usuario.getTelefone());
 			usuario.setCelular(usuario.getCelular());
+			usuario.setConectado(false);
 			usuario.setCpf(usuario.getCpf());
 			usuario.setSenhaNaoCriptografada(usuario.getSenha());
 			SimpleHash hash = new SimpleHash("md5", usuario.getSenhaNaoCriptografada());

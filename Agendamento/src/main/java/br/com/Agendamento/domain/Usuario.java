@@ -13,6 +13,9 @@ public class Usuario extends GenericDomain {
 
 	@Column(length = 32, nullable = false)
 	private String senha;
+	
+	@Column(nullable = false)
+	private boolean conectado;
 
 	@Transient
 	private String senhaNaoCriptografada;
@@ -50,6 +53,14 @@ public class Usuario extends GenericDomain {
 
 	public Character getTipo() {
 		return tipo;
+	}
+
+	public boolean isConectado() {
+		return conectado;
+	}
+
+	public void setConectado(boolean conectado) {
+		this.conectado = conectado;
 	}
 
 	public void setTipo(Character tipo) {

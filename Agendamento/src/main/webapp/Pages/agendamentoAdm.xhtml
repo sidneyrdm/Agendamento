@@ -23,10 +23,10 @@
 					<p:column headerText="Turno">
 						<h:outputText value="#{agendamento.disponibilidade.turno}" />
 					</p:column>
-					<p:column headerText="Nome">
-						<h:outputText value="#{agendamento.usuario.nome}"
-							sortBy="#{agendamento.usuario.nome}"
-							filterBy="#{agendamento.usuario.nome}" />
+					<p:column headerText="Nome"
+						sortBy="#{agendamento.usuario.nome}"
+						filterBy="#{agendamento.usuario.nome}">
+						<h:outputText value="#{agendamento.usuario.nome}" />
 					</p:column>
 					<p:column headerText="Opções">
 						<p:commandButton icon="ui-icon-trash"

@@ -1,5 +1,7 @@
 package br.com.Agendamento.dao;
 
+import java.util.List;
+
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -27,4 +29,19 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
 			throw erro;
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Usuario> buscarConectado(boolean conectado) {
+		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
+		try {
+			Criteria consulta = sessao.createCriteria(Usuario.class);
+			consulta.add(Restrictions.eq("conectado", conectado));
+			List<Usuario> resultado = consulta.list();
+			return resultado;
+		} catch (RuntimeException erro) {
+			throw erro;
+		} finally {
+			sessao.close();
+		}
+	}	
 }

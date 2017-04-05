@@ -80,6 +80,11 @@
 						required="true" requiredMessage="campo CNPJ é obrigatório"
 						value="#{empresaBean.empresa.cnpj}" />
 
+					<h:outputLabel value="Insc.Estadual.:" />
+					<h:inputText size="10" maxlength="12"
+						value="#{empresaBean.empresa.inscricaoEstadual}" required="true"
+						requiredMessage="o campo INSCRIÇÃO ESTADUAL é obrigatório" />
+
 					<h:outputLabel value="Estado.:" />
 					<p:selectOneMenu filter="true" id="estado"
 						converter="omnifaces.SelectItemsConverter"

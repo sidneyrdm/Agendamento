@@ -15,6 +15,7 @@ public class UsuarioDAOTest {
 
 	
 	@Test
+	@Ignore
 	public void salvar() {
 
 		usuario.setNome("sidney");
@@ -24,9 +25,9 @@ public class UsuarioDAOTest {
 		usuario.setCpf("070.915.384-80");
 		usuario.setCelular("(81)98895-0121");
 		usuario.setTipo('A');
+		usuario.setConectado(false);
 		usuariodao.salvar(usuario);
 	}
-
 
 	@Ignore
 	@Test
@@ -37,6 +38,13 @@ public class UsuarioDAOTest {
 
 		usuario = usuariodao.autenticar(cpf, senha);
 		System.out.println(usuario.getNome() + " =nome");
+	}
+	
+	@Test
+	public void aaa(){
+		usuario = usuariodao.buscar(5L);
+		usuario.setConectado(false);
+		usuariodao.editar(usuario);
 	}
 
 	@Ignore

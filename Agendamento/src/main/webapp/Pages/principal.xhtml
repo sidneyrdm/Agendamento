@@ -9,8 +9,11 @@
 	template="/templates/modeloPublico.xhtml">
 
 	<ui:define name="conteudo">
-	<h:form>
-	<h:outputLabel value="Bem vindo ao Gerenciador de Agendamentos do Grupo RendeMais Supermercados"/>
-	</h:form>
+		<h:form>
+			<h:outputLabel
+				value="Bem vindo ao Gerenciador de Agendamentos do Grupo RendeMais Supermercados" />
+			<p:commandButton value="testar"
+				actionListener="#{autenticacaoBean.mostrarUsuariosConectados}" />
+		</h:form>
 	</ui:define>
 </ui:composition>

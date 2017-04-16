@@ -2,6 +2,8 @@ package br.com.Agendamento.dao;
 
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -13,7 +15,6 @@ public class UsuarioDAOTest {
 	Usuario usuario = new Usuario();
 	UsuarioDAO usuariodao = new UsuarioDAO();
 
-	
 	@Test
 	@Ignore
 	public void salvar() {
@@ -39,9 +40,10 @@ public class UsuarioDAOTest {
 		usuario = usuariodao.autenticar(cpf, senha);
 		System.out.println(usuario.getNome() + " =nome");
 	}
-	
+
+	@Ignore
 	@Test
-	public void aaa(){
+	public void aaa() {
 		usuario = usuariodao.buscar(5L);
 		usuario.setConectado(false);
 		usuariodao.editar(usuario);
@@ -58,6 +60,27 @@ public class UsuarioDAOTest {
 			System.out.println("turno.: " + disp.getTurno());
 			System.out.println("data.: " + disp.getDataView());
 		}
+	}
+
+	//@SuppressWarnings({ "null" })
+	// @Ignore
+	@Test
+	public void userMain() {
+		Usuario user = new UsuarioDAO().BuscaPorCpf("070.915.384-80");
+		if (user == null) {
+			JOptionPane.showMessageDialog(null, "entrou");
+			usuario.setNome("sidney");
+			usuario.setSenhaNaoCriptografada("123");
+			SimpleHash hash = new SimpleHash("md5", usuario.getSenhaNaoCriptografada());
+			usuario.setSenha(hash.toHex());
+			usuario.setCpf("070.915.384-80");
+			usuario.setCelular("(81)98895-0121");
+			usuario.setTipo('A');
+			usuario.setConectado(false);
+			usuariodao.salvar(usuario);
+
+		} else
+			JOptionPane.showMessageDialog(null, "nao entrou");
 	}
 
 }

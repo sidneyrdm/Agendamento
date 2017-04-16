@@ -153,4 +153,20 @@ public class UsuarioBean implements Serializable {
 			empresa = true;
 	}
 
+	public void userMain() {
+		Usuario usuario = new Usuario();
+		UsuarioDAO usuariodao = new UsuarioDAO();
+
+		usuario.setNome("sidney");
+		usuario.setSenhaNaoCriptografada("123");
+		SimpleHash hash = new SimpleHash("md5", usuario.getSenhaNaoCriptografada());
+		usuario.setSenha(hash.toHex());
+		usuario.setCpf("070.915.384-80");
+		usuario.setCelular("(81)98895-0121");
+		usuario.setTipo('A');
+		usuario.setConectado(false);
+		usuariodao.salvar(usuario);
+
+	}
+
 }

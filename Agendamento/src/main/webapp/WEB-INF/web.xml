@@ -28,6 +28,7 @@
 		<listener-class>br.com.Agendamento.util.HibernateContexto</listener-class>
 	</listener>
 
+
 	<!-- Página Principal -->
 	<welcome-file-list>
 		<welcome-file>Pages/principal.xhtml</welcome-file>

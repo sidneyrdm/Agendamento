@@ -41,10 +41,10 @@ public class UsuarioDAOTest {
 		System.out.println(usuario.getNome() + " =nome");
 	}
 
-	@Ignore
+	//@Ignore
 	@Test
 	public void aaa() {
-		usuario = usuariodao.buscar(5L);
+		usuario = usuariodao.buscar(1L);
 		usuario.setConectado(false);
 		usuariodao.editar(usuario);
 	}
@@ -62,8 +62,8 @@ public class UsuarioDAOTest {
 		}
 	}
 
-	//@SuppressWarnings({ "null" })
-	// @Ignore
+	// @SuppressWarnings({ "null" })
+	@Ignore
 	@Test
 	public void userMain() {
 		Usuario user = new UsuarioDAO().BuscaPorCpf("070.915.384-80");

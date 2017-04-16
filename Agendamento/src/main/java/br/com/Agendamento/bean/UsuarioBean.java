@@ -153,19 +153,24 @@ public class UsuarioBean implements Serializable {
 			empresa = true;
 	}
 
+	@SuppressWarnings("null")
 	public void userMain() {
-		Usuario usuario = new Usuario();
-		UsuarioDAO usuariodao = new UsuarioDAO();
+		Usuario user = new Usuario();
+		UsuarioDAO userdao = new UsuarioDAO();
+		user = userdao.BuscaPorCpf("070.915.384-80");
 
-		usuario.setNome("sidney");
-		usuario.setSenhaNaoCriptografada("123");
-		SimpleHash hash = new SimpleHash("md5", usuario.getSenhaNaoCriptografada());
-		usuario.setSenha(hash.toHex());
-		usuario.setCpf("070.915.384-80");
-		usuario.setCelular("(81)98895-0121");
-		usuario.setTipo('A');
-		usuario.setConectado(false);
-		usuariodao.salvar(usuario);
+		if (user == null) {
+			user.setNome("sidney");
+			user.setSenhaNaoCriptografada("123");
+			SimpleHash hash = new SimpleHash("md5", user.getSenhaNaoCriptografada());
+			user.setSenha(hash.toHex());
+			user.setCpf("070.915.384-80");
+			user.setCelular("(81)98895-0121");
+			user.setTipo('A');
+			user.setConectado(false);
+			userdao.salvar(user);
+		} else
+			System.out.println("usuário já existe");
 
 	}
 

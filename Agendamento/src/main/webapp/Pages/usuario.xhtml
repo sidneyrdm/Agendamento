@@ -15,8 +15,8 @@
 					paginator="true" value="#{usuarioBean.usuarios}" var="usuario">
 					<f:facet name="footer">
 						<p:commandButton value="Novo" actionListener="#{usuarioBean.novo}"
-							oncomplete="PF('dialogo').show();"
-							update=":formcadastro:gridcadastro">
+							update=":formcadastro:gridcadastro"
+							oncomplete="PF('dialogo').show();">
 							<f:actionListener
 								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 						</p:commandButton>

@@ -22,7 +22,7 @@ import br.com.Agendamento.domain.Usuario;
 public class UsuarioBean implements Serializable {
 
 	private boolean empresa;
-	Usuario usuario = new Usuario();
+	private Usuario usuario;
 	private Usuario selecao;
 	List<Usuario> usuarios;
 	private List<Empresa> empresas;

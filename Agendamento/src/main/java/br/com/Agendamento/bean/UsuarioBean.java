@@ -153,13 +153,13 @@ public class UsuarioBean implements Serializable {
 			empresa = true;
 	}
 
-	@SuppressWarnings("null")
 	public void userMain() {
 		Usuario user = new Usuario();
 		UsuarioDAO userdao = new UsuarioDAO();
 		user = userdao.BuscaPorCpf("070.915.384-80");
 
 		if (user == null) {
+			user = new Usuario();
 			user.setNome("sidney");
 			user.setSenhaNaoCriptografada("123");
 			SimpleHash hash = new SimpleHash("md5", user.getSenhaNaoCriptografada());

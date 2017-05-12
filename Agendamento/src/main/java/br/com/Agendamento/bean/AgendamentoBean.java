@@ -132,6 +132,7 @@ public class AgendamentoBean implements Serializable {
 			AgendamentoDAO agendamentodao = new AgendamentoDAO();
 			agendamento.setDisponibilidade(agendamento.getDisponibilidade());
 			agendamento.setUsuario(agendamento.getUsuario());
+			agendamento.setStatus("Não Atendido");
 			agendamentodao.merge(agendamento);
 			atualizaDisponibilidade(agendamento.getDisponibilidade().getCodigo(), 's');
 			novo();
@@ -211,15 +212,15 @@ public class AgendamentoBean implements Serializable {
 					} else
 						this.desabilitaBotaoSalvar = false;
 				}
-			} 
-				System.out.println("entrou no else");
+			}
+			System.out.println("entrou no else");
+			this.desabilitaBotaoSalvar = false;
+			if (this.disponiveis == 0) {
+				Messages.addGlobalError("Não temos mais vagas para a data selecionada!");
+				this.desabilitaBotaoSalvar = true;
+			} else
 				this.desabilitaBotaoSalvar = false;
-				if (this.disponiveis == 0) {
-					Messages.addGlobalError("Não temos mais vagas para a data selecionada!");
-					this.desabilitaBotaoSalvar = true;
-				} else
-					this.desabilitaBotaoSalvar = false;
-			
+
 			System.out.println("botao salvar.: " + desabilitaBotaoSalvar);
 		} catch (RuntimeException erro) {
 
@@ -258,25 +259,15 @@ public class AgendamentoBean implements Serializable {
 		return c.get(c.YEAR);
 	}
 
-	public void mostrar() {/*
-							 * int semana =
-							 * getSemana(agendamento.getDisponibilidade().
-							 * getData()); int mes =
-							 * getMes(agendamento.getDisponibilidade().getData()
-							 * ); for (Agendamento agend : agendamentosUser) {
-							 * System.out.println("usuario logado.: " +
-							 * agend.getUsuario().getNome()); System.out.
-							 * println("quantidade de agendamentos.: " +
-							 * agendamentosUser.size());
-							 * System.out.println("data do agendamento.: " +
-							 * agend.getDisponibilidade().getDataView());
-							 * System.out.println(mes + " Mes do agendamento.: "
-							 * + getMes(agend.getDisponibilidade().getData()));
-							 * System.out.println(semana +
-							 * " semana do agendamento.: " +
-							 * getSemana(agend.getDisponibilidade().getData()));
-							 * 
-							 * }
-							 */
+	public void AtualizaStatus(ActionEvent evento) {
+		try {
+			AgendamentoDAO agendamentodao = new AgendamentoDAO();
+			agendamento.setStatus(agendamento.getStatus());
+			agendamentodao.merge(agendamento);
+			Messages.addGlobalInfo("Status Atualizado com Sucesso!");
+		} catch (RuntimeException erro) {
+			Messages.addGlobalError("erro ao tentar Atualizar Status");
+			erro.printStackTrace();
+		}
 	}
 }

@@ -23,10 +23,20 @@
 					<p:column headerText="Turno">
 						<h:outputText value="#{agendamento.disponibilidade.turno}" />
 					</p:column>
-					<p:column headerText="Nome"
-						sortBy="#{agendamento.usuario.nome}"
+					<p:column headerText="Nome" sortBy="#{agendamento.usuario.nome}"
 						filterBy="#{agendamento.usuario.nome}">
 						<h:outputText value="#{agendamento.usuario.nome}" />
+					</p:column>
+					<p:column headerText="Status" sortBy="#{agendamento.status}"
+						filterBy="#{agendamento.status}" style="text-align: center;">
+						<p:commandButton value="#{agendamento.status}"
+							actionListener="#{agendamentoBean.editar}"
+							oncomplete="PF('dialogo2').show();"
+							update=":formAtualizaStatus:gridcadastro2 :mensagem :formtabela:tabela">
+							<f:attribute name="agendamentoSelecionado" value="#{agendamento}" />
+							<f:actionListener
+								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+						</p:commandButton>
 					</p:column>
 					<p:column headerText="Opções">
 						<p:commandButton icon="ui-icon-trash"
@@ -37,14 +47,6 @@
 							<f:attribute name="agendamentoSelecionado" value="#{agendamento}" />
 						</p:commandButton>
 
-						<p:commandButton icon="ui-icon-pencil" disabled="true"
-							actionListener="#{agendamentoBean.editar}"
-							oncomplete="PF('dialogo').show();"
-							update=":formcadastro:gridcadastro">
-							<f:attribute name="agendamentoSelecionado" value="#{agendamento}" />
-							<f:actionListener
-								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
-						</p:commandButton>
 					</p:column>
 
 				</p:dataTable>
@@ -54,7 +56,28 @@
 					<p:commandButton value="Não" type="button"
 						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 				</p:confirmDialog>
+
 			</p:panel>
 		</h:form>
+
+		<p:dialog header="Atualiza Status" widgetVar="dialogo2"
+			draggable="false" resizable="false" modal="true">
+			<h:form id="formAtualizaStatus">
+				<h:panelGrid columns="2" id="gridcadastro2">
+					<h:outputLabel for="turno" value="Turno.:" />
+					<p:selectOneRadio value="#{agendamentoBean.agendamento.status}"
+						required="true" requiredMessage="o campo Status é obrigatório">
+						<f:selectItem itemValue="Atendido" itemLabel="Atendido" />
+						<f:selectItem itemValue="Não atendido" itemLabel="Não atendido" />
+					</p:selectOneRadio>
+				</h:panelGrid>
+				<p:commandButton value="Salvar"
+					actionListener="#{agendamentoBean.AtualizaStatus}"
+					update=":formtabela:tabela :mensagem :formAtualizaStatus:gridcadastro2"
+					oncomplete="PF('dialogo2').hide();" />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo2').hide();" />
+			</h:form>
+		</p:dialog>
+
 	</ui:define>
 </ui:composition>

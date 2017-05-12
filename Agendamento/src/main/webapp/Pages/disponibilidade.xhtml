@@ -75,7 +75,7 @@
 						requiredMessage="campo QUANTIDADE é obrigatório"
 						value="#{disponibilidadeBean.disponibilidade.qtd}" />
 					<h:outputLabel for="disponibilidade" value="Data.:" />
-					<p:calendar id="mask"
+					<p:calendar id="mask" locale="pt_BR"
 						value="#{disponibilidadeBean.disponibilidade.data}"
 						pattern="dd-MM-yyyy" mask="true" />
 

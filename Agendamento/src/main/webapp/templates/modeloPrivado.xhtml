@@ -8,6 +8,7 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Agendamento</title>
+	<h:outputScript library="js" name="scripts.js"/>
 	<h:outputStylesheet library="css" name="estilos.css" />
 </h:head>
 <h:body>
@@ -15,7 +16,7 @@
 
 	<div id="geral">
 		<div id="topo" class="divTopo">
-			<p:graphicImage library="images" name="RendeMais.jpg"
+			<p:graphicImage library="images" name="faculdade.jpg"
 				styleClass="imagemCentralizada" />
 
 		</div>
@@ -26,7 +27,7 @@
 						<p:menubar>
 							<p:menuitem value="Início" url="/Pages/principalPrivado.xhtml"
 								rendered="true" />
-							<p:menuitem value="Disponibilidade"
+							<p:menuitem value="Disponibilidades"
 								url="/Pages/disponibilidade.xhtml"
 								rendered="#{autenticacaoBean.permissaoAdm}" />
 							<p:menuitem value="Agendamentos"

@@ -37,32 +37,13 @@
 					<p:column headerText="Nome">
 						<h:outputText value="#{agendamento.usuario.nome}" />
 					</p:column>
-					<p:column headerText="Opções">
-						<p:commandButton icon="ui-icon-trash"
-							actionListener="#{agendamentoBean.excluir}"
-							update=":mensagem :formtabela:tabela">
-							<p:confirm header="Confirmação"
-								message="Deseja exluir o Agendamento?" icon="ui-icon-alert" />
-							<f:attribute name="agendamentoSelecionado" value="#{agendamento}" />
-						</p:commandButton>
-
-						<p:commandButton icon="ui-icon-pencil" disabled="true"
-							actionListener="#{agendamentoBean.editar}"
-							oncomplete="PF('dialogo').show();"
-							update=":formcadastro:gridcadastro">
-							<f:attribute name="agendamentoSelecionado" value="#{agendamento}" />
-							<f:actionListener
-								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
-						</p:commandButton>
+					<p:column headerText="Situação" width="10">
+						<p:selectOneRadio>
+							<f:selectItem itemValue="A" itemLabel="Atendido" />
+							<f:selectItem itemValue="N" itemLabel="Não Atendido" />
+						</p:selectOneRadio>
 					</p:column>
-
 				</p:dataTable>
-				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-					<p:commandButton value="Sim" type="button"
-						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-					<p:commandButton value="Não" type="button"
-						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-				</p:confirmDialog>
 			</p:panel>
 		</h:form>
 
@@ -95,7 +76,7 @@
 					<h:outputLabel value="Disponíveis.:" />
 					<h:outputText value="#{agendamentoBean.disponiveis}"
 						id="disponiveis" />
-					
+
 					<h:outputLabel value="Usuario.:" />
 					<p:selectOneMenu filter="true"
 						value="#{agendamentoBean.agendamento.usuario}"

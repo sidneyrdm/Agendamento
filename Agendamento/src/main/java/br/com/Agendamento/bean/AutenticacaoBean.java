@@ -155,7 +155,6 @@ public class AutenticacaoBean {
 			Faces.redirect("./Pages/principalPrivado.xhtml");
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Messages.addGlobalError(e.getMessage());
 		}
@@ -174,13 +173,6 @@ public class AutenticacaoBean {
 	}
 
 	public void desabilitabotaoLogar() throws IOException {
-		if (usuariologado == null) {
-			logar = false;
-			Faces.redirect("./Pages/autenticacao.xhtml");
-		} else {
-			logar = true;
-			Faces.redirect("./Pages/principalPrivado.xhtml");
-		}
 	}
 
 	public List<Usuario> getUsuariosConectados() {

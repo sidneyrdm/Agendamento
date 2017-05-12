@@ -1,0 +1,2 @@
+definir um atributo para informar se o Represetante agendado foi ou não atendido
+melhorar layout da ferramenta

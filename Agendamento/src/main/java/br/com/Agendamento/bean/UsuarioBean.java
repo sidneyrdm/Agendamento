@@ -114,7 +114,7 @@ public class UsuarioBean implements Serializable {
 				empresa = false;
 				empresas = new EmpresaDAO().listar();
 			}
-
+			empresas = new EmpresaDAO().listar();
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("erro ao tentar excluir usuario");
 			erro.printStackTrace();

@@ -6,7 +6,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	template="/templates/modeloPrivado.xhtml">
+	template="/templates/modeloPrivado2.xhtml">
 
 	<ui:define name="conteudo">
 
@@ -51,7 +51,7 @@
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>
-				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:confirmDialog global="true" showEffect="explode">
 					<p:commandButton value="Sim" type="button"
 						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
 					<p:commandButton value="Não" type="button"
@@ -60,6 +60,7 @@
 			</p:panel>
 		</h:form>
 		<p:dialog header="Disponibilidades - Cadastro" widgetVar="dialogo"
+			appendTo="@(body)" showEffect="explode" 
 			draggable="false" resizable="false" modal="true">
 			<h:form id="formdisponibilidade">
 				<h:panelGrid columns="2" id="gridcadastro">

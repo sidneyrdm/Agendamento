@@ -6,7 +6,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	template="/templates/modeloPrivado.xhtml">
+	template="/templates/modeloPrivado2.xhtml">
 
 	<ui:define name="conteudo">
 
@@ -53,7 +53,7 @@
 					</p:column>
 
 				</p:dataTable>
-				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:confirmDialog global="true" showEffect="explode">
 					<p:commandButton value="Sim" type="button"
 						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
 					<p:commandButton value="Não" type="button"
@@ -62,21 +62,22 @@
 			</p:panel>
 		</h:form>
 		<p:dialog header="Empresas - Cadastro" widgetVar="dialogo"
+			appendTo="@(body)" showEffect="explode" 
 			draggable="false" resizable="false" modal="true">
 			<h:form id="formcadastro">
 				<h:panelGrid id="gridcadastro" columns="2">
 					<h:outputLabel value="Nome Fantasia.:" />
-					<h:inputText size="20" maxlength="50"
+					<h:inputText size="35" maxlength="50"
 						value="#{empresaBean.empresa.nome}" required="true"
 						requiredMessage="o campo NOME é obrigatório" />
 
 					<h:outputLabel value="Razao social.:" />
-					<h:inputText size="20" maxlength="50"
+					<h:inputText size="35" maxlength="50" 
 						value="#{empresaBean.empresa.razaoSocial}" required="true"
 						requiredMessage="o campo RAZÃO SO é obrigatório" />
 
 					<h:outputLabel value="Cnpj.:" />
-					<p:inputMask mask="99.999.999/9999-99" id="cnpj" size="20"
+					<p:inputMask mask="99.999.999/9999-99" id="cnpj" 
 						required="true" requiredMessage="campo CNPJ é obrigatório"
 						value="#{empresaBean.empresa.cnpj}" />
 

@@ -10,6 +10,7 @@
 <h:body>
 	<p:growl id="mensagem" />
 	<p:dialog header="Autenticação" closable="false" draggable="false"
+		appendTo="@(body)" showEffect="explode" 
 		resizable="false" modal="true" visible="true">
 		<h:form>
 			<h:panelGrid columns="2">
@@ -19,8 +20,9 @@
 					requiredMessage="o campo CPF é obrigatório" />
 
 				<h:outputLabel for="senha" value="Senha.:" />
-				<p:password id="senha" size="15" value="#{autenticacaoBean.senha}"
-					required="true" requiredMessage="o campo SENHA é obrigatório"/>
+				<p:password id="senha" size="5" maxlength="5"
+					value="#{autenticacaoBean.senha}" required="true"
+					requiredMessage="o campo SENHA é obrigatório" />
 			</h:panelGrid>
 
 			<h:panelGrid columns="2">

@@ -6,7 +6,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	template="/templates/modeloPrivado.xhtml">
+	template="/templates/modeloPrivado2.xhtml">
 
 	<ui:define name="conteudo">
 
@@ -43,14 +43,14 @@
 							actionListener="#{agendamentoBean.excluir}"
 							update=":mensagem :formtabela:tabela">
 							<p:confirm header="Confirmação"
-								message="Deseja exluir o Agendamento?" icon="ui-icon-alert" />
+								message="Deseja exluir o Agendamento de #{agendamento.usuario.nome}?" icon="ui-icon-alert" />
 							<f:attribute name="agendamentoSelecionado" value="#{agendamento}" />
 						</p:commandButton>
 
 					</p:column>
 
 				</p:dataTable>
-				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:confirmDialog global="true" showEffect="explode">
 					<p:commandButton value="Sim" type="button"
 						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
 					<p:commandButton value="Não" type="button"
@@ -61,6 +61,7 @@
 		</h:form>
 
 		<p:dialog header="Atualiza Status" widgetVar="dialogo2"
+			appendTo="@(body)" showEffect="explode"
 			draggable="false" resizable="false" modal="true">
 			<h:form id="formAtualizaStatus">
 				<h:panelGrid columns="2" id="gridcadastro2">

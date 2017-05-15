@@ -1,2 +1,2 @@
-definir um atributo para informar se o Represetante agendado foi ou não atendido
+definir um atributo para informar se o Represetante agendado foi ou nï¿½o atendido(PRONTO)
 melhorar layout da ferramenta

@@ -135,10 +135,10 @@ public class AutenticacaoBean {
 			} else {
 				usuariologado.setConectado(true);
 				usuariodao.editar(usuariologado);
-				if (usuariosConectados.contains(usuariologado)) {
-					Messages.addGlobalError("Usuário " + usuariologado.getNome() + " já Conectado!");
-					return;
-				}
+				//if (usuariosConectados.contains(usuariologado)) {
+					//Messages.addGlobalError("Usuário " + usuariologado.getNome() + " já Conectado!");
+					//return;
+			//	}
 			}
 
 			usuario = usuariologado;

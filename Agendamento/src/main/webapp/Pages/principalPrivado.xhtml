@@ -6,11 +6,18 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	template="/templates/modeloPrivado.xhtml">
+	template="/templates/modeloPrivado2.xhtml">
 
 	<ui:define name="conteudo">
-	<h:form>
-	<h:outputLabel value="Bem vindo ao Gerenciador de Agendamentos do Grupo RendeMais Supermercados"/>
-	</h:form>
+		<h:form style="text-align: center">
+			<h:outputLabel
+				value="Bem vindo ao Gerenciador de Agendamentos do Grupo RendeMais Supermercados" />
+
+			<div id="topo" class="divTopo">
+				<p:graphicImage library="images" name="RM.png"
+					styleClass="imagemCentralizada" />
+
+			</div>
+		</h:form>
 	</ui:define>
 </ui:composition>

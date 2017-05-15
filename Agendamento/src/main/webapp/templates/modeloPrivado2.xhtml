@@ -12,10 +12,11 @@
 	<h:outputStylesheet library="css" name="estilos.css" />
 </h:head>
 <h:body>
-
 	<p:growl id="mensagem" />
-	<div id="geral">
-		<div id="teste">
+	<p:layout fullPage="true">
+
+		<p:layoutUnit position="north" size="100" resizable="true"
+			closable="true" collapsible="true">
 			<h:form id="formMenu">
 				<p:toolbar id="barraPrincipal" rendered="true">
 					<f:facet name="left">
@@ -48,15 +49,17 @@
 				</p:toolbar>
 			</h:form>
 
-		</div>
+		</p:layoutUnit>
 
-		<div id="conteudo" class="divConteudo">
+		<p:layoutUnit position="center">
 			<ui:insert name="conteudo" />
-		</div>
-		<div id="rodape" class="divRodape">
-			<ui:insert name="rodape" />
-		</div>
+		</p:layoutUnit>
+		<p:layoutUnit position="south" size="50" resizable="true"
+			style="text-align: center" closable="true" collapsible="true">
+			<h:outputText value="Desenvolvido por.:  Sidney Brito"/>
+		</p:layoutUnit>
 
-	</div>
+	</p:layout>
+
 </h:body>
 </html>

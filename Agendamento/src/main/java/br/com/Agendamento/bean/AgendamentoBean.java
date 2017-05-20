@@ -13,12 +13,14 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import org.apache.commons.mail.EmailException;
 import org.omnifaces.util.Messages;
 
 import br.com.Agendamento.dao.AgendamentoDAO;
 import br.com.Agendamento.dao.DisponibilidadeDAO;
 import br.com.Agendamento.domain.Agendamento;
 import br.com.Agendamento.domain.Disponibilidade;
+import br.com.Agendamento.util.Email;
 
 @SuppressWarnings("serial")
 @ManagedBean
@@ -33,6 +35,8 @@ public class AgendamentoBean implements Serializable {
 	List<Agendamento> agendamentos;
 	List<Agendamento> agendamentosUser;
 	List<Disponibilidade> disponibilidades;
+	String assunto = "Confirmação de agendamento - RendeMais Supermercados";
+	String mensagem = "Parabéns, você foi agendado com sucesso para a data ";
 
 	public AutenticacaoBean getAut() {
 		return aut;
@@ -127,13 +131,16 @@ public class AgendamentoBean implements Serializable {
 		}
 	}
 
-	public void salvar() {
+	public void salvar() throws EmailException {
 		try {
+			Email email = new Email();
 			AgendamentoDAO agendamentodao = new AgendamentoDAO();
 			agendamento.setDisponibilidade(agendamento.getDisponibilidade());
 			agendamento.setUsuario(agendamento.getUsuario());
 			agendamento.setStatus("Não Atendido");
 			agendamentodao.merge(agendamento);
+			email.sendEmail(agendamento.getUsuario().getEmail(), agendamento.getUsuario().getNome(), assunto,
+					mensagem + agendamento.getDisponibilidade().getDataView());
 			atualizaDisponibilidade(agendamento.getDisponibilidade().getCodigo(), 's');
 			novo();
 			Messages.addGlobalInfo("Agendamento gravado com sucesso!");

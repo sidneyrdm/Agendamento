@@ -1,26 +1,20 @@
 package br.com.Agendamento.dao;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import org.junit.Ignore;
+import org.apache.commons.mail.EmailException;
 import org.junit.Test;
+
+import br.com.Agendamento.util.Email;
 
 public class testes {
 
-	@Ignore
 	@Test
-	public static void main(String[] args) {
-		SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy"); // HH:mm:ss
-		Date data = new Date();
+	public void teste() {
+		Email email = new Email();
 		try {
-			System.out.println("data " + dataFormatada.format(data));
-		} catch (Exception e) {
+			email.sendEmail("sidneybritomal@gmail.com", "sidney", "confirmacão de agendamento", "Obrigado pelo agendamento");
+		} catch (EmailException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
-	
-
-
 }

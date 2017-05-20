@@ -27,6 +27,10 @@
 						filterBy="#{agendamento.usuario.nome}">
 						<h:outputText value="#{agendamento.usuario.nome}" />
 					</p:column>
+					<p:column headerText="Empresa" sortBy="#{agendamento.usuario.empresa.nome}"
+						filterBy="#{agendamento.usuario.empresa.nome}">
+						<h:outputText value="#{agendamento.usuario.empresa.nome}" />
+					</p:column>
 					<p:column headerText="Status" sortBy="#{agendamento.status}"
 						filterBy="#{agendamento.status}" style="text-align: center;">
 						<p:commandButton value="#{agendamento.status}"
@@ -43,7 +47,8 @@
 							actionListener="#{agendamentoBean.excluir}"
 							update=":mensagem :formtabela:tabela">
 							<p:confirm header="Confirmação"
-								message="Deseja exluir o Agendamento de #{agendamento.usuario.nome}?" icon="ui-icon-alert" />
+								message="Deseja exluir o Agendamento de #{agendamento.usuario.nome}?"
+								icon="ui-icon-alert" />
 							<f:attribute name="agendamentoSelecionado" value="#{agendamento}" />
 						</p:commandButton>
 
@@ -61,11 +66,11 @@
 		</h:form>
 
 		<p:dialog header="Atualiza Status" widgetVar="dialogo2"
-			appendTo="@(body)" showEffect="explode"
-			draggable="false" resizable="false" modal="true">
+			appendTo="@(body)" showEffect="explode" draggable="false"
+			resizable="false" modal="true">
 			<h:form id="formAtualizaStatus">
 				<h:panelGrid columns="2" id="gridcadastro2">
-					<h:outputLabel for="turno" value="Turno.:" />
+					<h:outputLabel for="status" value="Status.:" />
 					<p:selectOneRadio value="#{agendamentoBean.agendamento.status}"
 						required="true" requiredMessage="o campo Status é obrigatório">
 						<f:selectItem itemValue="Atendido" itemLabel="Atendido" />

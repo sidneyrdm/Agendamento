@@ -13,17 +13,9 @@
 		<h:form id="formtabela">
 			<p:panel header="Meus Agendamentos - LISTAGEM">
 				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela"
-					paginator="false" rows="30"
+					styleClass="coluna" paginator="false" rows="30"
 					value="#{agendamentoBean.agendamentosUser}" var="agendamento">
-					<f:facet name="footer">
-						<p:commandButton value="Novo Agendamento"
-							actionListener="#{agendamentoBean.novo}"
-							oncomplete="PF('dialogo').show();"
-							update=":formcadastro:gridcadastro">
-							<f:actionListener
-								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
-						</p:commandButton>
-					</f:facet>
+
 					<p:column headerText="Data"
 						sortBy="#{agendamento.disponibilidade.dataView}"
 						filterBy="#{agendamento.disponibilidade.dataView}">
@@ -35,12 +27,6 @@
 					<p:column headerText="Nome">
 						<h:outputText value="#{agendamento.usuario.nome}" />
 					</p:column>
-					<p:column headerText="Situação" width="10">
-						<p:selectOneRadio>
-							<f:selectItem itemValue="A" itemLabel="Atendido" />
-							<f:selectItem itemValue="N" itemLabel="Não Atendido" />
-						</p:selectOneRadio>
-					</p:column>
 				</p:dataTable>
 			</p:panel>
 		</h:form>
@@ -48,7 +34,7 @@
 
 		<p:dialog header="Agendamentos - Cadastro" widgetVar="dialogo"
 			appendTo="@(body)" showEffect="explode" draggable="false"
-			resizable="false" modal="true" >
+			resizable="false" modal="true">
 			<h:form id="formcadastro">
 				<h:panelGrid id="gridcadastro" columns="2">
 					<p:outputLabel for="turno" value="Turno:" />
@@ -97,5 +83,16 @@
 			</h:form>
 		</p:dialog>
 
+	</ui:define>
+	<ui:define name="opcoes">
+		<h:form>
+			<p:commandButton value="novo agendamento"
+				actionListener="#{agendamentoBean.novo}"
+				oncomplete="PF('dialogo').show();"
+				update=":formcadastro:gridcadastro">
+				<f:actionListener
+					type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+			</p:commandButton>
+		</h:form>
 	</ui:define>
 </ui:composition>

@@ -13,8 +13,8 @@
 		<!-- Tabela disponibilidades -->
 		<h:form id="formtabela">
 			<p:panel header="Disponibilidades - LISTAGEM">
-				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela"
-					paginator="false" rows="30"
+				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela" styleClass="coluna"
+					paginator="false" rows="30" 
 					value="#{disponibilidadeBean.disponibilidades}"
 					var="disponibilidade">
 					<f:facet name="footer">
@@ -72,7 +72,7 @@
 						<f:selectItem itemValue="Tarde" itemLabel="Tarde" />
 					</p:selectOneRadio>
 					<h:outputLabel value="quantidade" />
-					<p:inputMask mask="99" id="quantidade" size="1" required="true"
+					<p:inputMask mask="99" id="quantidade" size="2" required="true"
 						requiredMessage="campo QUANTIDADE é obrigatório"
 						value="#{disponibilidadeBean.disponibilidade.qtd}" />
 					<h:outputLabel for="disponibilidade" value="Data.:" />

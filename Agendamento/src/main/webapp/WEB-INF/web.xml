@@ -16,7 +16,7 @@
 	<!-- Tema do PrimeFaces -->
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
-		<param-value>dot-luv</param-value>
+		<param-value>afterwork</param-value>
 	</context-param>
 
 	<!-- Configuração do JSF -->

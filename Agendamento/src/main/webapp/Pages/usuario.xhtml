@@ -11,7 +11,7 @@
 	<ui:define name="conteudo">
 		<h:form id="formtabela">
 			<p:panel header="Usuários - LISTAGEM">
-				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela"
+				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela" styleClass="coluna"
 					paginator="true" value="#{usuarioBean.usuarios}" var="usuario">
 					<f:facet name="footer">
 						<p:commandButton value="Novo" actionListener="#{usuarioBean.novo}"
@@ -26,7 +26,7 @@
 						<h:outputText value="#{usuario.nome}" />
 					</p:column>
 
-					<p:column headerText="Email">
+					<p:column headerText="Email" width="240">
 						<h:outputText value="#{usuario.email}" />
 					</p:column>
 					<p:column headerText="Telefone">
@@ -70,8 +70,8 @@
 			</p:panel>
 		</h:form>
 		<p:dialog header="Usuários - Cadastro" widgetVar="dialogo"
-			appendTo="@(body)" showEffect="explode" 
-			resizable="false" modal="true" global="true" >
+			appendTo="@(body)" showEffect="explode" resizable="false"
+			modal="true" global="true">
 			<h:form id="formcadastro">
 				<h:panelGrid columns="2" id="gridcadastro">
 					<h:outputLabel value="Nome.:" />

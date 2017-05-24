@@ -8,15 +8,19 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Agendamento</title>
+	<h:outputScript library="js" name="scripts.js" />
 	<h:outputStylesheet library="css" name="estilos.css" />
 </h:head>
-<h:body>
+<h:body styleClass="coluna">
 	<p:growl id="mensagem" />
+	<p:layout fullPage="true">
 
-	<div id="geral">
-		<div id="teste">
+		<p:layoutUnit position="north" size="100" resizable="true"
+			closable="true" collapsible="true">
 			<h:form id="formMenu">
-				<p:toolbar id="barraPrincipalpublico" rendered="true">
+				<p:toolbar id="barraPrincipal" rendered="true"
+					style="horizontal-align:center">
+
 					<f:facet name="right">
 						<p:menubar>
 							<p:menuitem value="Logar" url="/Pages/autenticacao.xhtml" />
@@ -24,10 +28,19 @@
 					</f:facet>
 				</p:toolbar>
 			</h:form>
-		</div>
-		<div id="conteudo" class="divConteudo">
+
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center">
 			<ui:insert name="conteudo" />
-		</div>
-	</div>
+		</p:layoutUnit>
+		<p:layoutUnit position="south" size="50" resizable="true"
+			style="text-align: center" closable="true" collapsible="true">
+			<h:outputText
+				value="Desenvolvido por.:  Sidney Brito e William Silva - Faculdade Nova Roma" />
+		</p:layoutUnit>
+
+	</p:layout>
+
 </h:body>
 </html>

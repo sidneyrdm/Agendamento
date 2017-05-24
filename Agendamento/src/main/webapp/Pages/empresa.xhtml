@@ -54,8 +54,8 @@
 			</p:panel>
 		</h:form>
 		<p:dialog header="Empresas - Cadastro" widgetVar="dialogo"
-			appendTo="@(body)" showEffect="explode" draggable="false"
-			resizable="false" modal="true">
+			appendTo="@(body)" showEffect="explode" resizable="false"
+			modal="true" global="true">
 			<h:form id="formcadastro">
 				<h:panelGrid id="gridcadastro" columns="2">
 					<h:outputLabel value="Nome Fantasia.:" />
@@ -78,40 +78,31 @@
 						value="#{empresaBean.empresa.inscricaoEstadual}" required="true"
 						requiredMessage="o campo INSCRIÇÃO ESTADUAL é obrigatório" />
 
-					<h:outputLabel value="Estado.:" />
-					<p:selectOneMenu filter="true" id="estado"
-						converter="omnifaces.SelectItemsConverter"
-						value="empresaBean.empresa.estado">
-						<f:selectItem itemLabel="Acre" itemValue="AC" />
-						<f:selectItem itemLabel="Alagoas" itemValue="AL" />
-						<f:selectItem itemLabel="Amapá" itemValue="AP" />
-						<f:selectItem itemLabel="Amazonas" itemValue="AM" />
-						<f:selectItem itemLabel="Bahia" itemValue="BA" />
-						<f:selectItem itemLabel="Ceará" itemValue="CE" />
-						<f:selectItem itemLabel="Distrito Federal" itemValue="DF" />
-						<f:selectItem itemLabel="Espírito Santo" itemValue="ES" />
-						<f:selectItem itemLabel="Goiás" itemValue="GO" />
-						<f:selectItem itemLabel="Maranhão" itemValue="MA" />
-						<f:selectItem itemLabel="Mato Grosso" itemValue="MT" />
-						<f:selectItem itemLabel="Mato Grosso Do Sul" itemValue="MS" />
-						<f:selectItem itemLabel="Minas Gerais" itemValue="MG" />
-						<f:selectItem itemLabel="Pará" itemValue="PA" />
-						<f:selectItem itemLabel="Paraíba" itemValue="PB" />
-						<f:selectItem itemLabel="Paraná" itemValue="PR" />
-						<f:selectItem itemLabel="Pernambuco" itemValue="PE" />
-						<f:selectItem itemLabel="Rio De Janeiro" itemValue="RJ" />
-						<f:selectItem itemLabel="Rio Grande Do Norte" itemValue="RN" />
-						<f:selectItem itemLabel="Rio Grande Do Norte" itemValue="RS" />
-						<f:selectItem itemLabel="Rondônia" itemValue="RO" />
-						<f:selectItem itemLabel="Roraima" itemValue="RR" />
-						<f:selectItem itemLabel="Santa Catarina" itemValue="SC" />
-						<f:selectItem itemLabel="São Paulo" itemValue="SP" />
-						<f:selectItem itemLabel="Sergipe" itemValue="SE" />
-						<f:selectItem itemLabel="Tocantins" itemValue="TO" />
+					<p:outputLabel for="estado" value="Estado:" />
+					<p:selectOneMenu id="estado" filter="true"
+						value="#{empresaBean.estado}"
+						converter="omnifaces.SelectItemsConverter" required="true"
+						requiredMessage="O campo 'Estado' é obrigatório">
+						<f:selectItem noSelectionOption="true"
+							itemLabel="Selecione um estado" />
+						<f:selectItems value="#{empresaBean.estados}" var="estado"
+							itemValue="#{estado}" itemLabel="#{estado.nome}" />
+						<p:ajax listener="#{empresaBean.popular}"
+							update=":formcadastro:cidade" />
 					</p:selectOneMenu>
-					<h:outputLabel value="Cidade.:" />
-					<h:inputText size="20" maxlength="50"
-						value="#{empresaBean.empresa.cidade}" />
+
+					<p:outputLabel for="cidade" value="Cidade:" />
+					<p:selectOneMenu id="cidade" filter="true" required="true"
+						requiredMessage="O campo 'Cidade' é obrigatório"
+						converter="omnifaces.SelectItemsConverter"
+						value="#{empresaBean.empresa.cidade}">
+						<f:selectItem noSelectionOption="true"
+							itemLabel="Selecione uma cidade" />
+						<f:selectItems value="#{empresaBean.cidades}" var="cidade"
+							itemValue="#{cidade}" itemLabel="#{cidade.nome}" />
+					</p:selectOneMenu>
+
+
 					<h:outputLabel value="Bairro.:" />
 					<h:inputText size="20" maxlength="50"
 						value="#{empresaBean.empresa.bairro}" />

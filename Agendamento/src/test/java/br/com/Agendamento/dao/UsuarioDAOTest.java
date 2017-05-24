@@ -8,7 +8,9 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import br.com.Agendamento.domain.Cidade;
 import br.com.Agendamento.domain.Disponibilidade;
+import br.com.Agendamento.domain.Estado;
 import br.com.Agendamento.domain.Usuario;
 
 public class UsuarioDAOTest {
@@ -41,7 +43,7 @@ public class UsuarioDAOTest {
 		System.out.println(usuario.getNome() + " =nome");
 	}
 
-	//@Ignore
+	@Ignore
 	@Test
 	public void aaa() {
 		usuario = usuariodao.buscar(1L);
@@ -81,6 +83,14 @@ public class UsuarioDAOTest {
 
 		} else
 			JOptionPane.showMessageDialog(null, "nao entrou");
+	}
+	
+	@Test
+	public void cidade(){
+		CidadeDAO cdao = new CidadeDAO();
+		List<Cidade> estados = cdao.buscarPorEstado(1L);
+		
+		System.out.println("tamanho.: "+estados.size());
 	}
 
 }

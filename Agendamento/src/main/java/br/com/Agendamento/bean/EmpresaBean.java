@@ -1,6 +1,7 @@
 package br.com.Agendamento.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -10,8 +11,12 @@ import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
+import br.com.Agendamento.dao.CidadeDAO;
 import br.com.Agendamento.dao.EmpresaDAO;
+import br.com.Agendamento.dao.EstadoDAO;
+import br.com.Agendamento.domain.Cidade;
 import br.com.Agendamento.domain.Empresa;
+import br.com.Agendamento.domain.Estado;
 
 @SuppressWarnings("serial")
 @ManagedBean
@@ -20,6 +25,33 @@ public class EmpresaBean implements Serializable {
 
 	private Empresa empresa;
 	private List<Empresa> empresas;
+	private Estado estado;
+	private List<Estado> estados;
+	private List<Cidade> cidades;
+
+	public List<Estado> getEstados() {
+		return estados;
+	}
+
+	public void setEstados(List<Estado> estados) {
+		this.estados = estados;
+	}
+
+	public List<Cidade> getCidades() {
+		return cidades;
+	}
+
+	public void setCidades(List<Cidade> cidades) {
+		this.cidades = cidades;
+	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
 
 	public Empresa getEmpresa() {
 		return empresa;
@@ -39,6 +71,12 @@ public class EmpresaBean implements Serializable {
 
 	public void novo() {
 		empresa = new Empresa();
+		estado = new Estado();
+
+		EstadoDAO estadoDAO = new EstadoDAO();
+		estados = estadoDAO.listar();
+
+		cidades = new CidadeDAO().listar();
 	}
 
 	@PostConstruct
@@ -47,6 +85,7 @@ public class EmpresaBean implements Serializable {
 			EmpresaDAO empresadao = new EmpresaDAO();
 			empresas = empresadao.listar();
 
+			cidades = new CidadeDAO().listar();
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Erro ao tentar listar as Empresas ");
 			erro.printStackTrace();
@@ -88,7 +127,6 @@ public class EmpresaBean implements Serializable {
 			empresa.setBairro(empresa.getBairro());
 			empresa.setCep(empresa.getCep());
 			empresa.setCidade(empresa.getCidade());
-			empresa.setEstado(empresa.getEstado());
 			empresa.setInscricaoEstadual(empresa.getInscricaoEstadual());
 			empresa.setNumero(empresa.getNumero());
 			empresa.setRua(empresa.getRua());
@@ -101,5 +139,20 @@ public class EmpresaBean implements Serializable {
 			erro.printStackTrace();
 		}
 
+	}
+
+	public void popular() {
+		try {
+			if (estado != null) {
+				CidadeDAO cidadeDAO = new CidadeDAO();
+				cidades = cidadeDAO.buscarPorEstado(estado.getCodigo());
+				System.out.println("cidades.: " + cidades.size());
+			}else{
+				cidades = new ArrayList<>();
+			}
+		} catch (RuntimeException erro) {
+			Messages.addGlobalError("Ocorreu um erro ao tentar filtrar as cidades");
+			erro.printStackTrace();
+		}
 	}
 }

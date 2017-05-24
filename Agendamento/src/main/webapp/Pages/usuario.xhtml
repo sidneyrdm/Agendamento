@@ -10,17 +10,10 @@
 
 	<ui:define name="conteudo">
 		<h:form id="formtabela">
-			<p:panel header="Usuários - LISTAGEM">
-				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela" styleClass="coluna"
-					paginator="true" value="#{usuarioBean.usuarios}" var="usuario">
-					<f:facet name="footer">
-						<p:commandButton value="Novo" actionListener="#{usuarioBean.novo}"
-							update=":formcadastro:gridcadastro"
-							oncomplete="PF('dialogo').show();">
-							<f:actionListener
-								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
-						</p:commandButton>
-					</f:facet>
+			<p:panel header="Usuários - LISTAGEM" styleClass="coluna">
+				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela"
+					styleClass="coluna" paginator="true" rows="8"
+					value="#{usuarioBean.usuarios}" var="usuario">
 					<p:column headerText="Nome" sortBy="#{usuario.nome}"
 						filterBy="#{usuario.nome}">
 						<h:outputText value="#{usuario.nome}" />
@@ -131,6 +124,16 @@
 				</h:panelGrid>
 			</h:form>
 		</p:dialog>
-
+	</ui:define>
+	<ui:define name="opcoes">
+		<h:form>
+			<p:commandButton value="Cadastrar Usuário"
+				actionListener="#{usuarioBean.novo}"
+				update=":formcadastro:gridcadastro"
+				oncomplete="PF('dialogo').show();">
+				<f:actionListener
+					type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+			</p:commandButton>
+		</h:form>
 	</ui:define>
 </ui:composition>

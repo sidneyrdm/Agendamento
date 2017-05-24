@@ -12,7 +12,7 @@
 
 		<h:form id="formtabela">
 			<p:panel header="Agendamentos - LISTAGEM">
-				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela"
+				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela" styleClass="coluna"
 					paginator="false" rows="30" value="#{agendamentoBean.agendamentos}"
 					var="agendamento">
 					<p:column headerText="Data"
@@ -27,13 +27,15 @@
 						filterBy="#{agendamento.usuario.nome}">
 						<h:outputText value="#{agendamento.usuario.nome}" />
 					</p:column>
-					<p:column headerText="Empresa" sortBy="#{agendamento.usuario.empresa.nome}"
+					<p:column headerText="Empresa"
+						sortBy="#{agendamento.usuario.empresa.nome}"
 						filterBy="#{agendamento.usuario.empresa.nome}">
 						<h:outputText value="#{agendamento.usuario.empresa.nome}" />
 					</p:column>
 					<p:column headerText="Status" sortBy="#{agendamento.status}"
 						filterBy="#{agendamento.status}" style="text-align: center;">
-						<p:commandButton value="#{agendamento.status}"
+						<h:outputText value="#{agendamento.status}  " />
+						<p:commandButton icon="ui-icon-pencil"
 							actionListener="#{agendamentoBean.editar}"
 							oncomplete="PF('dialogo2').show();"
 							update=":formAtualizaStatus:gridcadastro2 :mensagem :formtabela:tabela">
@@ -85,5 +87,10 @@
 			</h:form>
 		</p:dialog>
 
+	</ui:define>
+	<ui:define name="opcoes">
+		<h:form id="formLateral">
+
+		</h:form>
 	</ui:define>
 </ui:composition>

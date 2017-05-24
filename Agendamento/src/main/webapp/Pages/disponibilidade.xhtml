@@ -12,20 +12,11 @@
 
 		<!-- Tabela disponibilidades -->
 		<h:form id="formtabela">
-			<p:panel header="Disponibilidades - LISTAGEM">
-				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela" styleClass="coluna"
-					paginator="false" rows="30" 
+			<p:panel header="Disponibilidades - LISTAGEM" styleClass="coluna">
+				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela"
+					styleClass="coluna" paginator="true" rows="8"
 					value="#{disponibilidadeBean.disponibilidades}"
 					var="disponibilidade">
-					<f:facet name="footer">
-						<p:commandButton value="Novo"
-							actionListener="#{disponibilidadeBean.novo}"
-							oncomplete="PF('dialogo').show();"
-							update=":formdisponibilidade:gridcadastro">
-							<f:actionListener
-								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
-						</p:commandButton>
-					</f:facet>
 					<p:column headerText="Data.:" sortBy="#{disponibilidade.dataView}"
 						filterBy="#{disponibilidade.dataView}">
 						<h:outputText value="#{disponibilidade.dataView}" />
@@ -60,8 +51,8 @@
 			</p:panel>
 		</h:form>
 		<p:dialog header="Disponibilidades - Cadastro" widgetVar="dialogo"
-			appendTo="@(body)" showEffect="explode" 
-			draggable="false" resizable="false" modal="true">
+			appendTo="@(body)" showEffect="explode" draggable="false"
+			resizable="false" modal="true">
 			<h:form id="formdisponibilidade">
 				<h:panelGrid columns="2" id="gridcadastro">
 					<h:outputLabel for="turno" value="Turno.:" />
@@ -88,5 +79,16 @@
 			</h:form>
 		</p:dialog>
 
+	</ui:define>
+	<ui:define name="opcoes">
+		<h:form>
+			<p:commandButton value="Liberar Disponibilidade"
+				actionListener="#{disponibilidadeBean.novo}"
+				oncomplete="PF('dialogo').show();"
+				update=":formdisponibilidade:gridcadastro">
+				<f:actionListener
+					type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+			</p:commandButton>
+		</h:form>
 	</ui:define>
 </ui:composition>

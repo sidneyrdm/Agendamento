@@ -11,18 +11,10 @@
 	<ui:define name="conteudo">
 
 		<h:form id="formtabela">
-			<p:panel header="EMPRESAS - LISTAGEM">
-				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela" styleClass="coluna"
-					paginator="false" rows="30" value="#{empresaBean.empresas}"
-					var="empresa">
-					<f:facet name="footer">
-						<p:commandButton value="Novo" actionListener="#{empresaBean.novo}"
-							oncomplete="PF('dialogo').show();"
-							update=":formcadastro:gridcadastro">
-							<f:actionListener
-								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
-						</p:commandButton>
-					</f:facet>
+			<p:panel header="EMPRESAS - LISTAGEM" styleClass="coluna">
+				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela"
+					styleClass="coluna" paginator="false" rows="30"
+					value="#{empresaBean.empresas}" var="empresa">
 					<p:column headerText="Nome" sortBy="{empresaBean.empresa.nome}"
 						filterBy="{empresa.nome}">
 						<h:outputText value="#{empresa.nome}" />
@@ -62,8 +54,8 @@
 			</p:panel>
 		</h:form>
 		<p:dialog header="Empresas - Cadastro" widgetVar="dialogo"
-			appendTo="@(body)" showEffect="explode" 
-			draggable="false" resizable="false" modal="true">
+			appendTo="@(body)" showEffect="explode" draggable="false"
+			resizable="false" modal="true">
 			<h:form id="formcadastro">
 				<h:panelGrid id="gridcadastro" columns="2">
 					<h:outputLabel value="Nome Fantasia.:" />
@@ -72,13 +64,13 @@
 						requiredMessage="o campo NOME é obrigatório" />
 
 					<h:outputLabel value="Razao social.:" />
-					<h:inputText size="35" maxlength="50" 
+					<h:inputText size="35" maxlength="50"
 						value="#{empresaBean.empresa.razaoSocial}" required="true"
 						requiredMessage="o campo RAZÃO SO é obrigatório" />
 
 					<h:outputLabel value="Cnpj.:" />
-					<p:inputMask mask="99.999.999/9999-99" id="cnpj" 
-						required="true" requiredMessage="campo CNPJ é obrigatório"
+					<p:inputMask mask="99.999.999/9999-99" id="cnpj" required="true"
+						requiredMessage="campo CNPJ é obrigatório"
 						value="#{empresaBean.empresa.cnpj}" />
 
 					<h:outputLabel value="Insc.Estadual.:" />
@@ -142,5 +134,16 @@
 				</h:panelGrid>
 			</h:form>
 		</p:dialog>
+	</ui:define>
+	<ui:define name="opcoes">
+		<h:form>
+			<p:commandButton value="Cadastrar Empresa"
+				actionListener="#{empresaBean.novo}"
+				oncomplete="PF('dialogo').show();"
+				update=":formcadastro:gridcadastro">
+				<f:actionListener
+					type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+			</p:commandButton>
+		</h:form>
 	</ui:define>
 </ui:composition>

@@ -32,7 +32,7 @@ public class ClasseInicial implements ServletContextListener {
 			usuario.setTipo('A');
 			usuario.setConectado(false);
 			usuariodao.salvar(usuario);
-		}else
+		} else
 			return;
 	}
 

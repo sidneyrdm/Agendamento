@@ -76,7 +76,7 @@ public class EmpresaBean implements Serializable {
 		EstadoDAO estadoDAO = new EstadoDAO();
 		estados = estadoDAO.listar();
 
-		cidades = new CidadeDAO().listar();
+		cidades = new ArrayList<Cidade>();
 	}
 
 	@PostConstruct

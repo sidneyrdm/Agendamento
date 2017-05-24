@@ -34,12 +34,14 @@
 								rendered="#{autenticacaoBean.permissaoAdm}" />
 							<p:menuitem value="Empresas" url="/Pages/empresa.xhtml"
 								rendered="#{autenticacaoBean.permissaoAdm}" />
-								
-							<p:menuitem value="Estados" url="/Pages/estado.xhtml"
-								rendered="#{autenticacaoBean.permissaoAdm}" />
-								
-							<p:menuitem value="Cidades" url="/Pages/cidade.xhtml"
-								rendered="#{autenticacaoBean.permissaoAdm}" />
+							<p:submenu id="sbm1">
+								<p:menuitem value="Estados" url="/Pages/estado.xhtml"
+									rendered="#{autenticacaoBean.permissaoAdm}" />
+							</p:submenu>
+							<p:submenu>
+								<p:menuitem value="Cidades" url="/Pages/cidade.xhtml"
+									rendered="#{autenticacaoBean.permissaoAdm}" />
+							</p:submenu>
 							<p:menuitem value="Agendamentos"
 								rendered="#{autenticacaoBean.permissaoRepresentante}"
 								url="/Pages/agendamentoRepresentante.xhtml" />

@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import br.com.Agendamento.domain.Cidade;
 import br.com.Agendamento.domain.Disponibilidade;
-import br.com.Agendamento.domain.Estado;
 import br.com.Agendamento.domain.Usuario;
 
 public class UsuarioDAOTest {

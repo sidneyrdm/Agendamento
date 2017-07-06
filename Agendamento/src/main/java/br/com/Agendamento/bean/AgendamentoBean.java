@@ -37,6 +37,9 @@ public class AgendamentoBean implements Serializable {
 	List<Disponibilidade> disponibilidades;
 	String assunto = "Confirmação de agendamento - RendeMais Supermercados";
 	String mensagem = "Parabéns, você foi agendado com sucesso para a data ";
+	String email;
+	String nome;
+	String data;
 
 	public AutenticacaoBean getAut() {
 		return aut;
@@ -133,19 +136,20 @@ public class AgendamentoBean implements Serializable {
 
 	public void salvar() throws EmailException {
 		try {
-			Email email = new Email();
 			AgendamentoDAO agendamentodao = new AgendamentoDAO();
 			agendamento.setDisponibilidade(agendamento.getDisponibilidade());
 			agendamento.setUsuario(agendamento.getUsuario());
 			agendamento.setStatus("Não Atendido");
 			agendamentodao.merge(agendamento);
-			email.sendEmail(agendamento.getUsuario().getEmail(), agendamento.getUsuario().getNome(), assunto,
-					mensagem + agendamento.getDisponibilidade().getDataView());
 			atualizaDisponibilidade(agendamento.getDisponibilidade().getCodigo(), 's');
-			novo();
 			Messages.addGlobalInfo("Agendamento gravado com sucesso!");
+			email = agendamento.getUsuario().getEmail();
+			nome = agendamento.getUsuario().getNome();
+			data = agendamento.getDisponibilidade().getDataView();
+			novo();
 			listar();
 			refresh();
+			// enviaEmail(email, nome, data);
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Erro ao tentar gravar a Agendamento");
 			erro.printStackTrace();
@@ -276,5 +280,11 @@ public class AgendamentoBean implements Serializable {
 			Messages.addGlobalError("erro ao tentar Atualizar Status");
 			erro.printStackTrace();
 		}
+	}
+
+	public void enviaEmail(String email, String nome, String data) throws EmailException {
+		Email mail = new Email();
+		mail.sendEmail(email, nome, assunto, mensagem + data);
+
 	}
 }

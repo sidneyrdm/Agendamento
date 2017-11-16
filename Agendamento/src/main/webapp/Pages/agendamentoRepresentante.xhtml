@@ -13,7 +13,7 @@
 		<h:form id="formtabela">
 			<p:panel header="Meus Agendamentos - LISTAGEM">
 				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela"
-					styleClass="coluna" paginator="false" rows="30"
+					styleClass="coluna" paginator="true" rows="5"
 					value="#{agendamentoBean.agendamentosUser}" var="agendamento">
 
 					<p:column headerText="Data"
@@ -29,6 +29,15 @@
 					</p:column>
 				</p:dataTable>
 			</p:panel>
+			<h:form>
+				<p:commandButton value="Agendar Visita"
+					actionListener="#{agendamentoBean.novo}"
+					oncomplete="PF('dialogo').show();"
+					update=":formcadastro:gridcadastro">
+					<f:actionListener
+						type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+				</p:commandButton>
+			</h:form>
 		</h:form>
 
 
@@ -85,14 +94,6 @@
 
 	</ui:define>
 	<ui:define name="opcoes">
-		<h:form>
-			<p:commandButton value="Agendar Visita"
-				actionListener="#{agendamentoBean.novo}"
-				oncomplete="PF('dialogo').show();"
-				update=":formcadastro:gridcadastro">
-				<f:actionListener
-					type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
-			</p:commandButton>
-		</h:form>
+		<h:outputLabel value="Conteúdo futuro" />
 	</ui:define>
 </ui:composition>

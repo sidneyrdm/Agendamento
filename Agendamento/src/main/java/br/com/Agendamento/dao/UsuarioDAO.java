@@ -45,6 +45,21 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
 		}
 	}	
 	
+	@SuppressWarnings("unchecked")
+	public List<Usuario> buscarR(Character tipo) {
+		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
+		try {
+			Criteria consulta = sessao.createCriteria(Usuario.class);
+			consulta.add(Restrictions.eq("tipo", tipo));
+			List<Usuario> resultado = consulta.list();
+			return resultado;
+		} catch (RuntimeException erro) {
+			throw erro;
+		} finally {
+			sessao.close();
+		}
+	}
+	
 	public Usuario BuscaPorCpf(String cpf) {
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
 

@@ -14,7 +14,7 @@
 			<p:panel header="Estados - Listagem">
 				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
 					paginator="true" value="#{estadoBean.estados}" var="estado"
-					rows="8" >
+					rows="5">
 					<p:column headerText="Nome" sortBy="#{estado.nome}"
 						filterBy="#{estado.nome}">
 						<h:outputText value="#{estado.nome}" />
@@ -49,6 +49,12 @@
 						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 				</p:confirmDialog>
 			</p:panel>
+			<h:form>
+				<p:commandButton value="Cadastrar Estado"
+					oncomplete="PF('dialogo').show();"
+					actionListener="#{estadoBean.novo}" update=":formCadastro:painel" />
+
+			</h:form>
 		</h:form>
 
 		<p:dialog header="Estados - Cadastro" widgetVar="dialogo"
@@ -79,10 +85,6 @@
 		</p:dialog>
 	</ui:define>
 	<ui:define name="opcoes">
-		<h:form>
-			<p:commandButton value="Cadastrar Estado" oncomplete="PF('dialogo').show();"
-				actionListener="#{estadoBean.novo}" update=":formCadastro:painel" />
-
-		</h:form>
+		<h:outputLabel value="Conteúdo futuro" />
 	</ui:define>
 </ui:composition>

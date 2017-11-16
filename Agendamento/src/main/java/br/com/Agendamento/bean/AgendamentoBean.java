@@ -18,8 +18,10 @@ import org.omnifaces.util.Messages;
 
 import br.com.Agendamento.dao.AgendamentoDAO;
 import br.com.Agendamento.dao.DisponibilidadeDAO;
+import br.com.Agendamento.dao.UsuarioDAO;
 import br.com.Agendamento.domain.Agendamento;
 import br.com.Agendamento.domain.Disponibilidade;
+import br.com.Agendamento.domain.Usuario;
 import br.com.Agendamento.util.Email;
 
 @SuppressWarnings("serial")
@@ -30,6 +32,7 @@ public class AgendamentoBean implements Serializable {
 	private AutenticacaoBean aut;
 	private boolean desabilitaBotaoSalvar;
 	private int disponiveis;
+	private String empresaUse;
 	AutenticacaoBean ab;
 	Agendamento agendamento = new Agendamento();
 	List<Agendamento> agendamentos;
@@ -193,6 +196,15 @@ public class AgendamentoBean implements Serializable {
 
 	}
 
+	public void empresaEscolhida() {
+		Usuario userRepresentante = new Usuario();
+		UsuarioDAO userdao = new UsuarioDAO();
+
+		userRepresentante = userdao.BuscaPorCpf(agendamento.getUsuario().getCpf());
+		this.empresaUse = userRepresentante.getEmpresa().getNome();
+
+	}
+
 	// função que habilita e desabilita o botão gravar
 	public void habilitaBotaoGravar() {
 		try {
@@ -286,5 +298,13 @@ public class AgendamentoBean implements Serializable {
 		Email mail = new Email();
 		mail.sendEmail(email, nome, assunto, mensagem + data);
 
+	}
+
+	public String getEmpresaUse() {
+		return empresaUse;
+	}
+
+	public void setEmpresaUse(String empresaUse) {
+		this.empresaUse = empresaUse;
 	}
 }

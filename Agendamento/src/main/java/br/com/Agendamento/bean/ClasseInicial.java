@@ -21,14 +21,14 @@ public class ClasseInicial implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent arg0) {
 		Usuario usuario = new Usuario();
 		UsuarioDAO usuariodao = new UsuarioDAO();
-		usuario = usuariodao.BuscaPorCpf("070.915.384-80");
+		usuario = usuariodao.BuscaPorCpf("000.000.000-00");
 		if (usuario == null) {
-			usuario.setNome("sidney");
-			usuario.setSenhaNaoCriptografada("123");
+			usuario.setNome("administrador");
+			usuario.setSenhaNaoCriptografada("00000");
 			SimpleHash hash = new SimpleHash("md5", usuario.getSenhaNaoCriptografada());
 			usuario.setSenha(hash.toHex());
-			usuario.setCpf("070.915.384-80");
-			usuario.setCelular("(81)98895-0121");
+			usuario.setCpf("000.000.000-00");
+			usuario.setCelular("(81)3251-8453");
 			usuario.setTipo('A');
 			usuario.setConectado(false);
 			usuariodao.salvar(usuario);

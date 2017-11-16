@@ -25,6 +25,8 @@ public class UsuarioBean implements Serializable {
 	private Usuario usuario;
 	private Usuario selecao;
 	List<Usuario> usuarios;
+	List<Usuario> usuariosR;
+
 	private List<Empresa> empresas;
 
 	public List<Empresa> getEmpresas() {
@@ -67,6 +69,14 @@ public class UsuarioBean implements Serializable {
 		this.usuarios = usuarios;
 	}
 
+	public List<Usuario> getUsuariosR() {
+		return usuariosR;
+	}
+
+	public void setUsuariosR(List<Usuario> usuariosR) {
+		this.usuariosR = usuariosR;
+	}
+
 	public void novo() {
 		try {
 			selecao = new Usuario();
@@ -85,7 +95,7 @@ public class UsuarioBean implements Serializable {
 			empresa = true;
 			UsuarioDAO usuariodao = new UsuarioDAO();
 			usuarios = usuariodao.listar();
-
+			usuariosR = usuariodao.buscarR('R');
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Erro ao tentar listar as Usuarios ");
 			erro.printStackTrace();
@@ -156,16 +166,16 @@ public class UsuarioBean implements Serializable {
 	public void userMain() {
 		Usuario user = new Usuario();
 		UsuarioDAO userdao = new UsuarioDAO();
-		user = userdao.BuscaPorCpf("070.915.384-80");
+		user = userdao.BuscaPorCpf("000.000.000-00");
 
 		if (user == null) {
 			user = new Usuario();
-			user.setNome("sidney");
-			user.setSenhaNaoCriptografada("123");
+			user.setNome("administrador");
+			user.setSenhaNaoCriptografada("00000");
 			SimpleHash hash = new SimpleHash("md5", user.getSenhaNaoCriptografada());
 			user.setSenha(hash.toHex());
-			user.setCpf("070.915.384-80");
-			user.setCelular("(81)98895-0121");
+			user.setCpf("000.000.000-00");
+			user.setCelular("(81)3251-8453");
 			user.setTipo('A');
 			user.setConectado(false);
 			userdao.salvar(user);

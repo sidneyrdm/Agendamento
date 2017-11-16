@@ -12,9 +12,9 @@
 
 		<h:form id="formtabela">
 			<p:panel header="Agendamentos - LISTAGEM">
-				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela" styleClass="coluna"
-					paginator="false" rows="30" value="#{agendamentoBean.agendamentos}"
-					var="agendamento">
+				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela"
+					styleClass="coluna" paginator="true" rows="5"
+					value="#{agendamentoBean.agendamentos}" var="agendamento">
 					<p:column headerText="Data"
 						sortBy="#{agendamento.disponibilidade.dataView}"
 						filterBy="#{agendamento.disponibilidade.dataView}">
@@ -65,6 +65,15 @@
 				</p:confirmDialog>
 
 			</p:panel>
+			<h:form>
+				<p:commandButton value="Agendar Visita"
+					actionListener="#{agendamentoBean.novo}"
+					oncomplete="PF('dialogo').show();"
+					update=":formcadastro:gridcadastro">
+					<f:actionListener
+						type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+				</p:commandButton>
+			</h:form>
 		</h:form>
 
 		<p:dialog header="Atualiza Status" widgetVar="dialogo2"
@@ -86,11 +95,66 @@
 				<p:commandButton value="Fechar" oncomplete="PF('dialogo2').hide();" />
 			</h:form>
 		</p:dialog>
+		<p:dialog header="Agendamentos - Cadastro" widgetVar="dialogo"
+			appendTo="@(body)" showEffect="explode" draggable="false"
+			resizable="false" modal="true">
+			<h:form id="formcadastro">
+				<h:panelGrid id="gridcadastro" columns="2">
+					<p:outputLabel for="turno" value="Turno:" />
+					<p:selectOneRadio id="turno"
+						value="#{disponibilidadeBean.selecao.turno}">
+						<f:selectItem itemLabel="Manha" itemValue="Manha" />
+						<f:selectItem itemLabel="Tarde" itemValue="Tarde" />
+						<p:ajax listener="#{disponibilidadeBean.popular}"
+							update=":formcadastro:date :mensagem" />
+					</p:selectOneRadio>
+
+					<h:outputLabel value="Data.:" for="date" />
+					<p:selectOneMenu filter="true" id="date"
+						value="#{agendamentoBean.agendamento.disponibilidade}"
+						converter="omnifaces.SelectItemsConverter" required="true"
+						requiredMessage="o campo Data é obrigatório">
+						<f:selectItem itemLabel="Selecione uma Data" />
+						<f:selectItems
+							value="#{disponibilidadeBean.disponibilidadesCarregadas}"
+							var="data" itemLabel="#{data.dataView}" itemValue="#{data}" />
+						<p:ajax listener="#{agendamentoBean.habilitaBotaoGravar}"
+							update=":mensagem :formcadastro:disponiveis :formcadastro:salvar :formtabela:tabela" />
+					</p:selectOneMenu>
+					<h:outputLabel value="Disponíveis.:" />
+					<h:outputText value="#{agendamentoBean.disponiveis}"
+						id="disponiveis" />
+
+					<h:outputLabel value="Usuario.:" />
+					<p:selectOneMenu filter="true"
+						value="#{agendamentoBean.agendamento.usuario}"
+						converter="omnifaces.SelectItemsConverter" required="true"
+						requiredMessage="o campo USUÁRIO é obrigatório">
+						<f:selectItems value="#{usuarioBean.usuariosR}" var="empresa"
+							itemLabel="#{empresa.nome}" itemValue="#{empresa}" />
+
+						<p:ajax listener="#{agendamentoBean.empresaEscolhida}"
+							update=":formcadastro:empresaUsuario" />
+
+					</p:selectOneMenu>
+					<h:outputLabel value="Empresa.:" />
+					<h:outputText value="#{agendamentoBean.empresaUse}"
+						id="empresaUsuario" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<p:commandButton value="Agendar"
+						disabled="#{agendamentoBean.desabilitaBotaoSalvar}" id="salvar"
+						actionListener="#{agendamentoBean.salvar}"
+						update=":mensagem :formcadastro:gridcadastro :formtabela:tabela "
+						oncomplete="PF('dialogo').hide();" />
+					<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
 
 	</ui:define>
 	<ui:define name="opcoes">
-		<h:form id="formLateral">
-
-		</h:form>
+		<h:outputLabel value="Conteúdo futuro" />
 	</ui:define>
 </ui:composition>

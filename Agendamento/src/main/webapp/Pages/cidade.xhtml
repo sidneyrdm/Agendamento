@@ -13,7 +13,7 @@
 			<p:panel header="Cidades - Listagem">
 				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
 					paginator="true" value="#{cidadeBean.cidades}" var="cidade"
-					rows="8">
+					rows="5">
 
 					<p:column headerText="Nome" filterBy="#{cidade.nome}"
 						sortBy="#{cidade.nome}">
@@ -54,6 +54,18 @@
 						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 				</p:confirmDialog>
 			</p:panel>
+
+			<h:form>
+				<p:commandButton value="Cadastrar Cidade"
+					actionListener="#{cidadeBean.novo}"
+					oncomplete="PF('dialogo').show();"
+					update=":mensagem :formCadastro:painel">
+					<f:actionListener
+						type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+				</p:commandButton>
+			</h:form>
+
+
 		</h:form>
 
 		<p:dialog header="Cidades - Cadastro" widgetVar="dialogo"
@@ -90,14 +102,6 @@
 		</p:dialog>
 	</ui:define>
 	<ui:define name="opcoes">
-		<h:form>
-			<p:commandButton value="Cadastrar Cidade"
-				actionListener="#{cidadeBean.novo}"
-				oncomplete="PF('dialogo').show();"
-				update=":mensagem :formCadastro:painel">
-				<f:actionListener
-					type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
-			</p:commandButton>
-		</h:form>
+		<h:outputLabel value="Conteúdo futuro" />
 	</ui:define>
 </ui:composition>

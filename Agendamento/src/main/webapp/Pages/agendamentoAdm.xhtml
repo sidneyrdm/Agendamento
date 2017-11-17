@@ -13,14 +13,17 @@
 		<h:form id="formtabela">
 			<p:panel header="Agendamentos - LISTAGEM">
 				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela"
-					styleClass="coluna" paginator="true" rows="5"
+					styleClass="coluna" paginator="true"
+					rows="#{agendamentoBean.aut.rows}"
 					value="#{agendamentoBean.agendamentos}" var="agendamento">
 					<p:column headerText="Data"
 						sortBy="#{agendamento.disponibilidade.dataView}"
 						filterBy="#{agendamento.disponibilidade.dataView}">
 						<h:outputText value="#{agendamento.disponibilidade.dataView}" />
 					</p:column>
-					<p:column headerText="Turno">
+					<p:column headerText="Turno"
+						sortBy="#{agendamento.disponibilidade.turno}"
+						filterBy="#{agendamento.disponibilidade.turno}">
 						<h:outputText value="#{agendamento.disponibilidade.turno}" />
 					</p:column>
 					<p:column headerText="Nome" sortBy="#{agendamento.usuario.nome}"

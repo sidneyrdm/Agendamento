@@ -22,6 +22,15 @@ import br.com.Agendamento.domain.Disponibilidade;
 public class DisponibilidadeBean implements Serializable {
 
 	private Disponibilidade disponibilidade;
+	private AutenticacaoBean aut;
+	public AutenticacaoBean getAut() {
+		return aut;
+	}
+
+	public void setAut(AutenticacaoBean aut) {
+		this.aut = aut;
+	}
+
 	private Disponibilidade selecao;
 	private List<Disponibilidade> disponibilidadesCarregadas;
 	private List<Disponibilidade> disponibilidades;

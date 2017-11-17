@@ -24,6 +24,15 @@ import br.com.Agendamento.domain.Estado;
 public class EmpresaBean implements Serializable {
 
 	private Empresa empresa;
+	private AutenticacaoBean aut;
+	public AutenticacaoBean getAut() {
+		return aut;
+	}
+
+	public void setAut(AutenticacaoBean aut) {
+		this.aut = aut;
+	}
+
 	private List<Empresa> empresas;
 	private Estado estado;
 	private List<Estado> estados;

@@ -20,6 +20,7 @@ import br.com.Agendamento.domain.Usuario;
 @SessionScoped
 public class AutenticacaoBean {
 
+	private int rows = 20;
 	private String nome;
 	private String cpf;
 	private String senha;
@@ -111,6 +112,15 @@ public class AutenticacaoBean {
 
 	public Usuario getUsuariologado() {
 		return usuariologado;
+	}
+
+	
+	public int getRows() {
+		return rows;
+	}
+
+	public void setRows(int rows) {
+		this.rows = rows;
 	}
 
 	public void setUsuariologado(Usuario usuariologado) {

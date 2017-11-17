@@ -13,7 +13,7 @@
 		<h:form id="formtabela">
 			<p:panel header="Meus Agendamentos - LISTAGEM">
 				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela"
-					styleClass="coluna" paginator="true" rows="5"
+					styleClass="coluna" paginator="true" rows="#{agendamentoBean.aut.rows}"
 					value="#{agendamentoBean.agendamentosUser}" var="agendamento">
 
 					<p:column headerText="Data"

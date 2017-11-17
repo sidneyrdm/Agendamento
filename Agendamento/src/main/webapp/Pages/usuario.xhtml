@@ -12,7 +12,7 @@
 		<h:form id="formtabela">
 			<p:panel header="Usuários - LISTAGEM" styleClass="coluna">
 				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela"
-					styleClass="coluna" paginator="true" rows="5"
+					styleClass="coluna" paginator="true" rows="#{usuarioBean.aut.rows}"
 					value="#{usuarioBean.usuarios}" var="usuario">
 					<p:column headerText="Nome" sortBy="#{usuario.nome}"
 						filterBy="#{usuario.nome}">

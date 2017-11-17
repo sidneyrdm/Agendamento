@@ -26,6 +26,15 @@ public class UsuarioBean implements Serializable {
 	private Usuario selecao;
 	List<Usuario> usuarios;
 	List<Usuario> usuariosR;
+	private AutenticacaoBean aut;
+
+	public AutenticacaoBean getAut() {
+		return aut;
+	}
+
+	public void setAut(AutenticacaoBean aut) {
+		this.aut = aut;
+	}
 
 	private List<Empresa> empresas;
 

@@ -22,6 +22,15 @@ public class CidadeBean implements Serializable {
 	private Cidade cidade;
 	private List<Cidade> cidades;
 	private List<Estado> estados;
+	private AutenticacaoBean aut;
+
+	public AutenticacaoBean getAut() {
+		return aut;
+	}
+
+	public void setAut(AutenticacaoBean aut) {
+		this.aut = aut;
+	}
 
 	public Cidade getCidade() {
 		return cidade;

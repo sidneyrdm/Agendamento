@@ -13,7 +13,7 @@
 			<p:panel header="Cidades - Listagem">
 				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
 					paginator="true" value="#{cidadeBean.cidades}" var="cidade"
-					rows="5">
+					rows="#{cidadeBean.aut.rows}">
 
 					<p:column headerText="Nome" filterBy="#{cidade.nome}"
 						sortBy="#{cidade.nome}">

@@ -13,13 +13,16 @@
 		<h:form id="formtabela">
 			<p:panel header="EMPRESAS - LISTAGEM" styleClass="coluna">
 				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela"
-					styleClass="coluna" paginator="true" rows="5"
+					styleClass="coluna" paginator="true" rows="#{empresaBean.aut.rows}"
 					value="#{empresaBean.empresas}" var="empresa">
-					<p:column headerText="Nome" sortBy="{empresaBean.empresa.nome}"
-						filterBy="{empresa.nome}">
+					<p:column headerText="Nome" sortBy="#{empresa.nome}"
+						filterBy="#{empresa.nome}">
 						<h:outputText value="#{empresa.nome}" />
 					</p:column>
-					<p:column headerText="Cnpj">
+
+
+					<p:column headerText="Cnpj" sortBy="#{empresa.cnpj}"
+						filterBy="#{empresa.cnpj}">
 						<h:outputText value="#{empresa.cnpj}" />
 					</p:column>
 					<p:column headerText="IE">

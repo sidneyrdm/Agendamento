@@ -14,7 +14,8 @@
 		<h:form id="formtabela">
 			<p:panel header="Disponibilidades - LISTAGEM" styleClass="coluna">
 				<p:dataTable emptyMessage="Nenhum Registro Encontrado" id="tabela"
-					styleClass="coluna" paginator="true" rows="5"
+					styleClass="coluna" paginator="true"
+					rows="#{disponibilidadeBean.aut.rows}"
 					value="#{disponibilidadeBean.disponibilidades}"
 					var="disponibilidade">
 					<p:column headerText="Data.:" sortBy="#{disponibilidade.dataView}"
